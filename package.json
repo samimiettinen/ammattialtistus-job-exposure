@@ -1,0 +1,48 @@
+{
+  "name": "ammattialtistus",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "pipeline:01": "tsx scripts/01_fetch_finnish_occupations.ts",
+    "pipeline:02": "tsx scripts/02_fetch_employment_counts.ts",
+    "pipeline:03": "tsx scripts/03_fetch_labor_market_outlook.ts",
+    "pipeline:04": "tsx scripts/04_score_occupations.ts",
+    "pipeline:05": "tsx scripts/05_merge.ts",
+    "pipeline:06": "tsx scripts/06_validate.ts",
+    "pipeline": "npm run pipeline:01 && npm run pipeline:02 && npm run pipeline:03 && npm run pipeline:04 && npm run pipeline:05 && npm run pipeline:06"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "echarts": "^6.0.0",
+    "echarts-for-react": "^3.0.2",
+    "lucide-react": "^0.544.0",
+    "next": "16.2.1",
+    "next-intl": "^4.3.4",
+    "nuqs": "^2.4.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.1.5",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.1",
+    "tailwindcss": "^4",
+    "tsx": "^4.20.5",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
+  }
+}

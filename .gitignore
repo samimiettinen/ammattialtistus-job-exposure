@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+dist
+.DS_Store
+.env
+.env.local
+data/raw
+data/scores.db
+data/validation-report.json
+_source_research
+*.log

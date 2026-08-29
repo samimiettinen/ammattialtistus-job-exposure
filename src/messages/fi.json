@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "title": "Ammattialtistus – tekoäly ja Suomen ammatit",
+    "description": "Ammattiluokitus 2010 -ammattien teoreettinen tekoälyaltistus, havaittu käyttöönotto ja työmarkkinanäkymä. Perustuu Tilastokeskuksen ja Työvoimabarometrin avoimiin tietoihin."
+  },
+  "brand": {
+    "name": "Ammattialtistus",
+    "tagline": "Suomen ammattien tekoälynäkymä"
+  },
+  "notice": "AI-altistus ei tarkoita työpaikkojen katoamista",
+  "nav": {
+    "visualizer": "Näkymä",
+    "methodology": "Menetelmä ja rajoitteet",
+    "language": "Kieli"
+  },
+  "tabs": {
+    "exposure": "Altistus",
+    "adoption": "Käyttöönotto",
+    "outlook": "Työmarkkinanäkymä"
+  },
+  "filters": {
+    "search": "Hae ammattia tai koodia",
+    "group": "Pääluokka",
+    "allGroups": "Kaikki pääluokat",
+    "outlook": "Näkymä",
+    "allOutlooks": "Kaikki näkymät",
+    "employment": "Vähimmäistyöllisyys",
+    "anySize": "Kaikki koot",
+    "scoreStatus": "Pisteytys",
+    "allScores": "Kaikki",
+    "scored": "Pisteytetty",
+    "unscored": "Ei pisteytystä",
+    "fixture": "Esimerkkipisteet",
+    "reset": "Tyhjennä suodattimet",
+    "results": "{count} ammattia"
+  },
+  "outlook": {
+    "shortage": "Työvoimapula",
+    "surplus": "Ylitarjonta",
+    "balanced": "Tasapaino",
+    "mismatch": "Kohtaanto-ongelma",
+    "unavailable": "Ei koneluettavaa näkymää"
+  },
+  "chart": {
+    "treemap": "Puu kartta, pinta-ala työllisten mukaan",
+    "scatter": "Hajontakuvio: teoreettinen altistus ja nykyinen käyttöönotto",
+    "x": "Teoreettinen altistus",
+    "y": "Nykyinen käyttöönotto",
+    "unscored": "Ei pisteytystä",
+    "stale": "Vanha tilasto"
+  },
+  "detail": {
+    "title": "Ammatti",
+    "close": "Sulje",
+    "employed": "Työlliset",
+    "year": "Tilastovuosi",
+    "exposure": "Teoreettinen AI-altistus",
+    "adoption": "Nykyinen käyttöönotto",
+    "outlook": "Työmarkkinanäkymä",
+    "index": "Pula–ylitarjonta-indeksi",
+    "uncertainty": "Epävarmuus",
+    "human": "Ihmisen kriittiset tehtävät",
+    "ai": "Tekoälylle soveltuvat tehtävät",
+    "sources": "Lähteet",
+    "missingEmployment": "Työllisyystietoa ei ole tälle koodille.",
+    "staleEmployment": "Työssäkäyntitilaston tuorein vuosi tässä aineistossa on 2023.",
+    "missingOutlook": "Työvoimabarometrissa ei ole koneluettavaa 4-numerotason havaintoa.",
+    "derivedOutlook": "Kansallinen luku on työllispainotettu kooste 19 maakunnan kohtaannosta, ei KEHA:n julkaisema valtakunnallinen indeksi.",
+    "missingScore": "Ammattia ei ole pisteytetty. Täysi luettelo edellyttää offline-pipelinea ja rajapinta-avainta.",
+    "fixtureScore": "Esimerkkipisteytys rubriikin mukaan, ei viranomaisaineisto.",
+    "noDescription": "Virallista kuvausta ei ole saatavilla tällä kielellä.",
+    "select": "Valitse ammatti kartasta tai hausta."
+  },
+  "uncertainty": {
+    "low": "Matala",
+    "medium": "Keskitaso",
+    "high": "Korkea"
+  },
+  "methodology": {
+    "title": "Menetelmä ja rajoitteet",
+    "lead": "Tämä sivu kertoo, mistä luvut tulevat ja mitä ne eivät tarkoita."
+  }
+}
