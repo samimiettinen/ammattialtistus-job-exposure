@@ -1,3 +1,4 @@
+import { evidenceFromSourceUrls, deriveExposureReasons } from "../occupation-analysis";
 import type {
   EmploymentRow,
   Occupation,
@@ -5,8 +6,9 @@ import type {
   ParsedOccupation,
   ScoreRecord,
 } from "../schemas";
-import { occupationSchema } from "../schemas";
+import { occupationSchema, scoreRecordSchema } from "../schemas";
 import { FIXTURE_MODEL } from "../schemas/scores";
+import { parentCodeOf } from "./classification";
 import { RETRIEVED_AT } from "./paths";
 import { employmentByExactCode } from "./employment";
 
@@ -22,11 +24,16 @@ export function mergeOccupations(args: {
   occupations: ParsedOccupation[];
   employment: EmploymentRow[];
   outlook: OutlookRecord[];
-  scores: ScoreRecord[];
+  scores: Array<ScoreRecord | Record<string, unknown>>;
 }): Occupation[] {
   const employmentMap = employmentByExactCode(args.employment);
   const outlookMap = new Map(args.outlook.map((row) => [row.occupationCode, row]));
-  const scoreMap = new Map(args.scores.map((row) => [row.occupationCode, row]));
+  const scoreMap = new Map(
+    args.scores.map((row) => {
+      const parsed = scoreRecordSchema.parse(row);
+      return [parsed.occupationCode, parsed] as const;
+    }),
+  );
 
   return args.occupations.map((occ) => {
     const employment = employmentMap.get(occ.occupationCode);
@@ -41,6 +48,7 @@ export function mergeOccupations(args: {
       occupationNameEn: occ.occupationNameEn,
       majorGroupCode: occ.majorGroupCode,
       majorGroupName: occ.majorGroupName,
+      parentCode: occ.parentCode ?? parentCodeOf(occ.occupationCode),
       description: occ.description,
       employedPersons: employment?.employedPersons ?? null,
       employmentDataYear: employment ? employment.year : null,
@@ -51,10 +59,18 @@ export function mergeOccupations(args: {
         `Ei koneluettavaa Työvoimabarometri-havaintoa tälle AML-koodille. Haettu ${RETRIEVED_AT}.`,
       theoreticalAIExposure: score?.theoreticalAIExposure ?? null,
       currentAIAdoption: score?.currentAIAdoption ?? null,
+      exposureRangeLow: score?.exposureRangeLow ?? null,
+      exposureRangeHigh: score?.exposureRangeHigh ?? null,
       exposureRationale: score?.exposureRationale ?? null,
       adoptionRationale: score?.adoptionRationale ?? null,
+      exposureReasons: deriveExposureReasons({
+        exposureReasons: score?.exposureReasons ?? [],
+        exposureRationale: score?.exposureRationale ?? null,
+      }),
       humanCriticalTasks: score?.humanCriticalTasks ?? [],
       AIApplicableTasks: score?.AIApplicableTasks ?? [],
+      recommendedSkills: score?.recommendedSkills ?? [],
+      evidence: score?.evidence?.length ? score.evidence : evidenceFromSourceUrls(occ.sourceUrls),
       uncertainty: score?.uncertainty ?? null,
       sourceUrls: occ.sourceUrls,
       scoredAt: score?.scoredAt ?? null,

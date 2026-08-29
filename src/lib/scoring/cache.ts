@@ -18,14 +18,39 @@ CREATE TABLE IF NOT EXISTS scores (
   ai_applicable_tasks TEXT NOT NULL,
   uncertainty TEXT,
   scored_at TEXT,
+  recommended_skills TEXT,
+  exposure_range_low REAL,
+  exposure_range_high REAL,
+  exposure_reasons TEXT,
+  evidence TEXT,
   PRIMARY KEY (occupation_code, prompt_version, source_data_hash, scoring_model)
 );
 `;
+
+const EXTRA_COLUMNS: Array<[string, string]> = [
+  ["recommended_skills", "TEXT"],
+  ["exposure_range_low", "REAL"],
+  ["exposure_range_high", "REAL"],
+  ["exposure_reasons", "TEXT"],
+  ["evidence", "TEXT"],
+];
+
+function ensureScoreColumns(db: Database.Database): void {
+  const existing = new Set(
+    (db.prepare("PRAGMA table_info(scores)").all() as Array<{ name: string }>).map((col) => col.name),
+  );
+  for (const [name, type] of EXTRA_COLUMNS) {
+    if (!existing.has(name)) {
+      db.exec(`ALTER TABLE scores ADD COLUMN ${name} ${type}`);
+    }
+  }
+}
 
 export function openScoreDb(dbPath = files.scoresDb): Database.Database {
   fs.mkdirSync(path.dirname(dbPath), { recursive: true });
   const db = new Database(dbPath);
   db.exec(CREATE_SQL);
+  ensureScoreColumns(db);
   return db;
 }
 
@@ -56,8 +81,9 @@ export function upsertScore(db: Database.Database, record: ScoreRecord): void {
     `INSERT INTO scores (
       occupation_code, prompt_version, source_data_hash, scoring_model,
       theoretical_ai_exposure, current_ai_adoption, exposure_rationale, adoption_rationale,
-      human_critical_tasks, ai_applicable_tasks, uncertainty, scored_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      human_critical_tasks, ai_applicable_tasks, uncertainty, scored_at,
+      recommended_skills, exposure_range_low, exposure_range_high, exposure_reasons, evidence
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(occupation_code, prompt_version, source_data_hash, scoring_model)
     DO UPDATE SET
       theoretical_ai_exposure = excluded.theoretical_ai_exposure,
@@ -67,7 +93,12 @@ export function upsertScore(db: Database.Database, record: ScoreRecord): void {
       human_critical_tasks = excluded.human_critical_tasks,
       ai_applicable_tasks = excluded.ai_applicable_tasks,
       uncertainty = excluded.uncertainty,
-      scored_at = excluded.scored_at`,
+      scored_at = excluded.scored_at,
+      recommended_skills = excluded.recommended_skills,
+      exposure_range_low = excluded.exposure_range_low,
+      exposure_range_high = excluded.exposure_range_high,
+      exposure_reasons = excluded.exposure_reasons,
+      evidence = excluded.evidence`,
   ).run(
     parsed.occupationCode,
     parsed.promptVersion,
@@ -81,6 +112,11 @@ export function upsertScore(db: Database.Database, record: ScoreRecord): void {
     JSON.stringify(parsed.AIApplicableTasks),
     parsed.uncertainty,
     parsed.scoredAt,
+    JSON.stringify(parsed.recommendedSkills ?? []),
+    parsed.exposureRangeLow,
+    parsed.exposureRangeHigh,
+    JSON.stringify(parsed.exposureReasons ?? []),
+    JSON.stringify(parsed.evidence ?? []),
   );
 }
 
@@ -89,15 +125,30 @@ export function readAllScores(db: Database.Database): ScoreRecord[] {
   return rows.map(rowToRecord);
 }
 
+function parseJsonArray(value: unknown): unknown[] {
+  if (value == null || value === "") return [];
+  try {
+    const parsed = JSON.parse(String(value));
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
 function rowToRecord(row: Record<string, unknown>): ScoreRecord {
   return scoreRecordSchema.parse({
     occupationCode: row.occupation_code,
     theoreticalAIExposure: row.theoretical_ai_exposure,
     currentAIAdoption: row.current_ai_adoption,
+    exposureRangeLow: row.exposure_range_low ?? null,
+    exposureRangeHigh: row.exposure_range_high ?? null,
     exposureRationale: row.exposure_rationale,
     adoptionRationale: row.adoption_rationale,
+    exposureReasons: parseJsonArray(row.exposure_reasons),
     humanCriticalTasks: JSON.parse(String(row.human_critical_tasks)),
     AIApplicableTasks: JSON.parse(String(row.ai_applicable_tasks)),
+    recommendedSkills: parseJsonArray(row.recommended_skills),
+    evidence: parseJsonArray(row.evidence),
     uncertainty: row.uncertainty,
     scoredAt: row.scored_at,
     scoringModel: row.scoring_model,

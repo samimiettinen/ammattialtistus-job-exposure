@@ -41,6 +41,8 @@ describe("merge and filters", () => {
     expect(merged[0]?.laborMarketOutlook).toBe("unavailable");
     expect(merged[0]?.scoreStatus).toBe("unscored");
     expect(merged[0]?.employmentStale).toBe(true);
+    expect(merged[0]?.parentCode).toBe("251");
+    expect(merged[0]?.recommendedSkills ?? []).toEqual([]);
   });
 
   it("labels fixture scores and validates unique codes", () => {

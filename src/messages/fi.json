@@ -8,6 +8,9 @@
     "tagline": "Suomen ammattien tekoälynäkymä"
   },
   "notice": "AI-altistus ei tarkoita työpaikkojen katoamista",
+  "common": {
+    "unavailable": "Tietoa ei saatavilla"
+  },
   "nav": {
     "visualizer": "Näkymä",
     "methodology": "Menetelmä ja rajoitteet",
@@ -20,6 +23,7 @@
   },
   "filters": {
     "search": "Hae ammattia tai koodia",
+    "searchHint": "Kirjoita ammattinimi tai AML-koodi. Tämä on ensisijainen tapa löytää ammatti.",
     "group": "Pääluokka",
     "allGroups": "Kaikki pääluokat",
     "outlook": "Näkymä",
@@ -32,7 +36,13 @@
     "unscored": "Ei pisteytystä",
     "fixture": "Esimerkkipisteet",
     "reset": "Tyhjennä suodattimet",
-    "results": "{count} ammattia"
+    "results": "{count} ammattia",
+    "advanced": "Tarkemmat suodattimet",
+    "presets": "Valmiit näkymät",
+    "presetLargest": "Suurimmat ammattiryhmät",
+    "presetHighExposure": "Korkea AI-altistus",
+    "presetUnusedPotential": "Käyttämätön AI-potentiaali",
+    "presetShortage": "Työvoimapula"
   },
   "outlook": {
     "shortage": "Työvoimapula",
@@ -42,12 +52,46 @@
     "unavailable": "Ei koneluettavaa näkymää"
   },
   "chart": {
-    "treemap": "Puu kartta, pinta-ala työllisten mukaan",
+    "treemap": "Puu kartta, pinta-ala työllisten mukaan. Napsauta ammattiryhmää lähentääksesi, ammattia valitaksesi.",
     "scatter": "Hajontakuvio: teoreettinen altistus ja nykyinen käyttöönotto",
     "x": "Teoreettinen altistus",
     "y": "Nykyinen käyttöönotto",
     "unscored": "Ei pisteytystä",
-    "stale": "Vanha tilasto"
+    "stale": "Vanha tilasto",
+    "breadcrumb": "Hierarkian taso",
+    "list": "Ammattilista, näppäimistö- ja ruudunlukijavaihtoehto kartalle",
+    "listToggle": "Näytä ammattilista"
+  },
+  "tooltip": {
+    "employed": "Työlliset",
+    "score": "Valittu mittari",
+    "uncertainty": "Epävarmuus",
+    "rationale": "Perustelu",
+    "availability": "Tietojen saatavuus",
+    "availabilityComplete": "Työllisyys, näkymä ja pisteytys ovat saatavilla",
+    "availabilityUnscored": "Ammattia ei ole pisteytetty",
+    "availabilityFixture": "Esimerkkipisteytys, ei viranomaisaineisto",
+    "availabilityMissingEmployment": "Työllisyystietoa ei ole",
+    "availabilityMissingOutlook": "Koneluettavaa työmarkkinanäkymää ei ole",
+    "availabilityPartial": "Osa tiedoista on vanhentunutta tai puutteellista"
+  },
+  "scoreMeaning": {
+    "exposure": {
+      "910": "Lähes kokonaan teksti-, koodi- tai datatyötä (teoreettinen altistus, ei työttömyysriski)",
+      "78": "Pääosin kognitiivista tai digitaalista työtä (teoreettinen altistus, ei työttömyysriski)",
+      "56": "Sekä tekoälylle soveltuvaa että kehollista tai vuorovaikutteista työtä",
+      "34": "Pääosin ruumiillista, vuorovaikutteista tai tilannesidonnaista työtä",
+      "12": "Lähes kokonaan ruumiillista tai paikkaan sidottua työtä",
+      "0": "Ei uskottavaa vaikutusta ydintehtäviin"
+    },
+    "adoption": {
+      "910": "Työkaluja on dokumentoidusti laajasti suomalaisilla työpaikoilla",
+      "78": "Työkaluja on ja käyttö on merkittävää",
+      "56": "Pilotteja ja varhaista käyttöä, ei valtavirtaa",
+      "34": "Satunnaisia kokeiluja tai lähinnä keskustelua",
+      "12": "Vähäistä havaittavaa käyttöä",
+      "0": "Ei merkittävää havaittavaa käyttöä"
+    }
   },
   "detail": {
     "title": "Ammatti",
@@ -59,9 +103,17 @@
     "outlook": "Työmarkkinanäkymä",
     "index": "Pula–ylitarjonta-indeksi",
     "uncertainty": "Epävarmuus",
-    "human": "Ihmisen kriittiset tehtävät",
-    "ai": "Tekoälylle soveltuvat tehtävät",
+    "human": "Ihmisen vastuulle kuuluvat tehtävät",
+    "ai": "Tehtävät, joita tekoäly voi nopeuttaa",
+    "skills": "Kehittämisen arvoiset taidot",
+    "reasons": "Miksi altistuspiste on tämä",
     "sources": "Lähteet",
+    "scoredAt": "Pisteytyspäivä",
+    "model": "Malli",
+    "prompt": "Kehoteversio",
+    "official": "Virallinen tilasto",
+    "aiEstimate": "Tekoälyn tuottama arvio",
+    "aiEstimateHint": "Ei Tilastokeskuksen, KEHA-keskuksen eikä TEM:n tilasto. Altistus ei ole työttömyyden todennäköisyys.",
     "missingEmployment": "Työllisyystietoa ei ole tälle koodille.",
     "staleEmployment": "Työssäkäyntitilaston tuorein vuosi tässä aineistossa on 2023.",
     "missingOutlook": "Työvoimabarometrissa ei ole koneluettavaa 4-numerotason havaintoa.",
@@ -69,12 +121,84 @@
     "missingScore": "Ammattia ei ole pisteytetty. Täysi luettelo edellyttää offline-pipelinea ja rajapinta-avainta.",
     "fixtureScore": "Esimerkkipisteytys rubriikin mukaan, ei viranomaisaineisto.",
     "noDescription": "Virallista kuvausta ei ole saatavilla tällä kielellä.",
-    "select": "Valitse ammatti kartasta tai hausta."
+    "select": "Valitse ammatti kartasta tai hausta.",
+    "onboardingTitle": "Näin luet näkymää",
+    "onboardingBody": "Hae ammattia nimellä tai koodilla, tai valitse ruutu kartasta. Ruudun pinta-ala on työllisten määrä, väri on valittu mittari. AI-altistus kuvaa tehtävien luonnetta; se ei ole ennuste irtisanomisista eikä työttömyyden todennäköisyys.",
+    "examples": "Esimerkkammatit",
+    "openExample": "Avaa {name}"
+  },
+  "summary": {
+    "line": "Näkymässä on {count} ammattia ja {workers}. {exposure} AI-altistus ei ole työttömyyden todennäköisyys.",
+    "workersMillions": "{value} miljoonaa työllistä",
+    "workersExact": "{value} työllistä",
+    "exposureShare": "{percent} % työskentelee ammateissa, joissa teoreettinen altistus on korkea.",
+    "exposureUnavailable": "Korkean teoreettisen altistuksen osuus: tietoa ei saatavilla, koska näkymässä ei ole pisteytettyjä ammatteja."
+  },
+  "quality": {
+    "unknownTitle": "Luokittelematon työllisyys",
+    "unknownBody": "Tilastokeskuksen aineistossa {count} työllistä ({year}) on luokittelemattomassa ryhmässä {code}. He eivät näy kartan ruutuina, jotta tuntematon luokka ei peittäisi varsinaisia ammatteja."
   },
   "uncertainty": {
     "low": "Matala",
     "medium": "Keskitaso",
     "high": "Korkea"
+  },
+  "workday": {
+    "title": "Kirjoita ammattisi tai kuvaile työpäiväsi",
+    "lead": "Arvio on tekoälyn tuottama, ei virallinen tilasto, eikä se ole työttömyyden todennäköisyys. AI-altistus ei tarkoita työpaikkojen katoamista.",
+    "privacy": "Vapaamuotoista kuvausta ei tallenneta.",
+    "jobTitle": "Ammattinimike",
+    "description": "Tyypillisen työpäivän kuvaus",
+    "submit": "Analysoi",
+    "pending": "Analysoidaan…",
+    "confidence": "Vastaavuus",
+    "accelerate": "Tekoäly voi nopeuttaa",
+    "assist": "Tekoäly voi avustaa, ihminen vastaa",
+    "human": "Ensisijaisesti inhimillinen, ruumiillinen tai relationaalinen",
+    "insufficient": "Liian vähän tietoa",
+    "shareTasks": "Osuus tehtävistä, joita tekoäly voi nopeuttaa",
+    "shareRole": "Osuus roolista, joka on periaatteessa automatisoitavissa",
+    "skills": "Suositellut taidot",
+    "errorUnavailable": "Työpäiväanalyysi ei ole käytettävissä ilman palvelimen malliasetusta. Tämä ei ole virallinen tilasto.",
+    "errorGeneric": "Analyysiä ei voitu tehdä.",
+    "fixtureNote": "Kehitystila: merkitty esimerkkivastaus, ei viranomaisaineisto.",
+    "ambiguous": "Usea ammatti sopii kuvaukseen. Valitse yksi.",
+    "noMatch": "Yhtään AML 2010 -ammattia ei voitu yhdistää luotettavasti."
+  },
+  "bridges": {
+    "title": "Läheiset uravaihtoehdot",
+    "overlap": "Päällekkäisyys",
+    "retained": "Säilyvät taidot",
+    "missing": "Puuttuvat taidot",
+    "why": "Miksi läheinen",
+    "calculated": "Samankaltaisuus on laskettu tehtävä- ja taitokentistä. Tekoäly ei keksi naapureita.",
+    "explainUnavailable": "Sanallinen tekoälyselite ei ole käytettävissä ilman palvelimen mallia.",
+    "empty": "Läheisiä vaihtoehtoja ei voitu laskea tälle ammattikoodille.",
+    "noSalary": "Palkkatietoa ei ole tässä aineistossa.",
+    "sameThreeDigit": "Sama 3-numeroryhmä",
+    "sameTwoDigit": "Sama 2-numeroryhmä",
+    "sameMajor": "Sama pääluokka",
+    "taskOverlap": "Yhteisiä tehtäviä tai taitoja",
+    "outlook": "Samanlainen työmarkkinanäkymä"
+  },
+  "compare": {
+    "action": "Vertaa",
+    "added": "Vertailussa",
+    "remove": "Poista vertailusta",
+    "title": "Ammattien vertailu",
+    "hint": "Valitse 2–4 ammattia. Vertailu kulkee osoitteessa ja sen voi tulostaa tai ladata kuvana tällä laitteella.",
+    "max": "Vertailussa voi olla enintään neljä ammattia.",
+    "needTwo": "Lisää vielä vähintään yksi ammatti, jotta vertailukortti aukeaa.",
+    "print": "Tulosta",
+    "downloadPng": "Lataa PNG",
+    "copyLink": "Kopioi linkki",
+    "copied": "Linkki kopioitu",
+    "clear": "Tyhjennä vertailu",
+    "missing": "Ammattia {code} ei löytynyt luokitelluista 4-numeroryhmistä.",
+    "searchResults": "Hakutulokset",
+    "noSearchResults": "Ei hakutuloksia.",
+    "metric": "Tieto",
+    "transferable": "Siirtokelpoiset taidot"
   },
   "methodology": {
     "title": "Menetelmä ja rajoitteet",

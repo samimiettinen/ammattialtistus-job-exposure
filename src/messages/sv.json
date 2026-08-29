@@ -8,6 +8,9 @@
     "tagline": "AI-läget för Finlands yrken"
   },
   "notice": "AI-altistus ei tarkoita työpaikkojen katoamista",
+  "common": {
+    "unavailable": "Uppgift saknas"
+  },
   "nav": {
     "visualizer": "Vy",
     "methodology": "Metod och begränsningar",
@@ -20,6 +23,7 @@
   },
   "filters": {
     "search": "Sök yrke eller kod",
+    "searchHint": "Skriv yrkesnamn eller AML-kod. Det är det primära sättet att hitta ett yrke.",
     "group": "Huvudgrupp",
     "allGroups": "Alla huvudgrupper",
     "outlook": "Utsikt",
@@ -32,7 +36,13 @@
     "unscored": "Utan poäng",
     "fixture": "Exempelpoäng",
     "reset": "Rensa filter",
-    "results": "{count} yrken"
+    "results": "{count} yrken",
+    "advanced": "Avancerade filter",
+    "presets": "Färdiga vyer",
+    "presetLargest": "Största yrkesgrupperna",
+    "presetHighExposure": "Hög AI-exponering",
+    "presetUnusedPotential": "Outnyttjad AI-potential",
+    "presetShortage": "Arbetskraftsbrist"
   },
   "outlook": {
     "shortage": "Arbetskraftsbrist",
@@ -42,12 +52,46 @@
     "unavailable": "Ingen maskinläsbar utsikt"
   },
   "chart": {
-    "treemap": "Trädkarta, yta efter antal sysselsatta",
+    "treemap": "Trädkarta, yta efter antal sysselsatta. Klicka på en yrkesgrupp för att zooma, på ett yrke för att välja.",
     "scatter": "Spridningsdiagram: teoretisk exponering och nuvarande införande",
     "x": "Teoretisk exponering",
     "y": "Nuvarande införande",
     "unscored": "Ingen poäng",
-    "stale": "Föråldrad statistik"
+    "stale": "Föråldrad statistik",
+    "breadcrumb": "Hierarkinivå",
+    "list": "Yrkeslista, tangentbords- och skärmläsaralternativ till kartan",
+    "listToggle": "Visa yrkeslista"
+  },
+  "tooltip": {
+    "employed": "Sysselsatta",
+    "score": "Valt mått",
+    "uncertainty": "Osäkerhet",
+    "rationale": "Motivering",
+    "availability": "Uppgifternas tillgänglighet",
+    "availabilityComplete": "Sysselsättning, utsikt och poäng finns",
+    "availabilityUnscored": "Yrket är inte poängsatt",
+    "availabilityFixture": "Exempelpoäng, inte myndighetsdata",
+    "availabilityMissingEmployment": "Ingen sysselsättningsuppgift",
+    "availabilityMissingOutlook": "Ingen maskinläsbar arbetsmarknadsutsikt",
+    "availabilityPartial": "En del uppgifter är föråldrade eller ofullständiga"
+  },
+  "scoreMeaning": {
+    "exposure": {
+      "910": "Nästan helt text-, kod- eller dataarbete (teoretisk exponering, inte arbetslöshetsrisk)",
+      "78": "Huvudsakligen kognitivt eller digitalt arbete (teoretisk exponering, inte arbetslöshetsrisk)",
+      "56": "Både arbete som lämpar sig för AI och kroppsligt eller interaktivt arbete",
+      "34": "Huvudsakligen kroppsligt, interaktivt eller situationsbundet arbete",
+      "12": "Nästan helt kroppsligt eller platsbundet arbete",
+      "0": "Ingen trovärdig påverkan på kärnuppgifterna"
+    },
+    "adoption": {
+      "910": "Verktyg används dokumenterat brett på finländska arbetsplatser",
+      "78": "Verktyg finns och användningen är betydande",
+      "56": "Piloter och tidig användning, inte mainstream",
+      "34": "Tillfälliga försök eller främst diskussion",
+      "12": "Liten observerbar användning",
+      "0": "Ingen betydande observerbar användning"
+    }
   },
   "detail": {
     "title": "Yrke",
@@ -59,9 +103,17 @@
     "outlook": "Arbetsmarknadsutsikt",
     "index": "Brist–överskottsindex",
     "uncertainty": "Osäkerhet",
-    "human": "Människokritiska uppgifter",
-    "ai": "Uppgifter där AI kan användas",
+    "human": "Uppgifter som kräver mänskligt ansvar",
+    "ai": "Uppgifter som AI kan påskynda",
+    "skills": "Färdigheter värda att utveckla",
+    "reasons": "Varför exponeringspoängen ser ut så här",
     "sources": "Källor",
+    "scoredAt": "Poängsättningsdatum",
+    "model": "Modell",
+    "prompt": "Promptversion",
+    "official": "Officiell statistik",
+    "aiEstimate": "AI-genererad uppskattning",
+    "aiEstimateHint": "Inte statistik från Statistikcentralen, KEHA eller ANM. Exponering är inte en arbetslöshetssannolikhet.",
     "missingEmployment": "Ingen sysselsättningsuppgift för koden.",
     "staleEmployment": "Senaste året i sysselsättningsstatistiken här är 2023.",
     "missingOutlook": "Arbetskraftsbarometern har ingen maskinläsbar observation på fyrasiffrig nivå.",
@@ -69,12 +121,84 @@
     "missingScore": "Yrket är inte poängsatt. Hela katalogen kräver en offline-pipeline och API-nyckel.",
     "fixtureScore": "Exempelpoäng enligt rubriken, inte myndighetsdata.",
     "noDescription": "Ingen officiell beskrivning på detta språk.",
-    "select": "Välj ett yrke i kartan eller sökningen."
+    "select": "Välj ett yrke i kartan eller sökningen.",
+    "onboardingTitle": "Så läser du vyn",
+    "onboardingBody": "Sök ett yrke med namn eller kod, eller välj en ruta i kartan. Rutan yta är antalet sysselsatta, färgen är det valda måttet. AI-exponering beskriver uppgifternas karaktär; den är inte en prognos om uppsägningar och inte en arbetslöshetssannolikhet.",
+    "examples": "Exempelyrken",
+    "openExample": "Öppna {name}"
+  },
+  "summary": {
+    "line": "Vyn visar {count} yrken och {workers}. {exposure} AI-exponering är inte en arbetslöshetssannolikhet.",
+    "workersMillions": "{value} miljoner sysselsatta",
+    "workersExact": "{value} sysselsatta",
+    "exposureShare": "{percent} % arbetar i yrken med hög teoretisk exponering.",
+    "exposureUnavailable": "Andelen med hög teoretisk exponering: uppgift saknas, eftersom vyn inte innehåller poängsatta yrken."
+  },
+  "quality": {
+    "unknownTitle": "Oklassificerad sysselsättning",
+    "unknownBody": "I Statistikcentralens material finns {count} sysselsatta ({year}) i den oklassificerade gruppen {code}. De visas inte som rutor i kartan, så att den okända klassen inte ska täcka de egentliga yrkena."
   },
   "uncertainty": {
     "low": "Låg",
     "medium": "Medel",
     "high": "Hög"
+  },
+  "workday": {
+    "title": "Skriv ditt yrke eller beskriv din arbetsdag",
+    "lead": "Uppskattningen är AI-genererad, inte officiell statistik, och inte en arbetslöshetssannolikhet. AI-altistus ei tarkoita työpaikkojen katoamista.",
+    "privacy": "Fritextbeskrivningen sparas inte.",
+    "jobTitle": "Yrkesnamn",
+    "description": "Beskrivning av en typisk arbetsdag",
+    "submit": "Analysera",
+    "pending": "Analyseras…",
+    "confidence": "Träffsäkerhet",
+    "accelerate": "AI kan påskynda",
+    "assist": "AI kan hjälpa, människan ansvarar",
+    "human": "Främst mänskligt, kroppsligt eller relationellt",
+    "insufficient": "Otillräcklig information",
+    "shareTasks": "Andel uppgifter som AI kan påskynda",
+    "shareRole": "Andel av rollen som i princip kan automatiseras",
+    "skills": "Rekommenderade färdigheter",
+    "errorUnavailable": "Arbetsdagsanalysen är inte tillgänglig utan serverns modellinställning. Detta är inte officiell statistik.",
+    "errorGeneric": "Analysen kunde inte göras.",
+    "fixtureNote": "Utvecklingsläge: märkt exempelsvar, inte myndighetsdata.",
+    "ambiguous": "Flera yrken passar beskrivningen. Välj ett.",
+    "noMatch": "Inget AML 2010-yrke kunde kopplas tillförlitligt."
+  },
+  "bridges": {
+    "title": "Närliggande yrkesalternativ",
+    "overlap": "Överlappning",
+    "retained": "Kvarvarande färdigheter",
+    "missing": "Saknade färdigheter",
+    "why": "Varför närliggande",
+    "calculated": "Likheten är beräknad från uppgifts- och färdighetsfält. AI hittar inte på grannar.",
+    "explainUnavailable": "En AI-skriven förklaring är inte tillgänglig utan serverns modell.",
+    "empty": "Närliggande alternativ kunde inte beräknas för den här koden.",
+    "noSalary": "Löneuppgifter finns inte i det här materialet.",
+    "sameThreeDigit": "Samma tresiffriga grupp",
+    "sameTwoDigit": "Samma tvåsiffriga grupp",
+    "sameMajor": "Samma huvudgrupp",
+    "taskOverlap": "Gemensamma uppgifter eller färdigheter",
+    "outlook": "Liknande arbetsmarknadsutsikt"
+  },
+  "compare": {
+    "action": "Jämför",
+    "added": "I jämförelsen",
+    "remove": "Ta bort från jämförelsen",
+    "title": "Jämförelse av yrken",
+    "hint": "Välj 2–4 yrken. Jämförelsen följer med i adressen och kan skrivas ut eller laddas ner som bild på den här enheten.",
+    "max": "Jämförelsen kan innehålla högst fyra yrken.",
+    "needTwo": "Lägg till minst ett yrke till för att öppna jämförelsekortet.",
+    "print": "Skriv ut",
+    "downloadPng": "Ladda ner PNG",
+    "copyLink": "Kopiera länk",
+    "copied": "Länken kopierades",
+    "clear": "Rensa jämförelsen",
+    "missing": "Yrket {code} saknas bland klassificerade fyrsiffriga grupper.",
+    "searchResults": "Sökresultat",
+    "noSearchResults": "Inga sökresultat.",
+    "metric": "Uppgift",
+    "transferable": "Överförbara färdigheter"
   },
   "methodology": {
     "title": "Metod och begränsningar",
