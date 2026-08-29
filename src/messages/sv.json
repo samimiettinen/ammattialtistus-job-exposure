@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "title": "Yrkesexponering – AI och Finlands yrken",
+    "description": "Teoretisk AI-exponering, observerat införande och arbetsmarknadsutsikter för yrken enligt yrkesklassificeringen 2010."
+  },
+  "brand": {
+    "name": "Ammattialtistus",
+    "tagline": "AI-läget för Finlands yrken"
+  },
+  "notice": "AI-altistus ei tarkoita työpaikkojen katoamista",
+  "nav": {
+    "visualizer": "Vy",
+    "methodology": "Metod och begränsningar",
+    "language": "Språk"
+  },
+  "tabs": {
+    "exposure": "Exponering",
+    "adoption": "Införande",
+    "outlook": "Arbetsmarknadsutsikt"
+  },
+  "filters": {
+    "search": "Sök yrke eller kod",
+    "group": "Huvudgrupp",
+    "allGroups": "Alla huvudgrupper",
+    "outlook": "Utsikt",
+    "allOutlooks": "Alla utsikter",
+    "employment": "Minsta antal sysselsatta",
+    "anySize": "Alla storlekar",
+    "scoreStatus": "Poängsättning",
+    "allScores": "Alla",
+    "scored": "Poängsatta",
+    "unscored": "Utan poäng",
+    "fixture": "Exempelpoäng",
+    "reset": "Rensa filter",
+    "results": "{count} yrken"
+  },
+  "outlook": {
+    "shortage": "Arbetskraftsbrist",
+    "surplus": "Överskott",
+    "balanced": "Balans",
+    "mismatch": "Matchningsproblem",
+    "unavailable": "Ingen maskinläsbar utsikt"
+  },
+  "chart": {
+    "treemap": "Trädkarta, yta efter antal sysselsatta",
+    "scatter": "Spridningsdiagram: teoretisk exponering och nuvarande införande",
+    "x": "Teoretisk exponering",
+    "y": "Nuvarande införande",
+    "unscored": "Ingen poäng",
+    "stale": "Föråldrad statistik"
+  },
+  "detail": {
+    "title": "Yrke",
+    "close": "Stäng",
+    "employed": "Sysselsatta",
+    "year": "Statistikår",
+    "exposure": "Teoretisk AI-exponering",
+    "adoption": "Nuvarande införande",
+    "outlook": "Arbetsmarknadsutsikt",
+    "index": "Brist–överskottsindex",
+    "uncertainty": "Osäkerhet",
+    "human": "Människokritiska uppgifter",
+    "ai": "Uppgifter där AI kan användas",
+    "sources": "Källor",
+    "missingEmployment": "Ingen sysselsättningsuppgift för koden.",
+    "staleEmployment": "Senaste året i sysselsättningsstatistiken här är 2023.",
+    "missingOutlook": "Arbetskraftsbarometern har ingen maskinläsbar observation på fyrasiffrig nivå.",
+    "derivedOutlook": "Det nationella talet är en sysselsättningsviktad sammanställning av 19 landskap, inte ett officiellt KEHA-index.",
+    "missingScore": "Yrket är inte poängsatt. Hela katalogen kräver en offline-pipeline och API-nyckel.",
+    "fixtureScore": "Exempelpoäng enligt rubriken, inte myndighetsdata.",
+    "noDescription": "Ingen officiell beskrivning på detta språk.",
+    "select": "Välj ett yrke i kartan eller sökningen."
+  },
+  "uncertainty": {
+    "low": "Låg",
+    "medium": "Medel",
+    "high": "Hög"
+  },
+  "methodology": {
+    "title": "Metod och begränsningar",
+    "lead": "Här förklaras varifrån talen kommer och vad de inte betyder."
+  }
+}

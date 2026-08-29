@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "title": "Occupation exposure – AI and Finnish jobs",
+    "description": "Theoretical AI exposure, observed adoption and labour-market outlook for Classification of Occupations 2010."
+  },
+  "brand": {
+    "name": "Ammattialtistus",
+    "tagline": "AI view of Finnish occupations"
+  },
+  "notice": "AI-altistus ei tarkoita työpaikkojen katoamista",
+  "nav": {
+    "visualizer": "View",
+    "methodology": "Methods and limits",
+    "language": "Language"
+  },
+  "tabs": {
+    "exposure": "Exposure",
+    "adoption": "Adoption",
+    "outlook": "Labour-market outlook"
+  },
+  "filters": {
+    "search": "Search occupation or code",
+    "group": "Major group",
+    "allGroups": "All major groups",
+    "outlook": "Outlook",
+    "allOutlooks": "All outlooks",
+    "employment": "Minimum employment",
+    "anySize": "Any size",
+    "scoreStatus": "Scoring",
+    "allScores": "All",
+    "scored": "Scored",
+    "unscored": "Unscored",
+    "fixture": "Example scores",
+    "reset": "Clear filters",
+    "results": "{count} occupations"
+  },
+  "outlook": {
+    "shortage": "Shortage",
+    "surplus": "Surplus",
+    "balanced": "Balanced",
+    "mismatch": "Mismatch",
+    "unavailable": "No machine-readable outlook"
+  },
+  "chart": {
+    "treemap": "Treemap sized by employed persons",
+    "scatter": "Scatterplot of theoretical exposure versus current adoption",
+    "x": "Theoretical exposure",
+    "y": "Current adoption",
+    "unscored": "Unscored",
+    "stale": "Stale statistics"
+  },
+  "detail": {
+    "title": "Occupation",
+    "close": "Close",
+    "employed": "Employed persons",
+    "year": "Statistical year",
+    "exposure": "Theoretical AI exposure",
+    "adoption": "Current adoption",
+    "outlook": "Labour-market outlook",
+    "index": "Shortage–surplus index",
+    "uncertainty": "Uncertainty",
+    "human": "Human-critical tasks",
+    "ai": "AI-applicable tasks",
+    "sources": "Sources",
+    "missingEmployment": "No employment count for this code.",
+    "staleEmployment": "The latest employment year in this extract is 2023.",
+    "missingOutlook": "Työvoimabarometri has no machine-readable 4-digit observation.",
+    "derivedOutlook": "The national figure is an employment-weighted composite of 19 regions, not an official KEHA national index.",
+    "missingScore": "This occupation has not been scored. The full catalogue needs the offline pipeline and an API key.",
+    "fixtureScore": "Example rubric score, not an official statistic.",
+    "noDescription": "No official description is available in this language.",
+    "select": "Select an occupation from the map or search."
+  },
+  "uncertainty": {
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High"
+  },
+  "methodology": {
+    "title": "Methods and limits",
+    "lead": "This page records where the numbers come from and what they do not mean."
+  }
+}
