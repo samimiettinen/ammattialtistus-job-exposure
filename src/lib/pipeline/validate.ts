@@ -1,3 +1,4 @@
+import { buildCatalogCoverageReport } from "../coverage/report";
 import { occupationSchema, type Occupation, type ValidationReport } from "../schemas";
 
 export function validateOccupations(occupations: Occupation[]): ValidationReport {
@@ -21,12 +22,18 @@ export function validateOccupations(occupations: Occupation[]): ValidationReport
     if (row.currentAIAdoption != null && (row.currentAIAdoption < 0 || row.currentAIAdoption > 10)) {
       errors.push(`${row.occupationCode}: adoption out of range`);
     }
+    if (row.employedPersons != null && row.employmentDataYear == null) {
+      errors.push(`${row.occupationCode}: employment count without official year`);
+    }
   }
 
   const level4 = occupations.filter((row) => row.level === 4);
   const withEmployment = level4.filter((row) => row.employedPersons != null);
   const withOutlook = level4.filter((row) => row.laborMarketOutlook !== "unavailable");
   const scored = occupations.filter((row) => row.scoreStatus !== "unscored");
+  const catalogCoverage = buildCatalogCoverageReport(occupations);
+  errors.push(...catalogCoverage.errors);
+  warnings.push(...catalogCoverage.warnings);
 
   if (withEmployment.length < level4.length * 0.5) {
     warnings.push("Fewer than half of level-4 occupations have employment counts.");
@@ -43,6 +50,13 @@ export function validateOccupations(occupations: Occupation[]): ValidationReport
     unscoredCount: occupations.filter((row) => row.scoreStatus === "unscored").length,
     employmentCoverage: level4.length ? withEmployment.length / level4.length : 0,
     outlookCoverage: level4.length ? withOutlook.length / level4.length : 0,
+    skillCoverage: catalogCoverage.skillCoverage,
+    taskCoverage: catalogCoverage.taskCoverage,
+    explicitSkillCoverage: catalogCoverage.explicitSkillCoverage,
+    fullCatalogFakeScores: catalogCoverage.fullCatalogFakeScores,
+    inventedOfficialStats: catalogCoverage.inventedOfficialStats,
+    visualLevel4Count: catalogCoverage.visualLevel4Count,
+    catalogCoverage,
     errors,
     warnings,
   };

@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { careerBridgesResponseSchema } from "./bridges";
+import { occupationAnalysisSchema } from "./situation";
 
 export const WORKDAY_PROMPT_VERSION = "2026-08-29.workday.1";
 export const WORKDAY_TEXT_MIN = 20;
@@ -89,6 +91,8 @@ export const workdayResponseSchema = z.object({
   model: z.string().nullable(),
   promptVersion: z.string(),
   scoredAt: z.string(),
+  analysis: occupationAnalysisSchema.optional(),
+  careerBridges: careerBridgesResponseSchema.optional(),
 });
 
 export type WorkdayResponse = z.infer<typeof workdayResponseSchema>;

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { catalogCoverageReportSchema } from "./coverage";
 import { occupationCatalogSchema } from "./occupation";
 import { employmentRowSchema, outlookRecordSchema, parsedOccupationSchema } from "./sources";
 import { scoreRecordSchema } from "./scores";
@@ -46,6 +47,13 @@ export const validationReportSchema = z.object({
   unscoredCount: z.number().int(),
   employmentCoverage: z.number(),
   outlookCoverage: z.number(),
+  skillCoverage: z.number().default(0),
+  taskCoverage: z.number().default(0),
+  explicitSkillCoverage: z.number().default(0),
+  fullCatalogFakeScores: z.boolean().default(false),
+  inventedOfficialStats: z.boolean().default(false),
+  visualLevel4Count: z.number().int().default(0),
+  catalogCoverage: catalogCoverageReportSchema.optional(),
   errors: z.array(z.string()),
   warnings: z.array(z.string()),
 });

@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS scores (
   exposure_range_high REAL,
   exposure_reasons TEXT,
   evidence TEXT,
+  classified_skills TEXT,
   PRIMARY KEY (occupation_code, prompt_version, source_data_hash, scoring_model)
 );
 `;
@@ -33,6 +34,7 @@ const EXTRA_COLUMNS: Array<[string, string]> = [
   ["exposure_range_high", "REAL"],
   ["exposure_reasons", "TEXT"],
   ["evidence", "TEXT"],
+  ["classified_skills", "TEXT"],
 ];
 
 function ensureScoreColumns(db: Database.Database): void {

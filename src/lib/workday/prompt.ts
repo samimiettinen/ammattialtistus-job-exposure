@@ -21,8 +21,9 @@ Kentät:
 tasks (8–12 kpl: {text, classification}),
 accelerateShareLow, accelerateShareHigh (0–1, osuus tehtävistä joita tekoäly voi nopeuttaa),
 automatableShareLow, automatableShareHigh (0–1, osuus roolista joka on periaatteessa automatisoitavissa, EI työttömyysriski),
-recommendedSkills (3–5 konkreettista taitoa),
-distinguishesExposureFromDisplacement (aina true).`;
+recommendedSkills (3–5 konkreettista taitoa; ei pelkkiä tehtäväotsikoita; älä keksi päällekkäisyyspisteitä),
+distinguishesExposureFromDisplacement (aina true).
+Älä palauta palkkaa, työllisyyslukua, työmarkkinanäkymää tai työttömyyden todennäköisyyttä.`;
 }
 
 export function workdayUserPrompt(input: {

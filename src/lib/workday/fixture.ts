@@ -24,13 +24,12 @@ export function fixtureWorkdayAnalysis(occupation: Occupation): WorkdayLlmOutput
   const accelerate = sliced.filter((task) => task.classification === "accelerate").length / sliced.length;
   const skills = unique([
     ...occupation.recommendedSkills,
-    ...occupation.AIApplicableTasks,
-    ...occupation.humanCriticalTasks,
     "dokumentointi",
     "laadunvarmistus",
-    "vuorovaikutus",
+    "koordinointi",
+    "asiakasymmärrys",
   ]).slice(0, 5);
-  while (skills.length < 3) skills.push("tehtäväkuvauksen tarkentaminen");
+  while (skills.length < 3) skills.push("dokumentointi");
 
   return {
     tasks: sliced,

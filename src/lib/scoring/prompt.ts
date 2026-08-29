@@ -36,9 +36,13 @@ theoreticalAIExposure, currentAIAdoption, exposureRationale, adoptionRationale,
 humanCriticalTasks (merkkijonotaulukko), AIApplicableTasks (merkkijonotaulukko),
 uncertainty (low|medium|high),
 distinguishesExposureFromDisplacement (aina true).
-Valinnaiset: recommendedSkills, exposureReasons (enintään 3 lausetta),
+Valinnaiset: recommendedSkills (3–8 konkreettista taitoa; EI pelkkiä tehtäväotsikoita;
+erota siirtokelpoinen taito, ammatti- tai välineosaaminen, kelpoisuus, vuorovaikutus, päätösvastuu, kehollinen kyky),
+exposureReasons (enintään 3 lausetta),
 exposureRangeLow, exposureRangeHigh (vain jos voit perustella tehtävien jaosta; älä keksi ±-väliä epävarmuudesta).
-Älä keksi palkkoja, virallisia tilastoja, työttömyysennusteita tai lähdeviitteitä.
+Älä keksi palkkoja, työllisyyslukuja, työmarkkinanäkymiä, työttömyysennusteita tai lähdeviitteitä.
+Älä pisteytä koko ammattiluetteloa keksityillä samoilla luvuilla. Puuttuva virallinen tieto jää puuttuvaksi.
+Lopullista taito- tai urapäällekkäisyyttä ET laske — se lasketaan deterministisesti.
 
 Perustelut suomeksi.`;
 }

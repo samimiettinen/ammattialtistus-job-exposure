@@ -5,28 +5,35 @@ import { useMemo } from "react";
 import { buildCareerBridges } from "@/lib/bridges";
 import { displayValue } from "@/lib/occupation-view";
 import type { Occupation } from "@/lib/schemas";
+import type { CareerBridgesResponse } from "@/lib/schemas/bridges";
+import { skillLabel } from "@/lib/skills/normalize";
 import { useVisualizerStore } from "@/lib/store";
 import { occupationName } from "@/lib/utils";
 
 export function CareerBridges({
   occupation,
   catalog,
+  result: provided,
 }: {
   occupation: Occupation;
   catalog: Occupation[];
+  result?: CareerBridgesResponse;
 }) {
   const t = useTranslations();
   const locale = useLocale();
   const setFilters = useVisualizerStore((state) => state.setFilters);
   const toggleCompare = useVisualizerStore((state) => state.toggleCompare);
-  const result = useMemo(() => buildCareerBridges(occupation, catalog), [occupation, catalog]);
+  const result = useMemo(
+    () => provided ?? buildCareerBridges(occupation, catalog, locale === "sv" || locale === "en" ? locale : "fi"),
+    [provided, occupation, catalog, locale],
+  );
   const unavailable = t("common.unavailable");
 
   return (
-    <section className="mt-4 rounded border border-[#d8d2c6] p-3">
+    <section className="rounded border border-[#d8d2c6] p-3">
       <h3 className="font-semibold text-[#0b3f3c]">{t("bridges.title")}</h3>
       <p className="mt-1 text-xs text-[#5c6570]">{t("bridges.calculated")}</p>
-      <p className="mt-1 text-xs text-[#5c6570]">{t("bridges.explainUnavailable")}</p>
+      <p className="mt-1 text-xs text-[#5c6570]">{t("bridges.weights")}</p>
       <p className="mt-1 text-xs text-[#5c6570]">{t("bridges.noSalary")}</p>
       {result.bridges.length === 0 ? (
         <p className="mt-2 text-sm text-[#5c6570]">{t("bridges.empty")}</p>
@@ -40,8 +47,7 @@ export function CareerBridges({
                   className="text-left text-[#0f5c5c] underline-offset-2 hover:underline"
                   onClick={() => setFilters({ selectedCode: bridge.occupationCode })}
                 >
-                  <span className="font-mono text-xs">{bridge.occupationCode}</span>{" "}
-                  {occupationName(bridge, locale)}
+                  <span className="font-mono text-xs">{bridge.occupationCode}</span> {occupationName(bridge, locale)}
                 </button>
                 <button
                   type="button"
@@ -55,24 +61,41 @@ export function CareerBridges({
                 {t("bridges.overlap")}: {Math.round(bridge.overlap * 100)} %
               </p>
               <p>
-                {t("detail.exposure")}: {displayValue(bridge.theoreticalAIExposure, unavailable)} ·{" "}
-                {t("detail.outlook")}:{" "}
-                {bridge.laborMarketOutlook === "unavailable"
-                  ? unavailable
-                  : t(`outlook.${bridge.laborMarketOutlook}`)}{" "}
-                · {t("detail.uncertainty")}:{" "}
-                {bridge.uncertainty ? t(`uncertainty.${bridge.uncertainty}`) : unavailable}
+                {t("bridges.exposure")}: {displayValue(bridge.theoreticalAIExposure, unavailable)} · {t("detail.outlook")}
+                :{" "}
+                {bridge.laborMarketOutlook === "unavailable" ? unavailable : t(`outlook.${bridge.laborMarketOutlook}`)} ·{" "}
+                {t("detail.uncertainty")}: {bridge.uncertainty ? t(`uncertainty.${bridge.uncertainty}`) : unavailable} ·{" "}
+                {t("bridges.completeness")}: {Math.round(bridge.dataCompleteness * 100)} %
               </p>
               <p>
-                {t("bridges.retained")}:{" "}
-                {bridge.retainedSkills.length ? bridge.retainedSkills.join(" · ") : unavailable}
+                {t("bridges.retained")}: {bridge.retainedSkills.length ? bridge.retainedSkills.join(" · ") : unavailable}
               </p>
               <p>
-                {t("bridges.missing")}:{" "}
-                {bridge.missingSkills.length ? bridge.missingSkills.join(" · ") : unavailable}
+                {t("bridges.missing")}: {bridge.missingSkills.length ? bridge.missingSkills.join(" · ") : unavailable}
+              </p>
+              <p>
+                {t("bridges.barriers")}:{" "}
+                {bridge.qualificationKnown
+                  ? bridge.qualificationBarriers.length
+                    ? bridge.qualificationBarriers.map((item) => skillLabel(item, locale)).join(" · ")
+                    : unavailable
+                  : unavailable}
+              </p>
+              <p>
+                {t("bridges.humanCapabilities")}:{" "}
+                {bridge.humanCriticalCapabilities.length
+                  ? bridge.humanCriticalCapabilities.map((item) => skillLabel(item, locale)).join(" · ")
+                  : unavailable}
               </p>
               <p className="text-xs text-[#5c6570]">
-                {t("bridges.why")}: {bridge.reasons.map((reason) => t(`bridges.${reason}`)).join(" · ")}
+                {t("bridges.why")}: {bridge.explanation}
+              </p>
+              <p className="text-xs text-[#5c6570]">
+                {t("bridges.whyProduced")}: {bridge.reasons.map((reason) => t(`bridges.${reason}`)).join(" · ")}
+              </p>
+              <p className="text-xs text-[#5c6570]">
+                {t("bridges.missingEvidence")}:{" "}
+                {bridge.missingEvidence.length ? bridge.missingEvidence.join(" · ") : unavailable}
               </p>
             </li>
           ))}

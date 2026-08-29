@@ -6,13 +6,14 @@ import { testOccupation } from "./helpers";
 const software = testOccupation("2512", {
   AIApplicableTasks: ["koodiluonnokset", "yksikkötestien hahmottelu"],
   humanCriticalTasks: ["tuotantovastuu"],
-  recommendedSkills: [],
+  recommendedSkills: ["dokumentointi", "koordinointi"],
 });
 const nearby = testOccupation("2514", {
   occupationNameFi: "Sovellusohjelmoijat",
   occupationNameEn: "Applications programmers",
   AIApplicableTasks: ["koodin täydennys", "yksikkötestit"],
   humanCriticalTasks: ["tuotantokoodin hyväksyntä", "asiakasneuvottelu kasvokkain"],
+  recommendedSkills: ["dokumentointi", "versionhallinta"],
   theoreticalAIExposure: 9,
 });
 const care = testOccupation("5321", {
@@ -43,6 +44,41 @@ describe("career bridges from structured overlap", () => {
     expect(near.reasons).toContain("sameThreeDigit");
     expect(near.reasons).toContain("taskOverlap");
     expect(near.retainedSkills.length).toBeGreaterThan(0);
+    expect(near.suppressed).toBe(false);
+    expect(near.factors.occupationalGroupProximity).toBe(1);
+    expect(near.qualificationKnown === false || Array.isArray(near.qualificationBarriers)).toBe(true);
+  });
+
+  it("does not recommend a career only because the title looks similar", () => {
+    const titled = testOccupation("8322", {
+      occupationNameFi: "Sovelluskuskit",
+      occupationNameEn: "Software drivers",
+      majorGroupCode: "8",
+      AIApplicableTasks: ["reitin optimointi"],
+      humanCriticalTasks: ["ajoneuvon hallinta"],
+      recommendedSkills: [],
+      theoreticalAIExposure: 3,
+    });
+    const similarTitle = occupationBridgeScore(software, titled);
+    expect(similarTitle.factors.taskOverlap).toBeLessThan(0.35);
+    expect(similarTitle.reasons).not.toContain("sameThreeDigit");
+  });
+
+  it("suppresses neighbours when data quality is insufficient", () => {
+    const thin = testOccupation("5412", {
+      scoreStatus: "unscored",
+      theoreticalAIExposure: null,
+      currentAIAdoption: null,
+      AIApplicableTasks: [],
+      humanCriticalTasks: [],
+      recommendedSkills: [],
+      laborMarketOutlook: "unavailable",
+      employedPersons: null,
+      employmentDataYear: null,
+      uncertainty: null,
+    });
+    const scored = occupationBridgeScore(software, thin);
+    expect(scored.suppressed).toBe(true);
   });
 
   it("lists missing skills from the target and never invents a salary", () => {

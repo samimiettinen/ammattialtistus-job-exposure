@@ -178,8 +178,18 @@
     "sameThreeDigit": "Samma tresiffriga grupp",
     "sameTwoDigit": "Samma tvåsiffriga grupp",
     "sameMajor": "Samma huvudgrupp",
-    "taskOverlap": "Gemensamma uppgifter eller färdigheter",
-    "outlook": "Liknande arbetsmarknadsutsikt"
+    "taskOverlap": "Gemensamma uppgifter",
+    "skillOverlap": "Överförbara färdigheter",
+    "outlook": "Liknande arbetsmarknadsutsikt",
+    "qualification": "Dokumenterad behörighet",
+    "humanCritical": "Mänskligt kritiska förmågor",
+    "barriers": "Behörighets- eller utbildningsgräns",
+    "humanCapabilities": "Mänskligt kritiska förmågor",
+    "completeness": "Underlagets täckning",
+    "missingEvidence": "Saknat underlag",
+    "exposure": "AI-exponering",
+    "whyProduced": "Varför den här rekommendationen",
+    "weights": "Vikter: src/lib/scoring/weights.ts"
   },
   "compare": {
     "action": "Jämför",
@@ -202,6 +212,46 @@
   },
   "methodology": {
     "title": "Metod och begränsningar",
-    "lead": "Här förklaras varifrån talen kommer och vad de inte betyder."
+    "lead": "Här förklaras varifrån talen kommer och vad de inte betyder.",
+    "analysisTitle": "Lägesbedömning och karriärbroar",
+    "analysisLead": "Lägeskategori, färdighetsöverlappning och närliggande yrken beräknas med dokumenterade vikter. AI kan tolka uppgifter men hittar inte på officiella tal eller det slutliga likhetstalet.",
+    "weights": "Vikterna för karriärbroar finns på ett ställe: src/lib/scoring/weights.ts."
+  },
+  "analysis": {
+    "situation": "Lägesbedömning",
+    "evidence": "Underlag och osäkerhet",
+    "capabilities": "Befintliga värdefulla förmågor",
+    "tasks": "Fynd på uppgiftsnivå",
+    "bridges": "Närliggande yrkesalternativ",
+    "actions": "Nästa åtgärder",
+    "methodology": "Metod och källor",
+    "methodologySummary": "Officiell statistik och AI-uppskattningar hålls isär. Saknade uppgifter märks som otillgängliga. Ett yrkesbyte härleds inte från exponering ensam. AI-altistus ei tarkoita työpaikkojen katoamista.",
+    "why": "Varför den här rekommendationen uppstod",
+    "missing": "Vilket underlag saknas",
+    "stale": "En del officiella indata är föråldrade eller poängen är gammal. Detta fyller inte i saknade officiella tal.",
+    "sourceOfficial": "Officiell statistik",
+    "sourceAi": "AI-genererad uppskattning",
+    "sourceUser": "Användaruppgift",
+    "sourceUnavailable": "Uppgift saknas",
+    "sourceCalculated": "Beräknad överlappning",
+    "completeness": "Underlagets täckning",
+    "inferredSkills": "Färdigheter har normaliserats från uppgiftsetiketter; de är inte en uttrycklig färdighetslista.",
+    "fixture": "Exempeluppskattning, inte myndighetsdata.",
+    "noCapabilities": "Överförbara färdigheter kunde inte normaliseras.",
+    "category": {
+      "explore_adjacent_now": "Undersök parallella alternativ",
+      "strengthen_current_role": "Stärk den nuvarande rollen",
+      "document_and_verify": "Komplettera underlaget",
+      "insufficient_evidence": "Underlaget räcker inte"
+    },
+    "skillCategory": {
+      "transferable": "Överförbar färdighet",
+      "occupation_specific": "Yrkespecifik kunskap",
+      "tools_technologies": "Verktyg och teknik",
+      "formal_qualification": "Formell behörighet",
+      "interpersonal": "Mellanmänsklig förmåga",
+      "decision_responsibility": "Beslutsansvar",
+      "physical_embodied": "Kroppslig förmåga"
+    }
   }
 }

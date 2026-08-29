@@ -1,3 +1,4 @@
+import { buildOccupationAnalysis } from "../analysis/build";
 import { evidenceFromSourceUrls } from "../occupation-analysis";
 import type { Occupation } from "../schemas";
 import {
@@ -67,7 +68,7 @@ export function analyzeWorkdaySync(args: {
     kind: item.kind === "ai_estimate" ? "occupation_record" : item.kind,
     occupationCode: matched.selected!.occupationCode,
   }));
-  const response = workdayResponseSchema.parse({
+  const draft = workdayResponseSchema.parse({
     ...base,
     status: "ok",
     selectedOccupationCode: matched.selected.occupationCode,
@@ -77,6 +78,17 @@ export function analyzeWorkdaySync(args: {
     recommendedSkills: parsed.recommendedSkills,
     citations,
     fixture: Boolean(args.fixture) || !args.modelOutput,
+  });
+  const built = buildOccupationAnalysis({
+    occupation: matched.selected,
+    catalog: args.catalog,
+    locale,
+    workday: draft,
+  });
+  const response = workdayResponseSchema.parse({
+    ...draft,
+    analysis: built,
+    careerBridges: built.bridges,
   });
   assertNoEcho(response, args.request.workdayText);
   return response;

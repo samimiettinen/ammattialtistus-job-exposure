@@ -74,7 +74,7 @@ export function Visualizer({
   return (
     <div className="space-y-4">
       <UrlStateSync />
-      <WorkdayPanel />
+      <WorkdayPanel catalog={occupations} />
       <div role="tablist" aria-label="Näkymä" className="flex flex-wrap gap-2">
         {(["exposure", "adoption", "outlook"] as const).map((tab) => (
           <button

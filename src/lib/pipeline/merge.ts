@@ -1,4 +1,5 @@
 import { evidenceFromSourceUrls, deriveExposureReasons } from "../occupation-analysis";
+import { skillsFromOccupation } from "../skills/normalize";
 import type {
   EmploymentRow,
   Occupation,
@@ -70,6 +71,13 @@ export function mergeOccupations(args: {
       humanCriticalTasks: score?.humanCriticalTasks ?? [],
       AIApplicableTasks: score?.AIApplicableTasks ?? [],
       recommendedSkills: score?.recommendedSkills ?? [],
+      classifiedSkills: skillsFromOccupation({
+        recommendedSkills: score?.recommendedSkills ?? [],
+        AIApplicableTasks: score?.AIApplicableTasks ?? [],
+        humanCriticalTasks: score?.humanCriticalTasks ?? [],
+        description: occ.description,
+        classifiedSkills: [],
+      }),
       evidence: score?.evidence?.length ? score.evidence : evidenceFromSourceUrls(occ.sourceUrls),
       uncertainty: score?.uncertainty ?? null,
       sourceUrls: occ.sourceUrls,

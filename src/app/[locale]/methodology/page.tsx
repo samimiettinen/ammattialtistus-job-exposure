@@ -79,6 +79,11 @@ export default async function MethodologyPage() {
       <h2>{t("compare.title")}</h2>
       <p>{t("compare.hint")}</p>
 
+      <h2>{t("methodology.analysisTitle")}</h2>
+      <p>{t("methodology.analysisLead")}</p>
+      <p>{t("methodology.weights")}</p>
+      <p>{t("analysis.methodologySummary")}</p>
+
       <h2>{t("bridges.title")}</h2>
       <p>{t("bridges.calculated")}</p>
       <p>{t("bridges.noSalary")}</p>

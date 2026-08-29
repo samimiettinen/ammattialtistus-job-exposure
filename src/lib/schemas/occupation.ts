@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { classifiedSkillSchema } from "./skills";
 
 export const uncertaintySchema = z.enum(["low", "medium", "high"]);
 export type Uncertainty = z.infer<typeof uncertaintySchema>;
@@ -50,6 +51,7 @@ export const occupationSchema = z
     humanCriticalTasks: z.array(z.string()),
     AIApplicableTasks: z.array(z.string()),
     recommendedSkills: z.array(z.string()).default([]),
+    classifiedSkills: z.array(classifiedSkillSchema).default([]),
     evidence: z.array(evidenceItemSchema).default([]),
     uncertainty: uncertaintySchema.nullable(),
     sourceUrls: z.array(z.string().url()),

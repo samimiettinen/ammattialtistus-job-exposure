@@ -1,5 +1,6 @@
 import { exposureReasonsFromRationale } from "./occupation-view";
 import { occupationSchema, type EvidenceItem, type Occupation } from "./schemas";
+import { skillsFromOccupation } from "./skills/normalize";
 
 function isHttpUrl(value: string): boolean {
   try {
@@ -41,6 +42,9 @@ export function enrichOccupationAnalysis(occupation: Occupation): Occupation {
     exposureRangeLow: occupation.exposureRangeLow ?? null,
     exposureRangeHigh: occupation.exposureRangeHigh ?? null,
     recommendedSkills: occupation.recommendedSkills ?? [],
+    classifiedSkills: occupation.classifiedSkills?.length
+      ? occupation.classifiedSkills
+      : skillsFromOccupation({ ...occupation, classifiedSkills: [] }),
   });
 }
 

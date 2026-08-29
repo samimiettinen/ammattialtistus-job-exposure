@@ -178,8 +178,18 @@
     "sameThreeDigit": "Sama 3-numeroryhmä",
     "sameTwoDigit": "Sama 2-numeroryhmä",
     "sameMajor": "Sama pääluokka",
-    "taskOverlap": "Yhteisiä tehtäviä tai taitoja",
-    "outlook": "Samanlainen työmarkkinanäkymä"
+    "taskOverlap": "Yhteisiä tehtäviä",
+    "skillOverlap": "Siirtokelpoiset taidot",
+    "outlook": "Samanlainen työmarkkinanäkymä",
+    "qualification": "Dokumentoitu kelpoisuus",
+    "humanCritical": "Ihmisen vastuulle kuuluvat kyvyt",
+    "barriers": "Kelpoisuus- tai koulutuskynnys",
+    "humanCapabilities": "Ihmisen kriittiset kyvyt",
+    "completeness": "Aineiston täydellisyys",
+    "missingEvidence": "Puuttuva näyttö",
+    "exposure": "AI-altistus",
+    "whyProduced": "Miksi tämä suositus",
+    "weights": "Painot: src/lib/scoring/weights.ts"
   },
   "compare": {
     "action": "Vertaa",
@@ -202,6 +212,46 @@
   },
   "methodology": {
     "title": "Menetelmä ja rajoitteet",
-    "lead": "Tämä sivu kertoo, mistä luvut tulevat ja mitä ne eivät tarkoita."
+    "lead": "Tämä sivu kertoo, mistä luvut tulevat ja mitä ne eivät tarkoita.",
+    "analysisTitle": "Tilannearvio ja urasillat",
+    "analysisLead": "Tilannearvio, taitopäällekkäisyys ja läheiset ammatit lasketaan dokumentoiduilla painoilla. Tekoäly voi jäsentää tehtäviä, mutta se ei keksi virallisia lukuja eikä lopullista samankaltaisuuspistettä.",
+    "weights": "Urasiltojen painot on kirjattu yhteen paikkaan: src/lib/scoring/weights.ts."
+  },
+  "analysis": {
+    "situation": "Tilannearvio",
+    "evidence": "Näyttö ja epävarmuus",
+    "capabilities": "Olemassa olevat arvokkaat kyvyt",
+    "tasks": "Tehtävätason havainnot",
+    "bridges": "Läheiset uravaihtoehdot",
+    "actions": "Seuraavat teot",
+    "methodology": "Menetelmä ja lähteet",
+    "methodologySummary": "Viralliset tilastot ja tekoälyarviot pidetään erillään. Puuttuva tieto näytetään saatavuusmerkintänä. Uranvaihtoa ei johdeta altistuksesta yksin. AI-altistus ei tarkoita työpaikkojen katoamista.",
+    "why": "Miksi tämä suositus syntyi",
+    "missing": "Mikä näyttö puuttuu",
+    "stale": "Osa virallisista syötteistä on vanhentunut tai pisteytys on vanha. Tämä ei täytä puuttuvia virallisia lukuja.",
+    "sourceOfficial": "Virallinen tilasto",
+    "sourceAi": "Tekoälyn tuottama arvio",
+    "sourceUser": "Käyttäjän antama tieto",
+    "sourceUnavailable": "Tietoa ei saatavilla",
+    "sourceCalculated": "Laskettu päällekkäisyys",
+    "completeness": "Aineiston täydellisyys",
+    "inferredSkills": "Taidot on normitettu tehtäväkuvauksista, ne eivät ole erillinen taitoluettelo.",
+    "fixture": "Esimerkkiarvio, ei viranomaisaineisto.",
+    "noCapabilities": "Siirtokelpoisia taitoja ei voitu normittaa.",
+    "category": {
+      "explore_adjacent_now": "Tarkastele rinnakkaisia vaihtoehtoja",
+      "strengthen_current_role": "Vahvista nykyistä roolia",
+      "document_and_verify": "Täydennä näyttöä",
+      "insufficient_evidence": "Aineisto ei riitä"
+    },
+    "skillCategory": {
+      "transferable": "Siirtokelpoinen taito",
+      "occupation_specific": "Ammattikohtainen osaaminen",
+      "tools_technologies": "Välineet ja teknologiat",
+      "formal_qualification": "Muodollinen kelpoisuus",
+      "interpersonal": "Vuorovaikutus",
+      "decision_responsibility": "Päätösvastuu",
+      "physical_embodied": "Kehollinen kyky"
+    }
   }
 }

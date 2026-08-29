@@ -2,17 +2,44 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
+import { AnalysisResults } from "@/components/AnalysisResults";
+import { buildOccupationAnalysis } from "@/lib/analysis/build";
+import type { Occupation } from "@/lib/schemas";
 import type { WorkdayResponse } from "@/lib/schemas/workday";
 import { useVisualizerStore } from "@/lib/store";
 
-const CLASS_KEYS = {
-  accelerate: "workday.accelerate",
-  assist: "workday.assist",
-  human: "workday.human",
-  insufficient: "workday.insufficient",
-} as const;
+function WorkdayAnalysis({ result, catalog }: { result: WorkdayResponse; catalog: Occupation[] }) {
+  const t = useTranslations();
+  const occupation =
+    catalog.find((row) => row.occupationCode === result.selectedOccupationCode) ?? null;
+  if (!occupation) {
+    return <p>{t("workday.noMatch")}</p>;
+  }
+  const analysis =
+    result.analysis && result.careerBridges
+      ? { ...result.analysis, bridges: result.careerBridges }
+      : buildOccupationAnalysis({
+          occupation,
+          catalog,
+          locale: result.locale,
+          workday: result,
+        });
+  return (
+    <div className="space-y-3">
+      <p>
+        {t("workday.shareTasks")}: {Math.round((result.accelerateShare?.low ?? 0) * 100)}–
+        {Math.round((result.accelerateShare?.high ?? 0) * 100)} %
+      </p>
+      <p>
+        {t("workday.shareRole")}: {Math.round((result.automatableShare?.low ?? 0) * 100)}–
+        {Math.round((result.automatableShare?.high ?? 0) * 100)} %
+      </p>
+      <AnalysisResults occupation={occupation} catalog={catalog} analysis={analysis} workday={result} />
+    </div>
+  );
+}
 
-export function WorkdayPanel() {
+export function WorkdayPanel({ catalog }: { catalog: Occupation[] }) {
   const t = useTranslations();
   const locale = useLocale();
   const selectedCode = useVisualizerStore((state) => state.selectedCode);
@@ -136,49 +163,7 @@ export function WorkdayPanel() {
             </div>
           ) : null}
           {result.status === "no_match" ? <p>{t("workday.noMatch")}</p> : null}
-          {result.status === "ok" ? (
-            <>
-              <p>
-                {t("workday.shareTasks")}: {Math.round((result.accelerateShare?.low ?? 0) * 100)}–
-                {Math.round((result.accelerateShare?.high ?? 0) * 100)} %
-              </p>
-              <p>
-                {t("workday.shareRole")}: {Math.round((result.automatableShare?.low ?? 0) * 100)}–
-                {Math.round((result.automatableShare?.high ?? 0) * 100)} %
-              </p>
-              <ul className="list-disc pl-5">
-                {result.tasks.map((task) => (
-                  <li key={task.text}>
-                    <span className="font-semibold">{t(CLASS_KEYS[task.classification])}:</span> {task.text}
-                  </li>
-                ))}
-              </ul>
-              <div>
-                <h3 className="font-semibold">{t("workday.skills")}</h3>
-                <ul className="list-disc pl-5">
-                  {result.recommendedSkills.map((skill) => (
-                    <li key={skill}>{skill}</li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold">{t("detail.sources")}</h3>
-                <ul className="list-disc pl-5 text-xs">
-                  {result.citations.map((item) => (
-                    <li key={item.url}>
-                      <a className="text-[#0f5c5c] underline" href={item.url} rel="noreferrer">
-                        {item.url}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <p className="text-xs text-[#5c6570]">
-                {t("detail.model")}: {result.model ?? t("common.unavailable")} · {t("detail.prompt")}:{" "}
-                {result.promptVersion}
-              </p>
-            </>
-          ) : null}
+          {result.status === "ok" ? <WorkdayAnalysis result={result} catalog={catalog} /> : null}
         </div>
       ) : null}
     </section>

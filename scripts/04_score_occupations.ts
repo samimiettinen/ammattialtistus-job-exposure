@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import { scoreRecordSchema, type ParsedOccupation, type ScoreRecord } from "../src/lib/schemas";
-import { FIXTURE_MODEL, PROMPT_VERSION, llmScoreResponseSchema } from "../src/lib/schemas/scores";
+import { FIXTURE_MODEL, PROMPT_VERSION } from "../src/lib/schemas/scores";
+import { parseLlmScoreResponse } from "../src/lib/scoring/parse";
 import { files } from "../src/lib/pipeline/paths";
 import { sourceDataHash } from "../src/lib/scoring/hash";
 import { scoringSystemPrompt, scoringUserPrompt } from "../src/lib/scoring/prompt";
@@ -60,7 +61,7 @@ async function scoreWithOpenAI(input: {
   };
   const content = body.choices?.[0]?.message?.content;
   if (!content) throw new Error("Empty model response");
-  const parsed = llmScoreResponseSchema.parse(JSON.parse(content));
+  const parsed = parseLlmScoreResponse(JSON.parse(content));
   return {
     occupationCode: input.occupation.occupationCode,
     theoreticalAIExposure: parsed.theoreticalAIExposure,

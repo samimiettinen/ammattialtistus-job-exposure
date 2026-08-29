@@ -178,8 +178,18 @@
     "sameThreeDigit": "Same 3-digit group",
     "sameTwoDigit": "Same 2-digit group",
     "sameMajor": "Same major group",
-    "taskOverlap": "Shared tasks or skills",
-    "outlook": "Similar labour-market outlook"
+    "taskOverlap": "Shared tasks",
+    "skillOverlap": "Transferable skills",
+    "outlook": "Similar labour-market outlook",
+    "qualification": "Documented qualification",
+    "humanCritical": "Human-critical capabilities",
+    "barriers": "Qualification or education barrier",
+    "humanCapabilities": "Human-critical capabilities",
+    "completeness": "Data completeness",
+    "missingEvidence": "Missing evidence",
+    "exposure": "AI exposure",
+    "whyProduced": "Why this recommendation",
+    "weights": "Weights: src/lib/scoring/weights.ts"
   },
   "compare": {
     "action": "Compare",
@@ -202,6 +212,46 @@
   },
   "methodology": {
     "title": "Methods and limits",
-    "lead": "This page records where the numbers come from and what they do not mean."
+    "lead": "This page records where the numbers come from and what they do not mean.",
+    "analysisTitle": "Situation assessment and career bridges",
+    "analysisLead": "Situation category, skill overlap and adjacent occupations are calculated with documented weights. AI may parse tasks; it does not invent official figures or the final similarity score.",
+    "weights": "Career-bridge weights live in one place: src/lib/scoring/weights.ts."
+  },
+  "analysis": {
+    "situation": "Situation assessment",
+    "evidence": "Evidence and uncertainty",
+    "capabilities": "Existing valuable capabilities",
+    "tasks": "Task-level findings",
+    "bridges": "Adjacent career options",
+    "actions": "Next actions",
+    "methodology": "Methods and sources",
+    "methodologySummary": "Official statistics and AI estimates stay separate. Missing data is labelled unavailable. A career change is not derived from exposure alone. AI-altistus ei tarkoita työpaikkojen katoamista.",
+    "why": "Why this recommendation was produced",
+    "missing": "Which evidence is missing",
+    "stale": "Some official inputs are stale or the score is old. This does not fill missing official numbers.",
+    "sourceOfficial": "Official statistics",
+    "sourceAi": "AI-generated estimate",
+    "sourceUser": "User-provided information",
+    "sourceUnavailable": "Information not available",
+    "sourceCalculated": "Calculated overlap",
+    "completeness": "Data completeness",
+    "inferredSkills": "Skills were normalised from task labels; they are not an explicit skill list.",
+    "fixture": "Example estimate, not an official source.",
+    "noCapabilities": "Transferable skills could not be normalised.",
+    "category": {
+      "explore_adjacent_now": "Explore parallel options",
+      "strengthen_current_role": "Strengthen the current role",
+      "document_and_verify": "Complete the evidence",
+      "insufficient_evidence": "Evidence is insufficient"
+    },
+    "skillCategory": {
+      "transferable": "Transferable skill",
+      "occupation_specific": "Occupation-specific expertise",
+      "tools_technologies": "Tools and technologies",
+      "formal_qualification": "Formal qualification",
+      "interpersonal": "Interpersonal capability",
+      "decision_responsibility": "Decision responsibility",
+      "physical_embodied": "Physical or embodied capability"
+    }
   }
 }
