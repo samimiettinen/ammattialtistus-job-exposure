@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { CareerBridges } from "@/components/CareerBridges";
+import { ProvenanceTag } from "@/components/ProvenanceTag";
 import type { BuiltAnalysis } from "@/lib/analysis/build";
 import { displayValue } from "@/lib/occupation-view";
 import type { Occupation } from "@/lib/schemas";
@@ -14,18 +15,6 @@ const TASK_KEYS = {
   human: "workday.human",
   insufficient: "workday.insufficient",
 } as const;
-
-function SourceTag({ kind }: { kind: "official" | "ai" | "user" | "unavailable" | "calculated" }) {
-  const t = useTranslations();
-  const label = {
-    official: t("analysis.sourceOfficial"),
-    ai: t("analysis.sourceAi"),
-    user: t("analysis.sourceUser"),
-    unavailable: t("analysis.sourceUnavailable"),
-    calculated: t("analysis.sourceCalculated"),
-  }[kind];
-  return <span className="rounded bg-[#efe9de] px-1.5 py-0.5 text-[11px] uppercase tracking-wide text-[#5c6570]">{label}</span>;
-}
 
 export function AnalysisResults({
   occupation,
@@ -53,7 +42,7 @@ export function AnalysisResults({
       <section className="rounded border border-[#0f5c5c] bg-[#f3f8f7] p-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h3 className="font-serif text-lg text-[#0b3f3c]">{t("analysis.situation")}</h3>
-          <SourceTag kind="calculated" />
+          <ProvenanceTag kind="calculated" />
         </div>
         <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[#0f5c5c]">
           {t(`analysis.category.${analysis.situation.category}`)}
@@ -82,7 +71,7 @@ export function AnalysisResults({
       <section className="rounded border border-[#d8d2c6] bg-white p-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h3 className="font-semibold text-[#0b3f3c]">{t("analysis.evidence")}</h3>
-          <SourceTag kind={analysis.coverage.fields.officialOutlook.status === "unavailable" ? "unavailable" : "official"} />
+          <ProvenanceTag kind={analysis.coverage.fields.officialOutlook.status === "unavailable" ? "unavailable" : "official"} />
         </div>
         {analysis.analysisStale ? <p className="mt-2 text-sm text-[#8a4b12]">{t("analysis.stale")}</p> : null}
         <dl className="mt-2 grid grid-cols-2 gap-2 text-sm">
@@ -90,7 +79,7 @@ export function AnalysisResults({
             <dt className="text-[#5c6570]">{t("detail.employed")}</dt>
             <dd>
               {displayValue(occupation.employedPersons, unavailable)}{" "}
-              <SourceTag kind={occupation.employedPersons == null ? "unavailable" : "official"} />
+              <ProvenanceTag kind={occupation.employedPersons == null ? "unavailable" : "official"} />
             </dd>
           </div>
           <div>
@@ -99,21 +88,21 @@ export function AnalysisResults({
               {occupation.laborMarketOutlook === "unavailable"
                 ? unavailable
                 : t(`outlook.${occupation.laborMarketOutlook}`)}{" "}
-              <SourceTag kind={occupation.laborMarketOutlook === "unavailable" ? "unavailable" : "official"} />
+              <ProvenanceTag kind={occupation.laborMarketOutlook === "unavailable" ? "unavailable" : "official"} />
             </dd>
           </div>
           <div>
             <dt className="text-[#5c6570]">{t("detail.exposure")}</dt>
             <dd>
               {displayValue(occupation.theoreticalAIExposure, unavailable)}{" "}
-              <SourceTag kind={occupation.theoreticalAIExposure == null ? "unavailable" : "ai"} />
+              <ProvenanceTag kind={occupation.theoreticalAIExposure == null ? "unavailable" : "ai"} />
             </dd>
           </div>
           <div>
             <dt className="text-[#5c6570]">{t("detail.uncertainty")}</dt>
             <dd>
               {occupation.uncertainty ? t(`uncertainty.${occupation.uncertainty}`) : unavailable}{" "}
-              <SourceTag kind={occupation.uncertainty ? "ai" : "unavailable"} />
+              <ProvenanceTag kind={occupation.uncertainty ? "ai" : "unavailable"} />
             </dd>
           </div>
         </dl>
@@ -128,7 +117,7 @@ export function AnalysisResults({
         ) : null}
         {workday ? (
           <p className="mt-1 text-xs text-[#5c6570]">
-            <SourceTag kind="user" /> {t("workday.privacy")}
+            <ProvenanceTag kind="user" /> {t("workday.privacy")}
           </p>
         ) : null}
       </section>
@@ -153,7 +142,7 @@ export function AnalysisResults({
       <section className="rounded border border-[#e6d3b8] bg-[#fff8ee] p-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h3 className="font-semibold text-[#8a4b12]">{t("analysis.tasks")}</h3>
-          <SourceTag kind="ai" />
+          <ProvenanceTag kind="ai" />
         </div>
         {tasks.length ? (
           <ul className="mt-2 list-disc pl-5 text-sm">

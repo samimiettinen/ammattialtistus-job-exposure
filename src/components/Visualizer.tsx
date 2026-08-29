@@ -13,6 +13,7 @@ import { ComparisonCard } from "./ComparisonCard";
 import { DataQualityNotice } from "./DataQualityNotice";
 import { DetailPanel } from "./DetailPanel";
 import { FilterBar } from "./FilterBar";
+import { MarketComposition } from "./MarketComposition";
 import { OccupationListbox } from "./OccupationListbox";
 import { SearchResults } from "./SearchResults";
 import { UrlStateSync } from "./UrlStateSync";
@@ -95,6 +96,7 @@ export function Visualizer({
       <SearchResults occupations={filtered} />
       <ComparisonCard catalog={occupations} />
       <ViewSummary summary={summary} />
+      <MarketComposition occupations={filtered} hierarchy={hierarchy} />
       <DataQualityNotice
         code={residual.code}
         employedPersons={residual.employedPersons}

@@ -1,6 +1,7 @@
 import { evidenceFromSourceUrls, deriveExposureReasons } from "../occupation-analysis";
 import { skillsFromOccupation } from "../skills/normalize";
 import type {
+  BarometerRegion,
   EmploymentRow,
   Occupation,
   OutlookRecord,
@@ -12,6 +13,7 @@ import { FIXTURE_MODEL } from "../schemas/scores";
 import { parentCodeOf } from "./classification";
 import { RETRIEVED_AT } from "./paths";
 import { employmentByExactCode } from "./employment";
+import { toRegionalOutlook } from "./outlook";
 
 function scoreStatusOf(score: ScoreRecord | undefined): Occupation["scoreStatus"] {
   if (!score || score.theoreticalAIExposure == null || score.currentAIAdoption == null) {
@@ -26,6 +28,8 @@ export function mergeOccupations(args: {
   employment: EmploymentRow[];
   outlook: OutlookRecord[];
   scores: Array<ScoreRecord | Record<string, unknown>>;
+  /** Barometer maakunta list, used only to name the regional rows. */
+  regions?: BarometerRegion[];
 }): Occupation[] {
   const employmentMap = employmentByExactCode(args.employment);
   const outlookMap = new Map(args.outlook.map((row) => [row.occupationCode, row]));
@@ -58,6 +62,7 @@ export function mergeOccupations(args: {
       outlookSource:
         outlook?.outlookSource ??
         `Ei koneluettavaa Työvoimabarometri-havaintoa tälle AML-koodille. Haettu ${RETRIEVED_AT}.`,
+      regionalOutlook: toRegionalOutlook(outlook?.regional ?? [], args.regions ?? []),
       theoreticalAIExposure: score?.theoreticalAIExposure ?? null,
       currentAIAdoption: score?.currentAIAdoption ?? null,
       exposureRangeLow: score?.exposureRangeLow ?? null,

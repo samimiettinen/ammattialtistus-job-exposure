@@ -23,6 +23,8 @@ export const catalogProvenanceSchema = z.object({
     catalogUrl: z.string(),
     observationUrlTemplate: z.string(),
     occupationCount: z.number().int(),
+    /** Number of maakunta rows the barometer returned names for. */
+    regionCount: z.number().int().optional(),
     aggregation: z.string(),
   }),
 });
@@ -60,8 +62,15 @@ export const validationReportSchema = z.object({
 
 export type ValidationReport = z.infer<typeof validationReportSchema>;
 
+export const catalogScoringSchema = z.object({
+  promptVersion: z.string(),
+  fixtureModel: z.string(),
+  scored: z.number().int(),
+});
+
 export const mergedCatalogFileSchema = occupationCatalogSchema.extend({
   provenance: catalogProvenanceSchema,
+  scoring: catalogScoringSchema.optional(),
 }).passthrough();
 
 export type MergedCatalogFile = z.infer<typeof mergedCatalogFileSchema>;

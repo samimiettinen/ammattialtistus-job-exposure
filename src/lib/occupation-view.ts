@@ -76,6 +76,13 @@ export function formatWorkers(count: number, locale: string): { kind: "millions"
   return { kind: "exact", value: formatNumber(count, locale) };
 }
 
+export function formatScore(value: number, locale: string): string {
+  return new Intl.NumberFormat(numberLocale(locale), {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  }).format(value);
+}
+
 export function formatSharePercent(share: number, locale: string): string {
   return new Intl.NumberFormat(numberLocale(locale), {
     minimumFractionDigits: 0,
