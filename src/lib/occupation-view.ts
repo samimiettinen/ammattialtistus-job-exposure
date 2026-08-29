@@ -163,7 +163,9 @@ export function buildOccupationDetailModel(
   },
 ): OccupationDetailModel {
   const { locale, unavailable } = args;
-  const reasons = exposureReasonsFromRationale(occupation.exposureRationale);
+  const reasons = occupation.exposureReasons?.length
+    ? occupation.exposureReasons.slice(0, 3)
+    : exposureReasonsFromRationale(occupation.exposureRationale);
   return {
     code: occupation.occupationCode,
     official: {

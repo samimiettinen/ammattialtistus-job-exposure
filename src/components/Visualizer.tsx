@@ -9,12 +9,15 @@ import type { Occupation, OccupationQuery } from "@/lib/schemas";
 import { useVisualizerStore } from "@/lib/store";
 import type { HierarchyLabel } from "@/lib/treemap-data";
 import { buildViewSummary } from "@/lib/view-summary";
+import { ComparisonCard } from "./ComparisonCard";
 import { DataQualityNotice } from "./DataQualityNotice";
 import { DetailPanel } from "./DetailPanel";
 import { FilterBar } from "./FilterBar";
 import { OccupationListbox } from "./OccupationListbox";
+import { SearchResults } from "./SearchResults";
 import { UrlStateSync } from "./UrlStateSync";
 import { ViewSummary } from "./ViewSummary";
+import { WorkdayPanel } from "./WorkdayPanel";
 
 const OccupationTreemap = dynamic(
   () => import("./OccupationTreemap").then((mod) => mod.OccupationTreemap),
@@ -71,6 +74,7 @@ export function Visualizer({
   return (
     <div className="space-y-4">
       <UrlStateSync />
+      <WorkdayPanel />
       <div role="tablist" aria-label="Näkymä" className="flex flex-wrap gap-2">
         {(["exposure", "adoption", "outlook"] as const).map((tab) => (
           <button
@@ -88,6 +92,8 @@ export function Visualizer({
         ))}
       </div>
       <FilterBar groups={groups} resultCount={filtered.length} />
+      <SearchResults occupations={filtered} />
+      <ComparisonCard catalog={occupations} />
       <ViewSummary summary={summary} />
       <DataQualityNotice
         code={residual.code}

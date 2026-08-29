@@ -14,6 +14,7 @@ export type FilterState = {
   selectedCode: string;
   tab: VisualizerTab;
   preset: PresetId | "";
+  compareCodes: string[];
 };
 
 const defaults: FilterState = {
@@ -25,12 +26,15 @@ const defaults: FilterState = {
   selectedCode: "",
   tab: "exposure",
   preset: "",
+  compareCodes: [],
 };
 
 type Store = FilterState & {
   setFilters: (patch: Partial<FilterState>) => void;
   setAdvancedFilters: (patch: Partial<FilterState>) => void;
   setPreset: (preset: PresetId | "") => void;
+  toggleCompare: (code: string) => void;
+  clearCompare: () => void;
   reset: () => void;
 };
 
@@ -46,6 +50,15 @@ export const useVisualizerStore = create<Store>((set) => ({
       minEmployment: null,
       scoreStatus: "all",
     }),
+  toggleCompare: (code) =>
+    set((state) => {
+      if (state.compareCodes.includes(code)) {
+        return { compareCodes: state.compareCodes.filter((item) => item !== code) };
+      }
+      if (state.compareCodes.length >= 4) return {};
+      return { compareCodes: [...state.compareCodes, code] };
+    }),
+  clearCompare: () => set({ compareCodes: [] }),
   reset: () => set(defaults),
 }));
 
