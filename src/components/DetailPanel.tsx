@@ -1,6 +1,8 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
+import { CareerBridges } from "@/components/CareerBridges";
+import { CompareAction } from "@/components/CompareAction";
 import type { Occupation } from "@/lib/schemas";
 import { buildOccupationDetailModel, exampleOccupations } from "@/lib/occupation-view";
 import { useVisualizerStore } from "@/lib/store";
@@ -78,13 +80,16 @@ export function DetailPanel({
             {occupation.majorGroupCode} {occupation.majorGroupName}
           </p>
         </div>
-        <button
-          type="button"
-          className="rounded border border-[#d8d2c6] px-2 py-1 text-sm"
-          onClick={() => setFilters({ selectedCode: "" })}
-        >
-          {t("detail.close")}
-        </button>
+        <div className="flex flex-col items-end gap-2">
+          <CompareAction code={occupation.occupationCode} />
+          <button
+            type="button"
+            className="rounded border border-[#d8d2c6] px-2 py-1 text-sm"
+            onClick={() => setFilters({ selectedCode: "" })}
+          >
+            {t("detail.close")}
+          </button>
+        </div>
       </div>
 
       <section className="rounded border border-[#c9ddd8] bg-[#f3f8f7] p-3">
@@ -140,6 +145,8 @@ export function DetailPanel({
           <Field label={t("detail.prompt")} value={model.ai.promptVersion} />
         </dl>
       </section>
+
+      <CareerBridges occupation={occupation} catalog={catalog} />
 
       <section className="mt-4">
         <h3 className="font-semibold">{t("detail.sources")}</h3>

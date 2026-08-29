@@ -31,6 +31,26 @@ h3 {
   outline-offset: 2px;
 }
 
+@media print {
+  header,
+  [role="note"],
+  .no-print,
+  [role="tablist"],
+  .echarts-for-react {
+    display: none !important;
+  }
+
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .comparison-card {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

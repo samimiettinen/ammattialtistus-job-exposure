@@ -69,6 +69,20 @@ export default async function MethodologyPage() {
         kenttä näytetään puuttuvana. Pisteyttämättömät ammatit eivät saa keksittyä lukua.
       </p>
 
+      <h2>{t("workday.title")}</h2>
+      <p>{t("workday.lead")}</p>
+      <p>{t("workday.privacy")}</p>
+      <p>
+        <code>POST /api/workday/analyze</code> {t("workday.errorUnavailable")}
+      </p>
+
+      <h2>{t("compare.title")}</h2>
+      <p>{t("compare.hint")}</p>
+
+      <h2>{t("bridges.title")}</h2>
+      <p>{t("bridges.calculated")}</p>
+      <p>{t("bridges.noSalary")}</p>
+
       <h2>Saavutettavuus ja kieli</h2>
       <p>
         Oletuskieli on suomi. Ruotsi ja englanti käyttävät Tilastokeskuksen luokitusnimiä.
