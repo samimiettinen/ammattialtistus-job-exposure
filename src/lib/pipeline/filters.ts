@@ -1,3 +1,4 @@
+import { applyPreset } from "../presets";
 import type { Occupation, OccupationQuery } from "../schemas";
 
 export function occupationSearchText(occupation: Occupation): string {
@@ -17,7 +18,8 @@ export function filterOccupations(
   query: OccupationQuery,
 ): Occupation[] {
   const needle = query.q?.trim().toLocaleLowerCase("fi");
-  return occupations.filter((occupation) => {
+  const scoped = applyPreset(occupations, query.preset, occupations);
+  return scoped.filter((occupation) => {
     if (query.level != null && occupation.level !== query.level) return false;
     if (query.code && occupation.occupationCode !== query.code) return false;
     if (query.group && occupation.majorGroupCode !== query.group) return false;

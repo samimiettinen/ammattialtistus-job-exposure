@@ -12,6 +12,7 @@ export const scoreRecordSchema = z.object({
   adoptionRationale: z.string().nullable(),
   humanCriticalTasks: z.array(z.string()),
   AIApplicableTasks: z.array(z.string()),
+  recommendedSkills: z.array(z.string()).optional(),
   uncertainty: uncertaintySchema.nullable(),
   scoredAt: z.string().nullable(),
   scoringModel: z.string().nullable(),

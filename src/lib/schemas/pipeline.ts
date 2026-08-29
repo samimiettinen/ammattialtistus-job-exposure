@@ -69,6 +69,7 @@ export const occupationQuerySchema = z.object({
   minAdoption: z.coerce.number().optional(),
   maxAdoption: z.coerce.number().optional(),
   scoreStatus: z.enum(["llm", "fixture", "unscored", "scored"]).optional(),
+  preset: z.enum(["largest", "high_exposure", "unused_potential", "shortage"]).optional(),
   level: z.coerce.number().int().min(1).max(5).optional(),
   code: z.string().optional(),
 });

@@ -7,6 +7,7 @@ import type {
 } from "../schemas";
 import { occupationSchema } from "../schemas";
 import { FIXTURE_MODEL } from "../schemas/scores";
+import { parentCodeOf } from "./classification";
 import { RETRIEVED_AT } from "./paths";
 import { employmentByExactCode } from "./employment";
 
@@ -41,6 +42,7 @@ export function mergeOccupations(args: {
       occupationNameEn: occ.occupationNameEn,
       majorGroupCode: occ.majorGroupCode,
       majorGroupName: occ.majorGroupName,
+      parentCode: occ.parentCode ?? parentCodeOf(occ.occupationCode),
       description: occ.description,
       employedPersons: employment?.employedPersons ?? null,
       employmentDataYear: employment ? employment.year : null,
@@ -55,6 +57,7 @@ export function mergeOccupations(args: {
       adoptionRationale: score?.adoptionRationale ?? null,
       humanCriticalTasks: score?.humanCriticalTasks ?? [],
       AIApplicableTasks: score?.AIApplicableTasks ?? [],
+      recommendedSkills: score?.recommendedSkills ?? [],
       uncertainty: score?.uncertainty ?? null,
       sourceUrls: occ.sourceUrls,
       scoredAt: score?.scoredAt ?? null,
