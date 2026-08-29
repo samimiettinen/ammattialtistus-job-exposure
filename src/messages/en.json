@@ -228,7 +228,24 @@
     "compositionLead": "The view summary computes official shares from every occupation in view and AI estimates from the scored ones only. Coverage is always stated before any mean, because the scored subset is not a random sample.",
     "regionalTitle": "Regional kohtaanto",
     "regionalLead": "The barometer's public JSON returns observations per region. Regional rows are shown as they stand, and figures subject to secrecy stay missing.",
-    "bandMeaning": "Meaning"
+    "bandMeaning": "Meaning",
+    "whatTitle": "What this tool shows",
+    "whatBody": "Ammattialtistus describes theoretical AI exposure, observed adoption and labour-market matching for the occupations in Classification of Occupations 2010. Exposure is an estimate of the nature of the tasks. It is not a forecast of redundancies, of automation, or of an occupation disappearing.",
+    "sourcesTitle": "Official sources (retrieved {date})",
+    "sourceClassification": "Classification of Occupations 2010, {localId}, {count} classes.",
+    "sourceEmployment": "Statistics Finland, employment, table {tableId}, year {year}, updated {updated}.",
+    "sourceOutlook": "Työvoimabarometri (KEHA), kohtaanto period {period}, {count} occupations.",
+    "sourceAggregation": "The aggregation rule as stored in the dataset: {rule}",
+    "updatedUnknown": "not known",
+    "mappingNote": "The full mapping and the per-field schemas are in docs/SOURCE_DATA_MAPPING.md.",
+    "notOfficialTitle": "What is not official data",
+    "notOfficialBody": "The AI exposure and adoption scores are not statistics from Statistics Finland, the KEHA Centre or the Ministry of Economic Affairs and Employment. Without an API key only the labelled example set is shown ({model}). Every other occupation stays unscored. Scoring runs only in a separate offline run, never in the browser and never in the Next.js API.",
+    "compositeTitle": "How the labour-market outlook is composed",
+    "compositeBody": "The public Työvoimabarometri interface returns kohtaanto for 19 regions, not a single national occupation-level index. The national state shown here is the employment-weighted majority of the regional matching states. The index is a weighted mean of the signed matching degree, where shortage is positive and surplus negative. This is a documented derivation, not a national figure published by KEHA.",
+    "staleTitle": "Stale and missing data",
+    "staleBody": "The most recent year of employment statistics in this extract is {year}, so employment is marked stale. If an occupation code is absent from the barometer or the employment table, the field is shown as missing. An unscored occupation is never given an invented value.",
+    "accessibilityTitle": "Accessibility and language",
+    "accessibilityBody": "The default language is Finnish. Swedish and English use Statistics Finland's classification names, and the official descriptions are mostly in Finnish. The interface works with a keyboard, and the reduced-motion setting turns chart animations off."
   },
   "analysis": {
     "situation": "Situation assessment",
@@ -266,7 +283,13 @@
       "decision_responsibility": "Decision responsibility",
       "physical_embodied": "Physical or embodied capability"
     },
-    "sourceComputed": "Computed from the view"
+    "sourceComputed": "Computed from the view",
+    "humanCore": "What remains human",
+    "humanShare": "Of the listed tasks, {human}/{total} are marked as human responsibility.",
+    "humanShareUnavailable": "There is no task list for this occupation, so the share cannot be computed.",
+    "humanCoreNote": "The share is computed from the AI-generated task list. It describes the distribution of that list, not how working time is spent and not whether a job is retained.",
+    "taskGroupCount": "{count} tasks",
+    "sourceComputedTasks": "Computed from the task list"
   },
   "composition": {
     "title": "Market composition",
@@ -326,5 +349,18 @@
     "degree3": "Moderate",
     "degree4": "Severe",
     "degree5": "Critical"
+  },
+  "sources": {
+    "title": "Official source links",
+    "lead": "The links go to documented interfaces and classification pages that were retrieved and verified. Per-occupation deep links are not constructed, because none have been verified.",
+    "empty": "No source links are recorded for this occupation.",
+    "label": {
+      "classificationApi": "Classification of Occupations 2010, classification API",
+      "classificationPage": "Classification of Occupations 2010, classification page",
+      "employmentTable": "Statistics Finland, employment, table 115r",
+      "employmentDocs": "Employment statistics documentation",
+      "barometerCatalog": "Työvoimabarometri, occupation list",
+      "barometerSite": "Työvoimabarometri"
+    }
   }
 }

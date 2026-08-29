@@ -3,7 +3,9 @@
 import { useLocale, useTranslations } from "next-intl";
 import { CareerBridges } from "@/components/CareerBridges";
 import { ProvenanceTag } from "@/components/ProvenanceTag";
+import { SourceLinks } from "@/components/SourceLinks";
 import type { BuiltAnalysis } from "@/lib/analysis/build";
+import { humanCoreForOccupation } from "@/lib/human-core";
 import { displayValue } from "@/lib/occupation-view";
 import type { Occupation } from "@/lib/schemas";
 import type { WorkdayResponse } from "@/lib/schemas/workday";
@@ -30,12 +32,7 @@ export function AnalysisResults({
   const t = useTranslations();
   const locale = useLocale();
   const unavailable = t("common.unavailable");
-  const tasks = workday?.tasks?.length
-    ? workday.tasks
-    : [
-        ...occupation.AIApplicableTasks.map((text) => ({ text, classification: "accelerate" as const })),
-        ...occupation.humanCriticalTasks.map((text) => ({ text, classification: "human" as const })),
-      ];
+  const humanCore = humanCoreForOccupation(occupation, workday?.tasks);
 
   return (
     <div className="space-y-4">
@@ -144,16 +141,42 @@ export function AnalysisResults({
           <h3 className="font-semibold text-[#8a4b12]">{t("analysis.tasks")}</h3>
           <ProvenanceTag kind="ai" />
         </div>
-        {tasks.length ? (
-          <ul className="mt-2 list-disc pl-5 text-sm">
-            {tasks.map((task) => (
-              <li key={`${task.classification}-${task.text}`}>
-                <span className="font-semibold">{t(TASK_KEYS[task.classification])}:</span> {task.text}
-              </li>
+        {humanCore.available ? (
+          <>
+            <div className="mt-2 rounded border border-[#0f5c5c] bg-[#f3f8f7] p-2">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h4 className="text-sm font-semibold text-[#0b3f3c]">{t("analysis.humanCore")}</h4>
+                <ProvenanceTag kind="computedTasks" />
+              </div>
+              <p className="mt-1 text-sm">
+                {t("analysis.humanShare", {
+                  human: humanCore.humanCount,
+                  total: humanCore.totalCount,
+                })}
+              </p>
+              <p className="mt-1 text-xs text-[#5c6570]">{t("analysis.humanCoreNote")}</p>
+            </div>
+            {humanCore.groups.map((group) => (
+              <div key={group.classification} className="mt-3">
+                <h4 className="text-sm font-semibold">
+                  {t(TASK_KEYS[group.classification])}{" "}
+                  <span className="font-normal text-xs text-[#5c6570]">
+                    ({t("analysis.taskGroupCount", { count: group.tasks.length })})
+                  </span>
+                </h4>
+                <ul className="mt-1 list-disc pl-5 text-sm">
+                  {group.tasks.map((text) => (
+                    <li key={`${group.classification}-${text}`}>{text}</li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </>
         ) : (
-          <p className="mt-2 text-sm">{unavailable}</p>
+          <>
+            <p className="mt-2 text-sm">{unavailable}</p>
+            <p className="mt-1 text-xs text-[#5c6570]">{t("analysis.humanShareUnavailable")}</p>
+          </>
         )}
       </section>
 
@@ -185,15 +208,7 @@ export function AnalysisResults({
         <p className="mt-2 text-sm leading-relaxed">{t("analysis.methodologySummary")}</p>
         <p className="mt-2 text-xs text-[#5c6570]">{t("bridges.weights")}</p>
         <p className="mt-2 text-xs text-[#5c6570]">{occupation.outlookSource || unavailable}</p>
-        <ul className="mt-2 list-disc pl-5 text-xs">
-          {occupation.sourceUrls.map((url) => (
-            <li key={url}>
-              <a className="break-all text-[#0f5c5c] underline" href={url} rel="noreferrer">
-                {url}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <SourceLinks occupation={occupation} />
       </details>
     </div>
   );
