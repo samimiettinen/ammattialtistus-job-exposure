@@ -77,20 +77,20 @@
   },
   "scoreMeaning": {
     "exposure": {
-      "910": "Almost entirely text, code or data work (theoretical exposure, not unemployment risk)",
-      "78": "Mostly cognitive or digital work (theoretical exposure, not unemployment risk)",
-      "56": "A mix of AI-suitable and physical or interactive work",
-      "34": "Mostly physical, interactive or situational work",
+      "0": "No credible effect on core tasks",
       "12": "Almost entirely physical or place-bound work",
-      "0": "No credible effect on core tasks"
+      "34": "Mostly physical, interactive or situational work",
+      "56": "A mix of AI-suitable and physical or interactive work",
+      "78": "Mostly cognitive or digital work (theoretical exposure, not unemployment risk)",
+      "910": "Almost entirely text, code or data work (theoretical exposure, not unemployment risk)"
     },
     "adoption": {
-      "910": "Tools are documented as widely used in Finnish workplaces",
-      "78": "Tools exist and use is material",
-      "56": "Pilots and early use, not mainstream",
-      "34": "Occasional trials or mainly discussion",
+      "0": "No material observed use",
       "12": "Little observed use",
-      "0": "No material observed use"
+      "34": "Occasional trials or mainly discussion",
+      "56": "Pilots and early use, not mainstream",
+      "78": "Tools exist and use is material",
+      "910": "Tools are documented as widely used in Finnish workplaces"
     }
   },
   "detail": {
@@ -215,7 +215,20 @@
     "lead": "This page records where the numbers come from and what they do not mean.",
     "analysisTitle": "Situation assessment and career bridges",
     "analysisLead": "Situation category, skill overlap and adjacent occupations are calculated with documented weights. AI may parse tasks; it does not invent official figures or the final similarity score.",
-    "weights": "Career-bridge weights live in one place: src/lib/scoring/weights.ts."
+    "weights": "Career-bridge weights live in one place: src/lib/scoring/weights.ts.",
+    "bandsTitle": "Scoring calibration",
+    "bandsLead": "The offline scorer uses these bands, calibrated for Finnish working life. The rubric and its version live in src/lib/scoring/prompt.ts.",
+    "bandsExposure": "Theoretical AI exposure",
+    "bandsAdoption": "Current AI adoption",
+    "fixturesTitle": "Labelled example scores",
+    "fixturesLead": "Without an API key the catalog carries only these labelled rows. Every other occupation stays unscored and is never given a guessed value.",
+    "coverageTitle": "Coverage in this dataset",
+    "provenanceTitle": "Scoring identifiers",
+    "compositionTitle": "Market composition",
+    "compositionLead": "The view summary computes official shares from every occupation in view and AI estimates from the scored ones only. Coverage is always stated before any mean, because the scored subset is not a random sample.",
+    "regionalTitle": "Regional kohtaanto",
+    "regionalLead": "The barometer's public JSON returns observations per region. Regional rows are shown as they stand, and figures subject to secrecy stay missing.",
+    "bandMeaning": "Meaning"
   },
   "analysis": {
     "situation": "Situation assessment",
@@ -252,6 +265,66 @@
       "interpersonal": "Interpersonal capability",
       "decision_responsibility": "Decision responsibility",
       "physical_embodied": "Physical or embodied capability"
-    }
+    },
+    "sourceComputed": "Computed from the view"
+  },
+  "composition": {
+    "title": "Market composition",
+    "lead": "Computed from the filters in this view. Official statistics and AI estimates stay separate.",
+    "coverageTitle": "Score coverage",
+    "coverageRows": "{scored} of {total} occupations are scored ({percent} %).",
+    "coverageEmployment": "Scored occupations account for {workers} employed persons, {percent} % of employment in this view.",
+    "coverageEmploymentUnavailable": "The employment share cannot be computed, because this view has no employment figures.",
+    "coverageWarning": "The AI estimates below describe that subset only. An unscored occupation is never given a guessed value.",
+    "coverageEmpty": "This view has no scored occupations, so no AI estimates are shown.",
+    "coverageFixture": "Of the scored rows, {count} are labelled example scores, not official data.",
+    "coverageMissingEmployment": "{count} occupations have no employment figure and therefore carry no weight in the means.",
+    "officialTitle": "Official labour-market outlook",
+    "officialLead": "Covers every occupation in this view, including the unscored ones.",
+    "officialNote": "The national state is an employment-weighted composite of the 19 regional kohtaanto rows, not a national index published by KEHA.",
+    "aiTitleExposure": "Distribution of theoretical exposure",
+    "aiTitleAdoption": "Distribution of current adoption",
+    "aiLead": "Covers scored occupations only. The weight is the number of employed persons.",
+    "meanExposure": "Employment-weighted mean, theoretical exposure",
+    "meanAdoption": "Employment-weighted mean, current adoption",
+    "meanWeight": "Weighted by {workers} employed persons.",
+    "aiNotice": "Exposure describes the nature of the tasks. It is not a probability of unemployment.",
+    "band": "Score band",
+    "occupations": "Occupations",
+    "workers": "Employed",
+    "shareOfScored": "Share of scored employment",
+    "shareOfView": "Share of employment in view",
+    "outlookColumn": "Labour-market outlook",
+    "crossTitle": "Cross-tabulations",
+    "crossOutlookExposure": "Theoretical exposure by official labour-market outlook",
+    "crossOutlookAdoption": "Current adoption by official labour-market outlook",
+    "crossGroupExposure": "Theoretical exposure by major group",
+    "crossGroupAdoption": "Current adoption by major group",
+    "crossNote": "Each cell states how many scored occupations stand behind it. A cell resting on a single occupation does not describe the whole group.",
+    "mean": "Weighted mean",
+    "scoredRows": "Scored",
+    "group": "Major group",
+    "empty": "This view has no occupations.",
+    "code": "AML code"
+  },
+  "regional": {
+    "title": "Regional kohtaanto",
+    "lead": "Työvoimabarometri observations by region. The national state is an employment-weighted composite of these.",
+    "region": "Region",
+    "state": "Matching state",
+    "degree": "Matching degree",
+    "employed": "Employed in the region",
+    "unemployed": "Unemployed jobseekers",
+    "vacancies": "Vacancies",
+    "period": "Observation period",
+    "regionCount": "{count} regions",
+    "censoredNote": "Some regional figures are subject to secrecy. They are shown as missing, not as zeros.",
+    "calculationError": "Calculation error",
+    "unavailable": "This dataset has no regional kohtaanto observations for this occupation code.",
+    "degree1": "Balance",
+    "degree2": "Mild",
+    "degree3": "Moderate",
+    "degree4": "Severe",
+    "degree5": "Critical"
   }
 }

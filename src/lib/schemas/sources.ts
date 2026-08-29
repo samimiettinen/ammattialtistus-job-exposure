@@ -61,6 +61,19 @@ export const employmentRowSchema = z.object({
 
 export type EmploymentRow = z.infer<typeof employmentRowSchema>;
 
+/** `GET /api/Paikka/regions` — 19 maakunnat. `id` joins to kohtaanto `groupingId`. */
+export const barometerRegionSchema = z
+  .object({
+    id: z.string(),
+    koodi: z.string().optional(),
+    nimi: z.string().optional(),
+    voimassaAlkaen: z.string().nullable().optional(),
+    voimassaPaattyen: z.string().nullable().optional(),
+  })
+  .passthrough();
+
+export type BarometerRegion = z.infer<typeof barometerRegionSchema>;
+
 export const kohtaantoTilaSchema = z.union([
   z.literal(0),
   z.literal(1),

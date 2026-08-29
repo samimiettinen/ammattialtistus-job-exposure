@@ -10,6 +10,7 @@ export const files = {
   employmentRaw: path.join(RAW_DIR, "employment_115r_2023.json"),
   outlookRaw: path.join(RAW_DIR, "outlook_tyovoimabarometri_2026-06.json"),
   barometerCatalog: path.join(RAW_DIR, "tyovoimabarometri_ammatit.json"),
+  barometerRegions: path.join(RAW_DIR, "tyovoimabarometri_maakunnat.json"),
   scoresDb: path.join(DATA_DIR, "scores.db"),
   scoresFixture: path.join(FIXTURE_DIR, "scores.json"),
   outlookFixture: path.join(FIXTURE_DIR, "outlook_adapter.example.json"),
@@ -27,6 +28,7 @@ export const CLASSIFICATION_ITEMS_URL =
 export const EMPLOYMENT_PX_URL = "https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/tyokay/115r.px";
 export const BAROMETER_AMMATIT_URL = "https://tyovoimabarometri.fi/api/ammatit";
 export const BAROMETER_DATE_URL = "https://tyovoimabarometri.fi/api/Tyollisyys/kohtaanto/date";
+export const BAROMETER_REGIONS_URL = "https://tyovoimabarometri.fi/api/Paikka/regions";
 export const barometerObservationUrl = (id: string, period: string) =>
   `https://tyovoimabarometri.fi/api/Tyollisyys/kohtaanto/Ammatti/${id}/${period}`;
 

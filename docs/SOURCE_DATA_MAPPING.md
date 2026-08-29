@@ -417,7 +417,7 @@ JS enum for `kohtaantotila` (client, matches numeric field below):
 | `GET /api/ammatit` | **200** 100 167 B | array **420**, unique 4-digit `koodi`. Keys: `nimi`, `id` (uuid), `toimialaId`, `koodi`, `kaytossa`, `lokalisoidutNimet`, `uiNayttaa`, `tyopaikkaKerroin`. All `kaytossa=false`, all `lokalisoidutNimet=null`, all `tyopaikkaKerroin=null`. `2512` → `nimi` `Sovellussuunnittelijat`, `id` `dd1b7558-21fb-43a5-b07a-33bb01878cad` |
 | `GET /api/Toimiala` | **200** | **9** groups. Keys: `nimi`, `toimialaId`, `koodi` (empty string), `kaytossa`, `uiNayttaa`, `lokalisoidutNimet`. `?lang=en` still returned Finnish `nimi` |
 | `GET /api/Paikka` | **404** | need suffix |
-| `GET /api/Paikka/regions` | **200** | **19** maakunnat. Keys: `id`, `koodi` (`01`…`21` official region numbers), `nimi`, `voimassaAlkaen`, `voimassaPaattyen` |
+| `GET /api/Paikka/regions` | **200** | **19** maakunnat. Keys: `id`, `koodi` (`01`…`21` official region numbers), `nimi`, `voimassaAlkaen`, `voimassaPaattyen`. **Fetched by `scripts/03` since the Phase A–F run — see §8.1** |
 | `GET /api/Paikka/map` | **200** | GeoJSON `FeatureCollection` (ETRS-TM35FIN-like metre coordinates) |
 | `GET /api/Tyollisyys/kohtaanto` | **404** | need suffix |
 | `GET /api/Tyollisyys/kohtaanto/date` | **200** | `{"value":"2026-06","ennuste":false}` |
@@ -550,3 +550,42 @@ Documented facts (from those pages, not from a live authorised call):
 | TMT job APIs | tmt-rajapinnat.keha@ely-keskus.fi |
 | TMT training API | tmt-koulutustietorajapinta@keha-keskus.fi |
 | koodistot / YTI | yhteentoimivuus@dvv.fi |
+
+---
+
+## 8. Re-audit attempt 2026-08-29 (Phase A–F run) — egress blocked
+
+Before writing any new parser, the source hosts were re-checked from the execution environment used for the Phase A–F work. **Every source host was refused at the network layer**, so no new official series was joined into the catalog in that run.
+
+| Target | Method | Result |
+|---|---|---|
+| `https://data.stat.fi/…/ammatti_1_20100101` | HTTPS GET | `curl (56) CONNECT tunnel failed` — gateway answered **403** to CONNECT |
+| `https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/tyokay/14sa.px` | HTTPS GET | `connect_rejected`, gateway **403** to CONNECT |
+| `https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/tyonv/12ti.px` | HTTPS GET | `connect_rejected`, gateway **403** to CONNECT |
+| `https://tyovoimabarometri.fi/api/ammatit` | HTTPS GET | `connect_rejected`, gateway **403** to CONNECT |
+
+The 403 is an egress-policy denial recorded by the session proxy itself (`recentRelayFailures`, `kind: connect_rejected`), not an upstream status code. It says nothing about the availability of the tables — sections 1–3 above stand as the last verified observation, dated 2026-08-29.
+
+`data/raw/` is gitignored and was absent, so no cached upstream payload could substitute.
+
+**Consequences recorded rather than worked around:**
+
+- **`14sa.px` (employed persons by occupation × education level) is still not joined.** Its variable codes, level labels and AML join rate were not re-verified, so no parser was written. Section 5's gap list still applies.
+- **`12ti.px` (unemployed jobseekers and vacancies by occupation) is still not joined.** The note in §3.1 that this table kept `Alue` / `Ammattiryhmä` through the 2026-06-08 stamped-code migration is from the earlier retrieval and must be re-confirmed against live metadata before any parser is written.
+- **Työmarkkinatori job ads remain unused** (OAuth-gated; unchanged).
+- No official observation anywhere in the catalog was added, altered or inferred during that run.
+
+### 8.1 Barometer region names are now actually fetched
+
+`GET https://tyovoimabarometri.fi/api/Paikka/regions` was documented in §3.2 as returning the 19 maakunnat, but `scripts/03` never called it, so every kohtaanto row carried a bare `groupingId` UUID with no readable name.
+
+`scripts/03` now fetches it and writes `data/raw/tyovoimabarometri_maakunnat.json`, and stores the same list under `regions` in the outlook raw file. `scripts/05` passes it to `mergeOccupations`, which persists `regionalOutlook[]` on each occupation record using the join already verified here: `kohtaanto.groupingId` == `regions.id`.
+
+Rules applied to those rows:
+
+- an unresolved `groupingId` keeps `regionName: null` — a UUID is never shown as a region name;
+- `toissaSensuroitu` / `tyottomatSensuroitu` store the count as `null`, so a secrecy-suppressed figure cannot render as a zero;
+- `kohtaantotila: 99` (`laskentavirhe`) maps to `unavailable`, not to an outlook class;
+- `kohtaantoaste` outside the barometer's own 1–5 grade is dropped to `null`.
+
+Because the region fetch could not run here, the **committed `data/occupations.json` still carries empty `regionalOutlook` arrays** and the UI shows the unavailable label for the regional block. Running `npm run pipeline:03 && npm run pipeline:05` on a machine that can reach `tyovoimabarometri.fi` populates it. The national figure is unaffected: it remains the documented employment-weighted composite, not a KEHA national index.

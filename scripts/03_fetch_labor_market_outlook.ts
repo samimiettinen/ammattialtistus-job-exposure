@@ -4,18 +4,20 @@ import { fetchJson, mapPool, sleep } from "../src/lib/pipeline/http";
 import {
   aggregateNationalOutlook,
   parseBarometerCatalog,
+  parseBarometerRegions,
   parseKohtaantoRows,
 } from "../src/lib/pipeline/outlook";
 import {
   BAROMETER_AMMATIT_URL,
   BAROMETER_DATE_URL,
+  BAROMETER_REGIONS_URL,
   OUTLOOK_PERIOD,
   RETRIEVED_AT,
   RAW_DIR,
   barometerObservationUrl,
   files,
 } from "../src/lib/pipeline/paths";
-import type { OutlookRecord } from "../src/lib/schemas";
+import type { BarometerRegion, OutlookRecord } from "../src/lib/schemas";
 
 type DatePayload = { value?: string; ennuste?: boolean };
 
@@ -23,6 +25,17 @@ async function main() {
   fs.mkdirSync(RAW_DIR, { recursive: true });
   const catalog = parseBarometerCatalog(await fetchJson<unknown>(BAROMETER_AMMATIT_URL));
   fs.writeFileSync(files.barometerCatalog, JSON.stringify(catalog, null, 2));
+
+  // Region names for the 19 maakunnat. `regions.id` is the join key for the
+  // `groupingId` on every kohtaanto row; without it the regional rows have no
+  // readable name, and a UUID is never presented as one.
+  let regions: BarometerRegion[] = [];
+  try {
+    regions = parseBarometerRegions(await fetchJson<unknown>(BAROMETER_REGIONS_URL));
+    fs.writeFileSync(files.barometerRegions, JSON.stringify(regions, null, 2));
+  } catch (error) {
+    console.warn("Could not read barometer regions; regional rows stay unnamed.", error);
+  }
 
   let period = OUTLOOK_PERIOD;
   try {
@@ -77,6 +90,8 @@ async function main() {
     retrievedAt: RETRIEVED_AT,
     period,
     catalogUrl: BAROMETER_AMMATIT_URL,
+    regionsUrl: BAROMETER_REGIONS_URL,
+    regions,
     observationUrlTemplate: barometerObservationUrl("{id}", period),
     aggregation:
       "Employment-weighted majority of regional kohtaantotila (toissa); signed kohtaantoaste mean. Not an official national KEHA index.",

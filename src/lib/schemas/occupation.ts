@@ -13,6 +13,32 @@ export const laborMarketOutlookSchema = z.enum([
 ]);
 export type LaborMarketOutlook = z.infer<typeof laborMarketOutlookSchema>;
 
+/**
+ * One Työvoimabarometri kohtaanto observation for a single maakunta.
+ *
+ * Region names come from `GET /api/Paikka/regions` (`groupingId` == `regions.id`,
+ * verified in docs/SOURCE_DATA_MAPPING.md §3.2). They stay null when that lookup
+ * is unavailable rather than being guessed from the UUID.
+ *
+ * Counts flagged as censored by the barometer are stored as null, so a
+ * secrecy-suppressed figure can never render as a zero.
+ */
+export const regionalOutlookSchema = z.object({
+  regionId: z.string(),
+  regionCode: z.string().nullable(),
+  regionName: z.string().nullable(),
+  laborMarketOutlook: laborMarketOutlookSchema,
+  matchingState: z.number().int(),
+  matchingDegree: z.number().int().min(1).max(5).nullable(),
+  employedPersons: z.number().nonnegative().nullable(),
+  employedCensored: z.boolean(),
+  unemployedJobseekers: z.number().nonnegative().nullable(),
+  unemployedCensored: z.boolean(),
+  vacancies: z.number().nonnegative().nullable(),
+  period: z.string().nullable(),
+});
+export type RegionalOutlook = z.infer<typeof regionalOutlookSchema>;
+
 export const scoreValueSchema = z.number().min(0).max(10);
 export const optionalScoreSchema = scoreValueSchema.nullable();
 
@@ -41,6 +67,8 @@ export const occupationSchema = z
     laborMarketOutlook: laborMarketOutlookSchema,
     shortageSurplusIndex: z.number().nullable(),
     outlookSource: z.string(),
+    /** Regional rows behind the national composite. Defaulted so older catalogs still parse. */
+    regionalOutlook: z.array(regionalOutlookSchema).default([]),
     theoreticalAIExposure: optionalScoreSchema,
     currentAIAdoption: optionalScoreSchema,
     exposureRangeLow: optionalScoreSchema.default(null),

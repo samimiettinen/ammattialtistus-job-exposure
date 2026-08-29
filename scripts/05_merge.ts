@@ -53,11 +53,16 @@ function main() {
   }
   scores = latestScorePerOccupation(scores);
 
+  const regions = fs.existsSync(files.barometerRegions)
+    ? JSON.parse(fs.readFileSync(files.barometerRegions, "utf8"))
+    : (outlook.regions ?? []);
+
   const merged = mergeOccupations({
     occupations: occupations.occupations,
     employment: employment.rows,
     outlook: outlook.records ?? [],
     scores,
+    regions,
   });
 
   const catalog = {
@@ -82,6 +87,7 @@ function main() {
         catalogUrl: BAROMETER_AMMATIT_URL,
         observationUrlTemplate: barometerObservationUrl("{id}", outlook.period ?? OUTLOOK_PERIOD),
         occupationCount: outlook.count ?? (outlook.records?.length ?? 0),
+        regionCount: Array.isArray(regions) ? regions.length : 0,
         aggregation:
           "Employment-weighted majority of regional kohtaantotila; signed kohtaantoaste mean. Not an official national KEHA index.",
       },

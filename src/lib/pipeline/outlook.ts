@@ -1,10 +1,14 @@
 import {
   barometerOccupationSchema,
+  barometerRegionSchema,
   kohtaantoRowSchema,
+  regionalOutlookSchema,
   type BarometerOccupation,
+  type BarometerRegion,
   type KohtaantoRow,
   type LaborMarketOutlook,
   type OutlookRecord,
+  type RegionalOutlook,
 } from "../schemas";
 import { RETRIEVED_AT } from "./paths";
 
@@ -15,6 +19,58 @@ const TILA_TO_OUTLOOK: Record<number, LaborMarketOutlook | null> = {
   3: "shortage",
   99: null,
 };
+
+export function outlookFromKohtaantotila(tila: number): LaborMarketOutlook {
+  return TILA_TO_OUTLOOK[tila] ?? "unavailable";
+}
+
+/** kohtaantoaste is a 1–5 severity grade in the barometer UI. Anything else is dropped. */
+function matchingDegree(value: number | null | undefined): number | null {
+  if (value == null || !Number.isInteger(value) || value < 1 || value > 5) return null;
+  return value;
+}
+
+/** A censored count is stored as null, never as a value and never as a zero. */
+function censoredCount(value: number | null | undefined, censored: boolean): number | null {
+  if (censored) return null;
+  if (value == null || Number.isNaN(value) || value < 0) return null;
+  return value;
+}
+
+export function parseBarometerRegions(payload: unknown): BarometerRegion[] {
+  return barometerRegionSchema.array().parse(payload);
+}
+
+/**
+ * Turn raw kohtaanto rows into the region-named shape the occupation record
+ * carries. Region names are looked up by `groupingId`; an unresolved id keeps a
+ * null name instead of inventing one.
+ */
+export function toRegionalOutlook(
+  rows: KohtaantoRow[],
+  regions: BarometerRegion[] = [],
+): RegionalOutlook[] {
+  const byId = new Map(regions.map((region) => [region.id, region]));
+  return rows.map((row) => {
+    const region = byId.get(row.groupingId);
+    const employedCensored = Boolean(row.toissaSensuroitu);
+    const unemployedCensored = Boolean(row.tyottomatSensuroitu);
+    return regionalOutlookSchema.parse({
+      regionId: row.groupingId,
+      regionCode: region?.koodi ?? null,
+      regionName: region?.nimi ?? null,
+      laborMarketOutlook: outlookFromKohtaantotila(row.kohtaantotila),
+      matchingState: row.kohtaantotila,
+      matchingDegree: matchingDegree(row.kohtaantoaste),
+      employedPersons: censoredCount(row.toissa, employedCensored),
+      employedCensored,
+      unemployedJobseekers: censoredCount(row.tyottomat, unemployedCensored),
+      unemployedCensored,
+      vacancies: censoredCount(row.tyopaikat, false),
+      period: row.kohtaantoTime ?? null,
+    });
+  });
+}
 
 export function signedKohtaantoAste(row: KohtaantoRow): number | null {
   if (row.kohtaantotila === 99) return null;

@@ -1,10 +1,23 @@
 {
-  "$comment": "Adapter schema for Työvoimabarometri kohtaanto if the live API is unavailable. Copy to data/raw/outlook_tyovoimabarometri_2026-06.json after filling records. Do not invent official values.",
+  "$comment": "Adapter schema for Työvoimabarometri kohtaanto if the live API is unavailable. Copy to data/raw/outlook_tyovoimabarometri_2026-06.json after filling records. Do not invent official values. Region names must come from GET /api/Paikka/regions; the placeholder names below are not official region names.",
   "retrievedAt": "2026-08-29",
   "period": "2026-06",
   "catalogUrl": "https://tyovoimabarometri.fi/api/ammatit",
+  "regionsUrl": "https://tyovoimabarometri.fi/api/Paikka/regions",
   "observationUrlTemplate": "https://tyovoimabarometri.fi/api/Tyollisyys/kohtaanto/Ammatti/{id}/2026-06",
   "aggregation": "Employment-weighted majority of regional kohtaantotila; signed kohtaantoaste mean. Not an official national KEHA index.",
+  "regions": [
+    {
+      "id": "0ba006ef-3d5f-40d2-8789-1378e8fcb7b0",
+      "koodi": "00",
+      "nimi": "EXAMPLE REGION — replace with the name from /api/Paikka/regions"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000002",
+      "koodi": "00",
+      "nimi": "EXAMPLE REGION — replace with the name from /api/Paikka/regions"
+    }
+  ],
   "count": 1,
   "records": [
     {
@@ -16,7 +29,7 @@
       "shortageSurplusIndex": -2.1,
       "outlookSource": "EXAMPLE ONLY — replace with a live script 03 run.",
       "outlookStale": false,
-      "regionCount": 1,
+      "regionCount": 2,
       "usableRegionCount": 1,
       "regional": [
         {
@@ -32,6 +45,18 @@
           "toissa": 2380,
           "toissaSensuroitu": false,
           "tyopaikat": 15,
+          "kohtaantoTime": "2026-06"
+        },
+        {
+          "$comment": "Second row shows the censored shape: a suppressed count must stay missing, never render as 0.",
+          "groupingId": "00000000-0000-0000-0000-000000000002",
+          "kohtaantotila": 99,
+          "kohtaantoaste": null,
+          "tyottomat": null,
+          "tyottomatSensuroitu": true,
+          "toissa": null,
+          "toissaSensuroitu": true,
+          "tyopaikat": null,
           "kohtaantoTime": "2026-06"
         }
       ]

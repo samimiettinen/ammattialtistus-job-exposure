@@ -77,20 +77,20 @@
   },
   "scoreMeaning": {
     "exposure": {
-      "910": "Nästan helt text-, kod- eller dataarbete (teoretisk exponering, inte arbetslöshetsrisk)",
-      "78": "Huvudsakligen kognitivt eller digitalt arbete (teoretisk exponering, inte arbetslöshetsrisk)",
-      "56": "Både arbete som lämpar sig för AI och kroppsligt eller interaktivt arbete",
-      "34": "Huvudsakligen kroppsligt, interaktivt eller situationsbundet arbete",
+      "0": "Ingen trovärdig påverkan på kärnuppgifterna",
       "12": "Nästan helt kroppsligt eller platsbundet arbete",
-      "0": "Ingen trovärdig påverkan på kärnuppgifterna"
+      "34": "Huvudsakligen kroppsligt, interaktivt eller situationsbundet arbete",
+      "56": "Både arbete som lämpar sig för AI och kroppsligt eller interaktivt arbete",
+      "78": "Huvudsakligen kognitivt eller digitalt arbete (teoretisk exponering, inte arbetslöshetsrisk)",
+      "910": "Nästan helt text-, kod- eller dataarbete (teoretisk exponering, inte arbetslöshetsrisk)"
     },
     "adoption": {
-      "910": "Verktyg används dokumenterat brett på finländska arbetsplatser",
-      "78": "Verktyg finns och användningen är betydande",
-      "56": "Piloter och tidig användning, inte mainstream",
-      "34": "Tillfälliga försök eller främst diskussion",
+      "0": "Ingen betydande observerbar användning",
       "12": "Liten observerbar användning",
-      "0": "Ingen betydande observerbar användning"
+      "34": "Tillfälliga försök eller främst diskussion",
+      "56": "Piloter och tidig användning, inte mainstream",
+      "78": "Verktyg finns och användningen är betydande",
+      "910": "Verktyg används dokumenterat brett på finländska arbetsplatser"
     }
   },
   "detail": {
@@ -215,7 +215,20 @@
     "lead": "Här förklaras varifrån talen kommer och vad de inte betyder.",
     "analysisTitle": "Lägesbedömning och karriärbroar",
     "analysisLead": "Lägeskategori, färdighetsöverlappning och närliggande yrken beräknas med dokumenterade vikter. AI kan tolka uppgifter men hittar inte på officiella tal eller det slutliga likhetstalet.",
-    "weights": "Vikterna för karriärbroar finns på ett ställe: src/lib/scoring/weights.ts."
+    "weights": "Vikterna för karriärbroar finns på ett ställe: src/lib/scoring/weights.ts.",
+    "bandsTitle": "Poängsättningens kalibrering",
+    "bandsLead": "Den offline-baserade poängsättaren använder dessa intervall, kalibrerade för finländskt arbetsliv. Rubriken och dess version finns i filen src/lib/scoring/prompt.ts.",
+    "bandsExposure": "Teoretisk AI-exponering",
+    "bandsAdoption": "Nuvarande ibruktagande av AI",
+    "fixturesTitle": "Märkta exempelpoäng",
+    "fixturesLead": "Utan API-nyckel innehåller katalogen endast dessa märkta rader. Övriga yrken förblir opoängsatta och ges inget gissat värde.",
+    "coverageTitle": "Täckning i detta material",
+    "provenanceTitle": "Poängsättningens identifierare",
+    "compositionTitle": "Sammanställning av arbetsmarknaden",
+    "compositionLead": "Sammanställningen beräknar de officiella andelarna utifrån alla yrken i vyn och AI-uppskattningarna endast utifrån de poängsatta. Täckningen anges alltid före medelvärdena, eftersom den poängsatta gruppen inte är ett slumpmässigt urval.",
+    "regionalTitle": "Regional matchning",
+    "regionalLead": "Barometerns offentliga JSON returnerar observationerna per landskap. Landskapsraderna visas som de är, och sekretessbelagda tal förblir saknade.",
+    "bandMeaning": "Betydelse"
   },
   "analysis": {
     "situation": "Lägesbedömning",
@@ -252,6 +265,66 @@
       "interpersonal": "Mellanmänsklig förmåga",
       "decision_responsibility": "Beslutsansvar",
       "physical_embodied": "Kroppslig förmåga"
-    }
+    },
+    "sourceComputed": "Beräknad från vyn"
+  },
+  "composition": {
+    "title": "Sammanställning av arbetsmarknaden",
+    "lead": "Sammanställningen beräknas utifrån filtren i vyn. Officiell statistik och AI-uppskattningar hålls åtskilda.",
+    "coverageTitle": "Poängsättningens täckning",
+    "coverageRows": "{scored}/{total} yrken är poängsatta ({percent} %).",
+    "coverageEmployment": "De poängsatta yrkena omfattar {workers} sysselsatta, det vill säga {percent} % av de sysselsatta i vyn.",
+    "coverageEmploymentUnavailable": "Andelen av sysselsättningen kan inte beräknas, eftersom vyn saknar sysselsättningsuppgifter.",
+    "coverageWarning": "AI-uppskattningarna nedan beskriver endast denna del. Ett opoängsatt yrke får inget gissat värde.",
+    "coverageEmpty": "Vyn innehåller inga poängsatta yrken, därför visas inga AI-uppskattningar.",
+    "coverageFixture": "Av de poängsatta är {count} märkta exempelpoäng, inte myndighetsmaterial.",
+    "coverageMissingEmployment": "{count} yrken saknar sysselsättningsuppgift och får därför ingen vikt i medelvärdena.",
+    "officialTitle": "Officiellt arbetsmarknadsläge",
+    "officialLead": "Omfattar alla yrken i vyn, även de opoängsatta.",
+    "officialNote": "Det nationella läget är en sysselsättningsviktad sammanställning av matchningen i 19 landskap, inte ett nationellt index publicerat av KEHA.",
+    "aiTitleExposure": "Fördelning av teoretisk exponering",
+    "aiTitleAdoption": "Fördelning av ibruktagandet",
+    "aiLead": "Omfattar endast poängsatta yrken. Vikten är antalet sysselsatta.",
+    "meanExposure": "Sysselsättningsviktat medelvärde, teoretisk exponering",
+    "meanAdoption": "Sysselsättningsviktat medelvärde, nuvarande ibruktagande",
+    "meanWeight": "Vikten är {workers} sysselsatta.",
+    "aiNotice": "Exponeringen beskriver arbetsuppgifternas karaktär. Den är inte sannolikheten för arbetslöshet.",
+    "band": "Poängintervall",
+    "occupations": "Yrken",
+    "workers": "Sysselsatta",
+    "shareOfScored": "Andel av den poängsatta sysselsättningen",
+    "shareOfView": "Andel av de sysselsatta i vyn",
+    "outlookColumn": "Arbetsmarknadsläge",
+    "crossTitle": "Korstabeller",
+    "crossOutlookExposure": "Teoretisk exponering efter officiellt arbetsmarknadsläge",
+    "crossOutlookAdoption": "Nuvarande ibruktagande efter officiellt arbetsmarknadsläge",
+    "crossGroupExposure": "Teoretisk exponering efter huvudgrupp",
+    "crossGroupAdoption": "Nuvarande ibruktagande efter huvudgrupp",
+    "crossNote": "Efter varje cell anges antalet poängsatta yrken. En cell som bygger på ett enda yrke beskriver inte hela gruppen.",
+    "mean": "Viktat medelvärde",
+    "scoredRows": "Poängsatta",
+    "group": "Huvudgrupp",
+    "empty": "Vyn innehåller inga yrken.",
+    "code": "AML-kod"
+  },
+  "regional": {
+    "title": "Regional matchning",
+    "lead": "Arbetskraftsbarometerns observationer per landskap. Det nationella läget är en sysselsättningsviktad sammanställning av dessa.",
+    "region": "Landskap",
+    "state": "Matchningsläge",
+    "degree": "Matchningsgrad",
+    "employed": "Sysselsatta i området",
+    "unemployed": "Arbetslösa arbetssökande",
+    "vacancies": "Lediga arbetsplatser",
+    "period": "Observationsperiod",
+    "regionCount": "{count} landskap",
+    "censoredNote": "En del av de regionala uppgifterna är sekretessbelagda. De visas som saknade, inte som nollor.",
+    "calculationError": "Beräkningsfel",
+    "unavailable": "Det finns inga regionala matchningsobservationer för denna yrkeskod i materialet.",
+    "degree1": "Balans",
+    "degree2": "Lindrig",
+    "degree3": "Måttlig",
+    "degree4": "Allvarlig",
+    "degree5": "Alarmerande"
   }
 }

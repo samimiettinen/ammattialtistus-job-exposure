@@ -77,20 +77,20 @@
   },
   "scoreMeaning": {
     "exposure": {
-      "910": "Lähes kokonaan teksti-, koodi- tai datatyötä (teoreettinen altistus, ei työttömyysriski)",
-      "78": "Pääosin kognitiivista tai digitaalista työtä (teoreettinen altistus, ei työttömyysriski)",
-      "56": "Sekä tekoälylle soveltuvaa että kehollista tai vuorovaikutteista työtä",
-      "34": "Pääosin ruumiillista, vuorovaikutteista tai tilannesidonnaista työtä",
+      "0": "Ei uskottavaa vaikutusta ydintehtäviin",
       "12": "Lähes kokonaan ruumiillista tai paikkaan sidottua työtä",
-      "0": "Ei uskottavaa vaikutusta ydintehtäviin"
+      "34": "Pääosin ruumiillista, vuorovaikutteista tai tilannesidonnaista työtä",
+      "56": "Sekä tekoälylle soveltuvaa että kehollista tai vuorovaikutteista työtä",
+      "78": "Pääosin kognitiivista tai digitaalista työtä (teoreettinen altistus, ei työttömyysriski)",
+      "910": "Lähes kokonaan teksti-, koodi- tai datatyötä (teoreettinen altistus, ei työttömyysriski)"
     },
     "adoption": {
-      "910": "Työkaluja on dokumentoidusti laajasti suomalaisilla työpaikoilla",
-      "78": "Työkaluja on ja käyttö on merkittävää",
-      "56": "Pilotteja ja varhaista käyttöä, ei valtavirtaa",
-      "34": "Satunnaisia kokeiluja tai lähinnä keskustelua",
+      "0": "Ei merkittävää havaittavaa käyttöä",
       "12": "Vähäistä havaittavaa käyttöä",
-      "0": "Ei merkittävää havaittavaa käyttöä"
+      "34": "Satunnaisia kokeiluja tai lähinnä keskustelua",
+      "56": "Pilotteja ja varhaista käyttöä, ei valtavirtaa",
+      "78": "Työkaluja on ja käyttö on merkittävää",
+      "910": "Työkaluja on dokumentoidusti laajasti suomalaisilla työpaikoilla"
     }
   },
   "detail": {
@@ -215,7 +215,20 @@
     "lead": "Tämä sivu kertoo, mistä luvut tulevat ja mitä ne eivät tarkoita.",
     "analysisTitle": "Tilannearvio ja urasillat",
     "analysisLead": "Tilannearvio, taitopäällekkäisyys ja läheiset ammatit lasketaan dokumentoiduilla painoilla. Tekoäly voi jäsentää tehtäviä, mutta se ei keksi virallisia lukuja eikä lopullista samankaltaisuuspistettä.",
-    "weights": "Urasiltojen painot on kirjattu yhteen paikkaan: src/lib/scoring/weights.ts."
+    "weights": "Urasiltojen painot on kirjattu yhteen paikkaan: src/lib/scoring/weights.ts.",
+    "bandsTitle": "Pisteytyksen kalibrointi",
+    "bandsLead": "Offline-pisteyttäjä käyttää näitä suomalaiseen työelämään kalibroituja välejä. Rubriikki ja sen versio ovat tiedostossa src/lib/scoring/prompt.ts.",
+    "bandsExposure": "Teoreettinen AI-altistus",
+    "bandsAdoption": "Nykyinen AI-käyttöönotto",
+    "fixturesTitle": "Merkityt esimerkkipisteytykset",
+    "fixturesLead": "Ilman rajapinta-avainta katalogissa on vain nämä merkityt rivit. Muut ammatit pysyvät pisteyttämättöminä, eikä niille anneta arvattua lukua.",
+    "coverageTitle": "Kattavuus tässä aineistossa",
+    "provenanceTitle": "Pisteytyksen tunnisteet",
+    "compositionTitle": "Työmarkkinakooste",
+    "compositionLead": "Näkymän kooste laskee viralliset osuudet kaikista näkymän ammateista ja tekoälyarviot vain pisteytetyistä. Kattavuus kerrotaan aina ennen keskiarvoja, koska pisteytetty joukko ei ole satunnaisotos.",
+    "regionalTitle": "Alueellinen kohtaanto",
+    "regionalLead": "Barometrin julkinen JSON palauttaa havainnot maakunnittain. Maakuntarivit näytetään sellaisinaan, ja salassa pidettävät luvut jäävät puuttuviksi.",
+    "bandMeaning": "Merkitys"
   },
   "analysis": {
     "situation": "Tilannearvio",
@@ -252,6 +265,66 @@
       "interpersonal": "Vuorovaikutus",
       "decision_responsibility": "Päätösvastuu",
       "physical_embodied": "Kehollinen kyky"
-    }
+    },
+    "sourceComputed": "Laskettu näkymästä"
+  },
+  "composition": {
+    "title": "Työmarkkinakooste",
+    "lead": "Kooste lasketaan näkymän suodattimista. Viralliset tilastot ja tekoälyarviot pidetään erillään.",
+    "coverageTitle": "Pisteytyksen kattavuus",
+    "coverageRows": "{scored}/{total} ammattia on pisteytetty ({percent} %).",
+    "coverageEmployment": "Pisteytetyissä ammateissa on {workers} työllistä eli {percent} % näkymän työllisistä.",
+    "coverageEmploymentUnavailable": "Työllisyysosuutta ei voi laskea, koska näkymässä ei ole työllisyyslukuja.",
+    "coverageWarning": "Alla olevat tekoälyarviot kuvaavat vain tätä osaa. Pisteyttämätön ammatti ei saa arvattua lukua.",
+    "coverageEmpty": "Näkymässä ei ole yhtään pisteytettyä ammattia, joten tekoälyarvioita ei näytetä.",
+    "coverageFixture": "Pisteytetyistä {count} on merkittyä esimerkkipisteytystä, ei viranomaisaineistoa.",
+    "coverageMissingEmployment": "{count} ammatilta puuttuu työllisyysluku, joten ne eivät saa painoa keskiarvoissa.",
+    "officialTitle": "Virallinen työmarkkinanäkymä",
+    "officialLead": "Mukana ovat kaikki näkymän ammatit, myös pisteyttämättömät.",
+    "officialNote": "Kansallinen tila on työllispainotettu kooste 19 maakunnan kohtaannosta, ei KEHA:n julkaisema valtakunnallinen indeksi.",
+    "aiTitleExposure": "Teoreettisen altistuksen jakauma",
+    "aiTitleAdoption": "Käyttöönoton jakauma",
+    "aiLead": "Mukana ovat vain pisteytetyt ammatit. Painona on työllisten määrä.",
+    "meanExposure": "Työllispainotettu keskiarvo, teoreettinen altistus",
+    "meanAdoption": "Työllispainotettu keskiarvo, nykyinen käyttöönotto",
+    "meanWeight": "Painona {workers} työllistä.",
+    "aiNotice": "Altistus kuvaa tehtävien luonnetta. Se ei ole työttömyyden todennäköisyys.",
+    "band": "Pisteväli",
+    "occupations": "Ammatteja",
+    "workers": "Työllisiä",
+    "shareOfScored": "Osuus pisteytetystä työllisyydestä",
+    "shareOfView": "Osuus näkymän työllisistä",
+    "outlookColumn": "Työmarkkinanäkymä",
+    "crossTitle": "Ristiintaulukot",
+    "crossOutlookExposure": "Teoreettinen altistus virallisen työmarkkinanäkymän mukaan",
+    "crossOutlookAdoption": "Nykyinen käyttöönotto virallisen työmarkkinanäkymän mukaan",
+    "crossGroupExposure": "Teoreettinen altistus pääluokan mukaan",
+    "crossGroupAdoption": "Nykyinen käyttöönotto pääluokan mukaan",
+    "crossNote": "Jokaisen solun perässä on pisteytettyjen ammattien määrä. Yhteen ammattiin perustuva solu ei kuvaa koko ryhmää.",
+    "mean": "Painotettu keskiarvo",
+    "scoredRows": "Pisteytettyjä",
+    "group": "Pääluokka",
+    "empty": "Näkymässä ei ole ammatteja.",
+    "code": "AML-koodi"
+  },
+  "regional": {
+    "title": "Alueellinen kohtaanto",
+    "lead": "Työvoimabarometrin havainnot maakunnittain. Kansallinen tila on näiden työllispainotettu kooste.",
+    "region": "Maakunta",
+    "state": "Kohtaantotila",
+    "degree": "Kohtaantoaste",
+    "employed": "Työlliset alueella",
+    "unemployed": "Työttömät työnhakijat",
+    "vacancies": "Avoimet työpaikat",
+    "period": "Havaintojakso",
+    "regionCount": "{count} maakuntaa",
+    "censoredNote": "Osa alueiden luvuista on salassa pidettäviä. Ne näkyvät puuttuvina, eivät nollina.",
+    "calculationError": "Laskentavirhe",
+    "unavailable": "Alueellisia kohtaantohavaintoja ei ole tässä aineistossa tälle ammattikoodille.",
+    "degree1": "Tasapaino",
+    "degree2": "Lievä",
+    "degree3": "Kohtalainen",
+    "degree4": "Vakava",
+    "degree5": "Hälyttävä"
   }
 }

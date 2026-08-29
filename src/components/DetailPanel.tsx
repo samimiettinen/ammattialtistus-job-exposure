@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { AnalysisResults } from "@/components/AnalysisResults";
 import { CompareAction } from "@/components/CompareAction";
+import { RegionalOutlook } from "@/components/RegionalOutlook";
 import { buildOccupationAnalysis } from "@/lib/analysis/build";
 import type { Occupation } from "@/lib/schemas";
 import { exampleOccupations } from "@/lib/occupation-view";
@@ -80,6 +81,7 @@ export function DetailPanel({
       </div>
 
       <AnalysisResults occupation={occupation} catalog={catalog} analysis={analysis} />
+      <RegionalOutlook occupation={occupation} />
     </aside>
   );
 }

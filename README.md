@@ -17,7 +17,7 @@ This is an original product. It follows the *idea* of occupation-level AI exposu
 
 Unscored occupations stay unscored. Missing employment or outlook is shown as unavailable. Employment year 2023 is marked stale in 2026.
 
-Full endpoint log and field mapping: [`docs/SOURCE_DATA_MAPPING.md`](docs/SOURCE_DATA_MAPPING.md). Plan: [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md).
+Full endpoint log and field mapping: [`docs/SOURCE_DATA_MAPPING.md`](docs/SOURCE_DATA_MAPPING.md). Plan: [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md). Latest audit: [`docs/PHASE_ABCF_AUDIT.md`](docs/PHASE_ABCF_AUDIT.md).
 
 ## Setup
 
@@ -52,14 +52,22 @@ Copy `.env.example` to `.env.local` only if you want to run the offline LLM scor
 
 `data/raw/` is gitignored. `data/fixtures/scores.json` is a small committed example set (`scoringModel`: `fixture/2026-08-29`). If the barometer API is down, use `data/fixtures/outlook_adapter.example.json` as a schema template — do not invent official values.
 
+Script `03` also fetches `GET /api/Paikka/regions` so the 19 regional kohtaanto rows carry maakunta names; script `05` persists them as `regionalOutlook[]` on each occupation. The committed `data/occupations.json` was merged before that field existed, so the regional block reads as unavailable until you re-run `npm run pipeline:03 && npm run pipeline:05` on a machine that can reach `tyovoimabarometri.fi`. An unresolved region keeps a null name, and counts the barometer marks as censored stay missing rather than becoming zeros.
+
 ## App
 
 - Next.js 16 App Router, Finnish default, Swedish and English
 - Treemap (area = employed persons) and scatterplot (exposure × adoption)
 - Tabs: Altistus, Käyttöönotto, Työmarkkinanäkymä
-- Shareable URL state (`q`, `group`, `outlook`, `emp`, `scores`, `code`, `tab`)
+- Filter-aware market composition: official outlook mix over the whole view, AI distribution over the scored rows only, with score coverage stated before any mean
+- Regional kohtaanto per occupation (19 maakunnat) when the barometer rows have been fetched
+- Shareable URL state (`q`, `group`, `outlook`, `emp`, `scores`, `code`, `tab`, `preset`, `compare`)
 - `/api/occupations` filters `occupations.json` only — no LLM
-- Methodology: `/fi/methodology`
+- Methodology: `/fi/methodology` — calibration bands, labelled fixtures, provenance, live coverage
+
+## Reading the market composition honestly
+
+The committed catalog scores **24 of 436** visual occupations (**5.5 %**), covering **28.7 %** of employment. The scored subset is not a random sample, so every AI mean in the composition panel sits below a coverage strip that says how much of the market it describes. Official blocks (employment, outlook) cover the whole view and are labelled separately. Cells with no scored occupation render as unavailable, never as zero. There are no salary or wage fields anywhere in this product.
 
 ## Deploy
 
