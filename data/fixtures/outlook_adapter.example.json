@@ -1,0 +1,40 @@
+{
+  "$comment": "Adapter schema for Työvoimabarometri kohtaanto if the live API is unavailable. Copy to data/raw/outlook_tyovoimabarometri_2026-06.json after filling records. Do not invent official values.",
+  "retrievedAt": "2026-08-29",
+  "period": "2026-06",
+  "catalogUrl": "https://tyovoimabarometri.fi/api/ammatit",
+  "observationUrlTemplate": "https://tyovoimabarometri.fi/api/Tyollisyys/kohtaanto/Ammatti/{id}/2026-06",
+  "aggregation": "Employment-weighted majority of regional kohtaantotila; signed kohtaantoaste mean. Not an official national KEHA index.",
+  "count": 1,
+  "records": [
+    {
+      "occupationCode": "2512",
+      "barometerId": "dd1b7558-21fb-43a5-b07a-33bb01878cad",
+      "barometerName": "Sovellussuunnittelijat",
+      "period": "2026-06",
+      "laborMarketOutlook": "surplus",
+      "shortageSurplusIndex": -2.1,
+      "outlookSource": "EXAMPLE ONLY — replace with a live script 03 run.",
+      "outlookStale": false,
+      "regionCount": 1,
+      "usableRegionCount": 1,
+      "regional": [
+        {
+          "groupingId": "0ba006ef-3d5f-40d2-8789-1378e8fcb7b0",
+          "asteikko": 6.096,
+          "kulmakerroin": 0.07185,
+          "tyottomyysaste": 0.086,
+          "vakanssiaste": 0.006,
+          "kohtaantotila": 1,
+          "kohtaantoaste": 3,
+          "tyottomat": 224,
+          "tyottomatSensuroitu": false,
+          "toissa": 2380,
+          "toissaSensuroitu": false,
+          "tyopaikat": 15,
+          "kohtaantoTime": "2026-06"
+        }
+      ]
+    }
+  ]
+}
