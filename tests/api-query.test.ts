@@ -17,6 +17,10 @@ describe("API query schema", () => {
     expect(filterOccupations([] as Occupation[], query)).toEqual([]);
   });
 
+  it("accepts a documented preset", () => {
+    expect(occupationQuerySchema.parse({ preset: "shortage" }).preset).toBe("shortage");
+  });
+
   it("rejects invalid scoreStatus", () => {
     expect(() => occupationQuerySchema.parse({ scoreStatus: "invented" })).toThrow();
   });
