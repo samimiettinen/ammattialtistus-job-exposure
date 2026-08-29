@@ -36,6 +36,9 @@ theoreticalAIExposure, currentAIAdoption, exposureRationale, adoptionRationale,
 humanCriticalTasks (merkkijonotaulukko), AIApplicableTasks (merkkijonotaulukko),
 uncertainty (low|medium|high),
 distinguishesExposureFromDisplacement (aina true).
+Valinnaiset: recommendedSkills, exposureReasons (enintään 3 lausetta),
+exposureRangeLow, exposureRangeHigh (vain jos voit perustella tehtävien jaosta; älä keksi ±-väliä epävarmuudesta).
+Älä keksi palkkoja, virallisia tilastoja, työttömyysennusteita tai lähdeviitteitä.
 
 Perustelut suomeksi.`;
 }

@@ -18,7 +18,7 @@ describe("occupation schema extensions", () => {
       parentCode: undefined,
       recommendedSkills: undefined,
     });
-    expect(parsed.recommendedSkills).toBeUndefined();
+    expect(parsed.recommendedSkills).toEqual([]);
     expect(parsed.parentCode).toBeUndefined();
   });
 
