@@ -63,11 +63,14 @@ Script `03` also fetches `GET /api/Paikka/regions` so the 19 regional kohtaanto 
 - Regional kohtaanto per occupation (19 maakunnat) when the barometer rows have been fetched
 - Shareable URL state (`q`, `group`, `outlook`, `emp`, `scores`, `code`, `tab`, `preset`, `compare`)
 - `/api/occupations` filters `occupations.json` only — no LLM
-- Methodology: `/fi/methodology` — calibration bands, labelled fixtures, provenance, live coverage
+- Methodology: `/fi/methodology` — calibration bands, labelled fixtures, provenance, live coverage (fully translated in fi/sv/en)
+- Detail panel: grouped task observations led by **what remains human**, plus labelled links to the verified official sources
 
 ## Reading the market composition honestly
 
 The committed catalog scores **24 of 436** visual occupations (**5.5 %**), covering **28.7 %** of employment. The scored subset is not a random sample, so every AI mean in the composition panel sits below a coverage strip that says how much of the market it describes. Official blocks (employment, outlook) cover the whole view and are labelled separately. Cells with no scored occupation render as unavailable, never as zero. There are no salary or wage fields anywhere in this product.
+
+The same rule governs the task lists: **what remains human** counts the tasks an occupation already has, and an occupation with no task list shows the unavailable label rather than a zero share. Source links surface only URLs recorded on the record — no per-occupation deep link is constructed, because none has been verified against the live services.
 
 ## Deploy
 

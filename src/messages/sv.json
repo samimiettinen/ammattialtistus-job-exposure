@@ -228,7 +228,24 @@
     "compositionLead": "Sammanställningen beräknar de officiella andelarna utifrån alla yrken i vyn och AI-uppskattningarna endast utifrån de poängsatta. Täckningen anges alltid före medelvärdena, eftersom den poängsatta gruppen inte är ett slumpmässigt urval.",
     "regionalTitle": "Regional matchning",
     "regionalLead": "Barometerns offentliga JSON returnerar observationerna per landskap. Landskapsraderna visas som de är, och sekretessbelagda tal förblir saknade.",
-    "bandMeaning": "Betydelse"
+    "bandMeaning": "Betydelse",
+    "whatTitle": "Vad det här verktyget visar",
+    "whatBody": "Ammattialtistus beskriver den teoretiska AI-exponeringen, det observerade ibruktagandet och arbetsmarknadens matchning för yrkena i Yrkesklassificeringen 2010. Exponeringen är en bedömning av arbetsuppgifternas karaktär. Den är inte en prognos om uppsägningar, automatisering eller att ett yrke försvinner.",
+    "sourcesTitle": "Officiella källor (hämtade {date})",
+    "sourceClassification": "Yrkesklassificeringen 2010, {localId}, {count} klasser.",
+    "sourceEmployment": "Statistikcentralen, sysselsättning, tabell {tableId}, år {year}, uppdaterad {updated}.",
+    "sourceOutlook": "Arbetskraftsbarometern (KEHA), matchningsperiod {period}, {count} yrken.",
+    "sourceAggregation": "Sammanställningens regel så som den lagrats i materialet: {rule}",
+    "updatedUnknown": "okänt",
+    "mappingNote": "Hela kartläggningen och de fältspecifika schemana finns i filen docs/SOURCE_DATA_MAPPING.md.",
+    "notOfficialTitle": "Vad som inte är myndighetsmaterial",
+    "notOfficialBody": "Poängen för AI-exponering och ibruktagande är inte statistik från Statistikcentralen, KEHA-centralen eller ANM. Utan API-nyckel visas endast den märkta exempelmängden ({model}). Övriga yrken visas som opoängsatta. Poängsättningen körs endast i en separat offline-körning, inte i webbläsaren och inte i Next.js-gränssnittet.",
+    "compositeTitle": "Sammanställning av arbetsmarknadsläget",
+    "compositeBody": "Arbetskraftsbarometerns offentliga gränssnitt returnerar matchningen för 19 landskap, inte ett enda nationellt yrkesspecifikt index. Det visade nationella läget är den sysselsättningsviktade majoriteten av landskapens matchningsläge. Indexet är ett viktat medelvärde av den förtecknade matchningsgraden, där brist är positiv och överutbud negativt. Detta är en dokumenterad härledning, inte ett nationellt nyckeltal publicerat av KEHA.",
+    "staleTitle": "Gamla och saknade uppgifter",
+    "staleBody": "Det senaste året i sysselsättningsstatistiken i detta uttag är {year}, därför märks sysselsättningen som föråldrad. Om en yrkeskod saknas i barometern eller i sysselsättningstabellen visas fältet som saknat. Ett opoängsatt yrke får aldrig ett påhittat värde.",
+    "accessibilityTitle": "Tillgänglighet och språk",
+    "accessibilityBody": "Standardspråket är finska. Svenska och engelska använder Statistikcentralens klassificeringsnamn, och de officiella beskrivningarna är huvudsakligen på finska. Gränssnittet fungerar med tangentbord, och inställningen för minskad rörelse stänger av diagramanimationerna."
   },
   "analysis": {
     "situation": "Lägesbedömning",
@@ -266,7 +283,13 @@
       "decision_responsibility": "Beslutsansvar",
       "physical_embodied": "Kroppslig förmåga"
     },
-    "sourceComputed": "Beräknad från vyn"
+    "sourceComputed": "Beräknad från vyn",
+    "humanCore": "Vad som förblir mänskligt",
+    "humanShare": "Av de listade uppgifterna är {human}/{total} markerade som människans ansvar.",
+    "humanShareUnavailable": "Det finns ingen uppgiftslista för detta yrke, därför kan andelen inte beräknas.",
+    "humanCoreNote": "Andelen beräknas utifrån den AI-genererade uppgiftslistan. Den beskriver listans fördelning, inte hur arbetstiden fördelas och inte om arbetsplatsen består.",
+    "taskGroupCount": "{count} uppgifter",
+    "sourceComputedTasks": "Beräknad från uppgiftslistan"
   },
   "composition": {
     "title": "Sammanställning av arbetsmarknaden",
@@ -326,5 +349,18 @@
     "degree3": "Måttlig",
     "degree4": "Allvarlig",
     "degree5": "Alarmerande"
+  },
+  "sources": {
+    "title": "Officiella källänkar",
+    "lead": "Länkarna leder till dokumenterade gränssnitt och klassificeringssidor som har hämtats och verifierats. Yrkesspecifika djuplänkar skapas inte, eftersom de inte har verifierats.",
+    "empty": "Det finns inga registrerade källänkar för detta yrke.",
+    "label": {
+      "classificationApi": "Yrkesklassificeringen 2010, klassificeringsgränssnitt",
+      "classificationPage": "Yrkesklassificeringen 2010, klassificeringssida",
+      "employmentTable": "Statistikcentralen, sysselsättning, tabell 115r",
+      "employmentDocs": "Dokumentation för sysselsättningsstatistiken",
+      "barometerCatalog": "Arbetskraftsbarometern, yrkesförteckning",
+      "barometerSite": "Arbetskraftsbarometern"
+    }
   }
 }

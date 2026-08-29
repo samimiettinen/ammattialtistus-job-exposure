@@ -12,12 +12,22 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+type SupportedLocale = (typeof routing.locales)[number];
+
+function isSupportedLocale(value: string): value is SupportedLocale {
+  return (routing.locales as readonly string[]).includes(value);
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  // Requests such as /favicon.ico fall through to this dynamic segment, and
+  // metadata runs before the layout body. Without this guard the message import
+  // below throws MODULE_NOT_FOUND and the request 500s instead of 404ing.
+  if (!isSupportedLocale(locale)) notFound();
   const messages = (await import(`../../messages/${locale}.json`)).default as {
     meta: { title: string; description: string };
   };
@@ -35,7 +45,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) notFound();
+  if (!isSupportedLocale(locale)) notFound();
   setRequestLocale(locale);
   const messages = await getMessages();
 

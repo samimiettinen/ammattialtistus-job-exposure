@@ -228,7 +228,24 @@
     "compositionLead": "Näkymän kooste laskee viralliset osuudet kaikista näkymän ammateista ja tekoälyarviot vain pisteytetyistä. Kattavuus kerrotaan aina ennen keskiarvoja, koska pisteytetty joukko ei ole satunnaisotos.",
     "regionalTitle": "Alueellinen kohtaanto",
     "regionalLead": "Barometrin julkinen JSON palauttaa havainnot maakunnittain. Maakuntarivit näytetään sellaisinaan, ja salassa pidettävät luvut jäävät puuttuviksi.",
-    "bandMeaning": "Merkitys"
+    "bandMeaning": "Merkitys",
+    "whatTitle": "Mitä tämä työkalu näyttää",
+    "whatBody": "Ammattialtistus kuvaa Ammattiluokitus 2010 -ammattien teoreettista tekoälyaltistusta, havaittua käyttöönottoa ja työmarkkinoiden kohtaantoa. Altistus on arvio tehtävien luonteesta. Se ei ole ennuste irtisanomisista, automatisaatiosta tai ammatin katoamisesta.",
+    "sourcesTitle": "Viralliset lähteet (haettu {date})",
+    "sourceClassification": "Ammattiluokitus 2010, {localId}, {count} luokkaa.",
+    "sourceEmployment": "Tilastokeskus, työssäkäynti, taulu {tableId}, vuosi {year}, päivitetty {updated}.",
+    "sourceOutlook": "Työvoimabarometri (KEHA), kohtaantojakso {period}, {count} ammattia.",
+    "sourceAggregation": "Koosteen sääntö sellaisena kuin se on tallennettu aineistoon: {rule}",
+    "updatedUnknown": "ei tiedossa",
+    "mappingNote": "Koko kartoitus ja kenttäkohtaiset skeemat ovat tiedostossa docs/SOURCE_DATA_MAPPING.md.",
+    "notOfficialTitle": "Mitä ei ole viranomaisaineistoa",
+    "notOfficialBody": "Tekoälyaltistus- ja käyttöönottopisteet eivät ole Tilastokeskuksen, KEHA-keskuksen eivätkä TEM:n tilastoja. Ilman rajapinta-avainta näytetään vain merkitty esimerkkijoukko ({model}). Muut ammatit näkyvät pisteyttämättöminä. Pisteytys ajetaan vain erillisessä offline-ajossa, ei selaimessa eikä Next.js-rajapinnassa.",
+    "compositeTitle": "Työmarkkinanäkymän kooste",
+    "compositeBody": "Työvoimabarometrin julkinen rajapinta palauttaa kohtaannon 19 maakunnalle, ei yhtä valtakunnallista ammattikohtaista indeksiä. Näytetty kansallinen tila on työllisten mukaan painotettu enemmistö alueiden kohtaantotilasta. Indeksi on painotettu keskiarvo etumerkillisestä kohtaantoasteesta, jossa pula on positiivinen ja ylitarjonta negatiivinen. Tämä on dokumentoitu johdannainen, ei KEHA:n julkaisema valtakunnallinen tunnusluku.",
+    "staleTitle": "Vanhat ja puuttuvat tiedot",
+    "staleBody": "Työssäkäyntitilaston tuorein vuosi tässä poiminnassa on {year}, joten työllisyys merkitään vanhentuneeksi. Jos AML-koodia ei ole barometrissa tai työllisyystaulussa, kenttä näytetään puuttuvana. Pisteyttämätön ammatti ei saa keksittyä lukua.",
+    "accessibilityTitle": "Saavutettavuus ja kieli",
+    "accessibilityBody": "Oletuskieli on suomi. Ruotsi ja englanti käyttävät Tilastokeskuksen luokitusnimiä, ja viralliset kuvaukset ovat pääosin suomeksi. Käyttöliittymä toimii näppäimistöllä, ja vähennetyn liikkeen asetus kytkee kaavioanimaatiot pois."
   },
   "analysis": {
     "situation": "Tilannearvio",
@@ -266,7 +283,13 @@
       "decision_responsibility": "Päätösvastuu",
       "physical_embodied": "Kehollinen kyky"
     },
-    "sourceComputed": "Laskettu näkymästä"
+    "sourceComputed": "Laskettu näkymästä",
+    "humanCore": "Mikä pysyy ihmisellä",
+    "humanShare": "Luetelluista tehtävistä {human}/{total} on merkitty ihmisen vastuulle.",
+    "humanShareUnavailable": "Tälle ammatille ei ole tehtäväluetteloa, joten osuutta ei voi laskea.",
+    "humanCoreNote": "Osuus lasketaan tekoälyn tuottamasta tehtäväluettelosta. Se kuvaa luettelon jakaumaa, ei työajan jakautumista eikä työpaikan säilymistä.",
+    "taskGroupCount": "{count} tehtävää",
+    "sourceComputedTasks": "Laskettu tehtäväluettelosta"
   },
   "composition": {
     "title": "Työmarkkinakooste",
@@ -326,5 +349,18 @@
     "degree3": "Kohtalainen",
     "degree4": "Vakava",
     "degree5": "Hälyttävä"
+  },
+  "sources": {
+    "title": "Viralliset lähdelinkit",
+    "lead": "Linkit vievät dokumentoituihin rajapintoihin ja luokitussivuille, jotka on haettu ja varmennettu. Ammattikohtaisia syvälinkkejä ei muodosteta, koska niitä ei ole varmennettu.",
+    "empty": "Tälle ammatille ei ole kirjattuja lähdelinkkejä.",
+    "label": {
+      "classificationApi": "Ammattiluokitus 2010, luokitusrajapinta",
+      "classificationPage": "Ammattiluokitus 2010, luokitussivu",
+      "employmentTable": "Tilastokeskus, työssäkäynti, taulu 115r",
+      "employmentDocs": "Työssäkäyntitilaston dokumentaatio",
+      "barometerCatalog": "Työvoimabarometri, ammattiluettelo",
+      "barometerSite": "Työvoimabarometri"
+    }
   }
 }

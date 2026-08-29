@@ -26,6 +26,8 @@ export const workdayTaskSchema = z.object({
   classification: taskClassificationSchema,
 });
 
+export type WorkdayTask = z.infer<typeof workdayTaskSchema>;
+
 export const shareRangeSchema = z
   .object({
     low: z.number().min(0).max(1),

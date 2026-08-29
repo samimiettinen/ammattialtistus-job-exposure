@@ -193,3 +193,47 @@ Do not implement either parser from these notes alone. Re-fetch first, and recor
 - Confirm both contents codes and the current latest month.
 - Present only as a tightness proxy (unemployed jobseekers vs vacancies). Not an expert shortage grade, not a replacement for barometer kohtaanto, not job-ad heat.
 - `X*` occupation classes stay excluded, and secrecy-suppressed cells stay unavailable.
+
+---
+
+## 9. Follow-up round — H, I, and two pre-existing defects
+
+**Date:** 2026-08-29, after PR #7 merged.
+
+### 9.1 The source blocks were re-tested, not assumed
+
+Before deciding what this round could contain, all three hosts were re-checked. The egress policy is unchanged:
+
+| Target | Result |
+|---|---|
+| `data.stat.fi:443` | gateway answered **403** to CONNECT |
+| `pxdata.stat.fi:443` | gateway answered **403** to CONNECT (both `14sa.px` and `12ti.px`) |
+| `tyovoimabarometri.fi:443` | gateway answered **403** to CONNECT |
+
+`OPENAI_API_KEY` and `SCORING_API_KEY` are both absent, and there is no `.env.local`.
+
+So **D, E and G remain unstarted**, and the **Phase C data population still cannot run** — the regional block keeps rendering the unavailable label until `npm run pipeline:03 && npm run pipeline:05` runs somewhere with network access. Section 8 remains the checklist. Nothing in this round infers, back-fills or estimates any of it.
+
+### 9.2 Phase H — what remains human
+
+`src/lib/human-core.ts` groups an occupation's existing task lists and reports how many of the listed tasks are marked human. The task section now leads with **Mikä pysyy ihmisellä** and renders one group per class, human first, each with its own count.
+
+Rules the module encodes, each covered in `tests/human-core-sources.test.ts`:
+
+- it only groups tasks that already exist; it never scores, and never invents a task;
+- an empty task list yields `available: false` and `humanShare: null`, rendered as *Tietoa ei saatavilla* — an absent list is never a zero share;
+- the share is tagged **Laskettu tehtäväluettelosta**, and the copy states in all three languages that it describes the composition of the list, not the division of working time and not whether a job is retained;
+- a workday task list, when present, takes precedence over the catalog lists, so the existing privacy path is unchanged.
+
+### 9.3 Phase I — official deep-links
+
+`src/lib/source-links.ts` turns the URLs already recorded on a record into labelled links, shown in the detail panel under **Viralliset lähdelinkit**.
+
+No per-occupation deep link is constructed. No such URL was ever verified against the live services, and building one from a code would fabricate a citation. An unrecognised URL keeps its host as its label rather than being given a description it has not earned. The module is client-safe (it cannot import `pipeline/paths.ts`, which uses `node:path`), so a test asserts that every entry in `SOURCE_URLS` still resolves to a label — that test fails if the two lists drift.
+
+The treemap tooltip was deliberately left alone: ECharts tooltips are not interactive without `enterable`, and the tile already opens the detail panel where these links live.
+
+### 9.4 Two pre-existing defects fixed
+
+- **500 on every page load.** `generateMetadata` in `src/app/[locale]/layout.tsx` imported `../../messages/${locale}.json` without validating `locale`, while `LocaleLayout` did validate. Requests such as `/favicon.ico` fall through to the dynamic segment, and metadata runs before the layout body, so the import threw `MODULE_NOT_FOUND` and the request 500ed. Both call sites now share one `isSupportedLocale` guard. `/favicon.ico` returns **404**, and the server log is clean.
+- **Untranslated methodology page.** Six sections were hardcoded Finnish and appeared verbatim on `/sv` and `/en`: *Mitä tämä työkalu näyttää*, *Viralliset lähteet*, *Mitä ei ole viranomaisaineistoa*, *Työmarkkinanäkymän kooste*, *Vanhat ja puuttuvat tiedot*, *Saavutettavuus ja kieli*. All six, with their body text, are now in fi/sv/en. The barometer aggregation string stays as stored in the catalog and is labelled as such, because it is provenance data rather than UI copy.
