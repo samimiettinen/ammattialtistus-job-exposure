@@ -79,6 +79,19 @@ export function majorGroupOf(code: string): string {
   return code.charAt(0);
 }
 
+export function parentCodeOf(code: string): string | null {
+  if (!code || code.length <= 1) return null;
+  if (/^X+$/i.test(code)) return code.length === 1 ? null : code.slice(0, -1);
+  return code.slice(0, -1);
+}
+
+export function groupCodeAtLevel(code: string, level: 1 | 2 | 3): string {
+  if (code.startsWith("X") || /^X+$/i.test(code)) {
+    return "X".repeat(level);
+  }
+  return code.slice(0, level);
+}
+
 export function classificationItemsUrl(lang: "fi" | "sv" | "en"): string {
   return `${CLASSIFICATION_ITEMS_URL}?content=data&meta=max&lang=${lang}`;
 }

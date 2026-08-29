@@ -23,7 +23,7 @@ export function GET(request: Request) {
   return NextResponse.json({
     retrievedAt: catalog.retrievedAt,
     provenance: catalog.provenance,
-    total: catalog.occupations.filter((row) => row.level === 4).length,
+    total: visualOccupations(catalog.occupations).length,
     count: rows.length,
     occupations: rows,
   });

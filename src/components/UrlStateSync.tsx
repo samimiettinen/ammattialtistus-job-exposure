@@ -2,6 +2,7 @@
 
 import { parseAsString, parseAsStringLiteral, useQueryStates } from "nuqs";
 import { useEffect, useRef } from "react";
+import { isPresetId } from "@/lib/presets";
 import { useVisualizerStore, type VisualizerTab } from "@/lib/store";
 
 const tabs = ["exposure", "adoption", "outlook"] as const;
@@ -17,6 +18,7 @@ export function UrlStateSync() {
     scores: parseAsString.withDefault("all"),
     code: parseAsString.withDefault(""),
     tab: parseAsStringLiteral(tabs).withDefault("exposure"),
+    preset: parseAsString.withDefault(""),
   });
 
   useEffect(() => {
@@ -29,8 +31,9 @@ export function UrlStateSync() {
       scoreStatus: (params.scores as typeof store.scoreStatus) || "all",
       selectedCode: params.code,
       tab: params.tab as VisualizerTab,
+      preset: isPresetId(params.preset) ? params.preset : "",
     });
-  }, [params.q, params.group, params.outlook, params.emp, params.scores, params.code, params.tab]);
+  }, [params.q, params.group, params.outlook, params.emp, params.scores, params.code, params.tab, params.preset]);
 
   useEffect(() => {
     if (skip.current) {
@@ -45,6 +48,7 @@ export function UrlStateSync() {
       scores: store.scoreStatus === "all" ? null : store.scoreStatus,
       code: store.selectedCode || null,
       tab: store.tab,
+      preset: store.preset || null,
     });
   }, [
     store.q,
@@ -54,6 +58,7 @@ export function UrlStateSync() {
     store.scoreStatus,
     store.selectedCode,
     store.tab,
+    store.preset,
     setParams,
   ]);
 

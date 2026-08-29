@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { extractDescription, majorGroupOf, parseClassificationBundle } from "../src/lib/pipeline/classification";
+import { extractDescription, majorGroupOf, parentCodeOf, parseClassificationBundle } from "../src/lib/pipeline/classification";
 
 const item = (code: string, level: number, name: string, parent: string | null, note?: string) => ({
   localId: `ammatti_1_20100101/${code}`,
@@ -36,5 +36,7 @@ describe("classification parser", () => {
     expect(majorGroupOf("2512")).toBe("2");
     expect(majorGroupOf("0110")).toBe("0");
     expect(majorGroupOf("XXXXX")).toBe("X");
+    expect(parentCodeOf("2512")).toBe("251");
+    expect(parentCodeOf("X")).toBeNull();
   });
 });
