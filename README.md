@@ -35,6 +35,8 @@ npm run dev
 
 Open http://localhost:3000 (redirects to `/fi`).
 
+Always start `npm run dev` from **this** directory. Kill any leftover `next` process first. `next.config.ts` pins `turbopack.root` here so a parent `package-lock.json` (for example under `~/Dev`) cannot make Turbopack watch the whole tree.
+
 Copy `.env.example` to `.env.local` only if you want to run the offline LLM scorer. The UI never reads those keys.
 
 ## Pipeline

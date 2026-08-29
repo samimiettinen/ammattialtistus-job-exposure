@@ -3,7 +3,7 @@
 **Product:** Finnish public-interest visualizer of theoretical AI exposure vs current AI adoption vs labour-market outlook for Ammattiluokitus 2010 (ISCO-08) occupations.
 
 **Retrieval / planning date:** 2026-08-29  
-**Workspace:** `/Users/samimiettinen/Dev/FinlandJobsAI/Untitled`  
+**Workspace:** `/Users/samimiettinen/Dev/FinlandJobsAI/sisapiiri`  
 **Inspiration (architecture only):** [sweden-job-market-visualizer](https://github.com/hamidfarmani/sweden-job-market-visualizer) and https://jobs.hamidfarmani.com — concept and pipeline shape only. No branding, copy, colours-as-brand, or assets are reused.
 
 **Mandatory UI notice:** “AI-altistus ei tarkoita työpaikkojen katoamista”
