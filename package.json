@@ -14,7 +14,8 @@
     "pipeline:04": "tsx scripts/04_score_occupations.ts",
     "pipeline:05": "tsx scripts/05_merge.ts",
     "pipeline:06": "tsx scripts/06_validate.ts",
-    "pipeline": "npm run pipeline:01 && npm run pipeline:02 && npm run pipeline:03 && npm run pipeline:04 && npm run pipeline:05 && npm run pipeline:06"
+    "pipeline": "npm run pipeline:01 && npm run pipeline:02 && npm run pipeline:03 && npm run pipeline:04 && npm run pipeline:05 && npm run pipeline:06",
+    "pipeline:07": "tsx scripts/07_validate_curated.ts"
   },
   "dependencies": {
     "better-sqlite3": "^12.4.1",

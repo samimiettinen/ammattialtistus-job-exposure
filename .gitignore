@@ -10,3 +10,4 @@ data/scores.db
 data/validation-report.json
 _source_research
 *.log
+data/curated-validation-report.json

@@ -289,7 +289,9 @@
     "humanShareUnavailable": "Tälle ammatille ei ole tehtäväluetteloa, joten osuutta ei voi laskea.",
     "humanCoreNote": "Osuus lasketaan tekoälyn tuottamasta tehtäväluettelosta. Se kuvaa luettelon jakaumaa, ei työajan jakautumista eikä työpaikan säilymistä.",
     "taskGroupCount": "{count} tehtävää",
-    "sourceComputedTasks": "Laskettu tehtäväluettelosta"
+    "sourceComputedTasks": "Laskettu tehtäväluettelosta",
+    "sourceCurated": "Kuratoitu, paneelin arvioima",
+    "sourceCuratedDraft": "Kuratoitu luonnos, ei validoitu"
   },
   "composition": {
     "title": "Työmarkkinakooste",
@@ -362,5 +364,35 @@
       "barometerCatalog": "Työvoimabarometri, ammattiluettelo",
       "barometerSite": "Työvoimabarometri"
     }
+  },
+  "curated": {
+    "title": "Kuratoitu ammattipolku",
+    "lead": "Käsin kirjoitettu tehtäväsetti, joka täydentää virallisia tilastoja ja tekoälyarvioita. Se on kolmas tietoluokka, ei kumpikaan edellisistä.",
+    "notOfficial": "Tämä ei ole viranomaistilasto eikä katalogin pisteytys vaan toimituksellista asiantuntija-arviota. Se ei muuta ammatin virallisia lukuja eikä altistuspisteitä.",
+    "draftNotice": "Tätä settiä ei ole vielä validoinut asiantuntijapaneeli. Luvut ovat luonnos, ja ne on tarkoitus pisteyttää uudelleen paneelissa.",
+    "validatedNotice": "Paneeli on arvioinut tämän setin. Arvioijia: {count}.",
+    "aiAxis": "Tekoälyn avustettavuus",
+    "humanAxis": "Ihmisen kriittisyys",
+    "axisScale": "asteikko 1–5",
+    "axesIndependent": "Akselit ovat riippumattomia. Sama tehtävä voi olla korkea molemmilla, eikä toinen ole toisen vastakohta.",
+    "why": "Perustelu",
+    "module": "Moduuli",
+    "coreModule": "Koskee kaikkia polkuja",
+    "tasks": "Tehtävää",
+    "taskCount": "{count} tehtävää",
+    "staleAxis": "Tekoälyarvio on vanhentunut ja se on tarkoitus arvioida uudelleen.",
+    "axisReviewInterval": "Tekoälypisteet arvioidaan uudelleen {months} kuukauden välein.",
+    "noRenderableSources": "Kortteja ankkuroivaa lähdettä ei ole vielä kirjattu. Käytettävissä oleva taksonomiaviite on vain sivustotasolla.",
+    "contentLanguage": "Korttien teksti on saatavilla vain suomeksi.",
+    "coverage": "Kattavuus",
+    "coverageAxes": "{withBoth}/{total} tehtävällä on molemmat akselit.",
+    "coverageValidated": "{count}/{total} tehtävää on paneelin arvioimia.",
+    "anchors": "Ammattikoodit",
+    "anchorPrimary": "ensisijainen",
+    "anchorSecondary": "toissijainen",
+    "panel": "Suunniteltu validointipaneeli",
+    "critiqueLog": "Toimituksellinen tarkastusloki",
+    "round": "Kierros {round}",
+    "empty": "Tälle ammatille ei ole kuratoitua polkua."
   }
 }

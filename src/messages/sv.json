@@ -289,7 +289,9 @@
     "humanShareUnavailable": "Det finns ingen uppgiftslista för detta yrke, därför kan andelen inte beräknas.",
     "humanCoreNote": "Andelen beräknas utifrån den AI-genererade uppgiftslistan. Den beskriver listans fördelning, inte hur arbetstiden fördelas och inte om arbetsplatsen består.",
     "taskGroupCount": "{count} uppgifter",
-    "sourceComputedTasks": "Beräknad från uppgiftslistan"
+    "sourceComputedTasks": "Beräknad från uppgiftslistan",
+    "sourceCurated": "Kurerad, granskad av panel",
+    "sourceCuratedDraft": "Kurerat utkast, inte validerat"
   },
   "composition": {
     "title": "Sammanställning av arbetsmarknaden",
@@ -362,5 +364,35 @@
       "barometerCatalog": "Arbetskraftsbarometern, yrkesförteckning",
       "barometerSite": "Arbetskraftsbarometern"
     }
+  },
+  "curated": {
+    "title": "Kurerad yrkesväg",
+    "lead": "Ett handskrivet uppgiftsset som kompletterar den officiella statistiken och AI-uppskattningarna. Det är en tredje dataklass, inte någondera av de tidigare.",
+    "notOfficial": "Detta är varken myndighetsstatistik eller katalogens poängsättning, utan en redaktionell expertbedömning. Den ändrar inte yrkets officiella tal eller exponeringspoäng.",
+    "draftNotice": "Detta set har ännu inte validerats av en expertpanel. Talen är ett utkast och är avsedda att poängsättas om i panel.",
+    "validatedNotice": "Panelen har granskat detta set. Antal bedömare: {count}.",
+    "aiAxis": "AI-stödbarhet",
+    "humanAxis": "Mänsklig kritikalitet",
+    "axisScale": "skala 1–5",
+    "axesIndependent": "Axlarna är oberoende. Samma uppgift kan vara hög på båda, och den ena är inte den andras motsats.",
+    "why": "Motivering",
+    "module": "Modul",
+    "coreModule": "Gäller alla vägar",
+    "tasks": "Uppgifter",
+    "taskCount": "{count} uppgifter",
+    "staleAxis": "AI-bedömningen är föråldrad och är avsedd att göras om.",
+    "axisReviewInterval": "AI-poängen bedöms på nytt med {months} månaders mellanrum.",
+    "noRenderableSources": "Ingen källa som förankrar korten har ännu registrerats. Den tillgängliga taxonomihänvisningen finns endast på webbplatsnivå.",
+    "contentLanguage": "Kortens text finns endast på finska.",
+    "coverage": "Täckning",
+    "coverageAxes": "{withBoth}/{total} uppgifter har båda axlarna.",
+    "coverageValidated": "{count}/{total} uppgifter är granskade av panelen.",
+    "anchors": "Yrkeskoder",
+    "anchorPrimary": "primär",
+    "anchorSecondary": "sekundär",
+    "panel": "Planerad valideringspanel",
+    "critiqueLog": "Redaktionell granskningslogg",
+    "round": "Runda {round}",
+    "empty": "Det finns ingen kurerad väg för detta yrke."
   }
 }

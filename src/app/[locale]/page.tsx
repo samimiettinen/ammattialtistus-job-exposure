@@ -1,9 +1,11 @@
 import { Suspense } from "react";
 import { Visualizer } from "@/components/Visualizer";
 import { hierarchyOccupations, loadCatalog, visualOccupations } from "@/lib/catalog";
+import { loadCuratedProfiles } from "@/lib/curated";
 
 export default async function HomePage() {
   const catalog = loadCatalog();
+  const curatedProfiles = loadCuratedProfiles();
   const occupations = visualOccupations(catalog.occupations);
   const hierarchy = hierarchyOccupations(catalog.occupations);
   const groupMap = new Map<string, string>();
@@ -21,6 +23,7 @@ export default async function HomePage() {
         groups={groups}
         hierarchy={hierarchy}
         catalog={catalog.occupations}
+        curatedProfiles={curatedProfiles}
       />
     </Suspense>
   );

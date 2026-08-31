@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { filterOccupations } from "@/lib/pipeline/filters";
 import { residualEmploymentNotice } from "@/lib/occupation-view";
-import type { Occupation, OccupationQuery } from "@/lib/schemas";
+import type { CuratedProfile, Occupation, OccupationQuery } from "@/lib/schemas";
 import { useVisualizerStore } from "@/lib/store";
 import type { HierarchyLabel } from "@/lib/treemap-data";
 import { buildViewSummary } from "@/lib/view-summary";
@@ -34,11 +34,13 @@ export function Visualizer({
   groups,
   hierarchy,
   catalog,
+  curatedProfiles,
 }: {
   occupations: Occupation[];
   groups: Array<{ code: string; name: string }>;
   hierarchy: HierarchyLabel[];
   catalog: Occupation[];
+  curatedProfiles: CuratedProfile[];
 }) {
   const t = useTranslations();
   const store = useVisualizerStore();
@@ -108,7 +110,7 @@ export function Visualizer({
           <OccupationListbox occupations={filtered} />
           <OccupationScatter occupations={filtered} />
         </div>
-        <DetailPanel occupation={selected} catalog={occupations} />
+        <DetailPanel occupation={selected} catalog={occupations} curatedProfiles={curatedProfiles} />
       </div>
     </div>
   );

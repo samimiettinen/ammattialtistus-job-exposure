@@ -289,7 +289,9 @@
     "humanShareUnavailable": "There is no task list for this occupation, so the share cannot be computed.",
     "humanCoreNote": "The share is computed from the AI-generated task list. It describes the distribution of that list, not how working time is spent and not whether a job is retained.",
     "taskGroupCount": "{count} tasks",
-    "sourceComputedTasks": "Computed from the task list"
+    "sourceComputedTasks": "Computed from the task list",
+    "sourceCurated": "Curated, panel-reviewed",
+    "sourceCuratedDraft": "Curated draft, not validated"
   },
   "composition": {
     "title": "Market composition",
@@ -362,5 +364,35 @@
       "barometerCatalog": "Työvoimabarometri, occupation list",
       "barometerSite": "Työvoimabarometri"
     }
+  },
+  "curated": {
+    "title": "Curated career path",
+    "lead": "A hand-written task set that complements the official statistics and the AI estimates. It is a third data class, not either of the previous two.",
+    "notOfficial": "This is neither official statistics nor the catalog's scoring, but an editorial expert assessment. It does not change the occupation's official figures or exposure scores.",
+    "draftNotice": "This set has not yet been validated by an expert panel. The values are a draft and are meant to be re-scored in panel.",
+    "validatedNotice": "A panel has reviewed this set. Reviewers: {count}.",
+    "aiAxis": "AI assistance",
+    "humanAxis": "Human criticality",
+    "axisScale": "scale 1–5",
+    "axesIndependent": "The axes are independent. The same task can be high on both, and neither is the opposite of the other.",
+    "why": "Reasoning",
+    "module": "Module",
+    "coreModule": "Applies to every path",
+    "tasks": "Tasks",
+    "taskCount": "{count} tasks",
+    "staleAxis": "The AI assessment is out of date and is due for re-review.",
+    "axisReviewInterval": "AI scores are re-reviewed every {months} months.",
+    "noRenderableSources": "No source anchoring the cards has been recorded yet. The available taxonomy reference is at site level only.",
+    "contentLanguage": "The card text is available in Finnish only.",
+    "coverage": "Coverage",
+    "coverageAxes": "{withBoth}/{total} tasks carry both axes.",
+    "coverageValidated": "{count}/{total} tasks are panel-reviewed.",
+    "anchors": "Occupation codes",
+    "anchorPrimary": "primary",
+    "anchorSecondary": "secondary",
+    "panel": "Planned validation panel",
+    "critiqueLog": "Editorial review log",
+    "round": "Round {round}",
+    "empty": "There is no curated path for this occupation."
   }
 }

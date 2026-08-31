@@ -1,0 +1,288 @@
+{
+  "profileId": "ai-assisted-developer",
+  "nameFi": "Tekoälyä käyttävä koodari",
+  "nameSv": "Utvecklare som använder AI",
+  "nameEn": "AI-assisted developer",
+  "descriptionFi": "Tekoälyä käyttävä koodari rakentaa ohjelmistoja siten, että merkittävä osa koodista syntyy AI-työkalujen tuottamana. Ero perinteiseen ohjelmistokehittäjään ei ole lopputuotteessa vaan työn painopisteessä: rivien kirjoittamisen sijaan työ on ongelman spesifiointia koneelle ymmärrettävään muotoon, AI-tuotoksen kriittistä katselmointia, agenttityönkulkujen orkestrointia sekä laadun, turvallisuuden ja arkkitehtuurin varmistamista. Ammattilainen kantaa vastuun kaikesta tuotantoon menevästä koodista riippumatta siitä, kuka tai mikä sen kirjoitti. Rooli kattaa samat urapolut kuin perinteinen kehitystyö, mutta jokaisella polulla työnkuva painottuu arviointiin ja päätöksentekoon generoinnin sijaan.",
+  "contentLanguage": "fi",
+  "compiledAt": "2026-08-30",
+  "status": "draft",
+  "validatedBy": 0,
+  "reviewedAt": null,
+  "anchors": [
+    { "occupationCode": "2512", "strength": "primary", "note": "ESCO software developer kiinnittyy ISCO-08-alaryhmään 2512." },
+    { "occupationCode": "2511", "strength": "secondary", "note": null },
+    { "occupationCode": "2513", "strength": "secondary", "note": null },
+    { "occupationCode": "2514", "strength": "secondary", "note": null },
+    { "occupationCode": "2519", "strength": "secondary", "note": null },
+    { "occupationCode": "2120", "strength": "secondary", "note": "Toissijainen viite vain data- ja ML-polulle, jonka tehtävät sivuavat data scientist -tyyppisiä ammatteja." }
+  ],
+  "modules": [
+    { "moduleId": "core", "nameFi": "Ydintehtävät", "kind": "core" },
+    { "moduleId": "frontend", "nameFi": "Frontend- ja fullstack-tuotekehittäjä", "kind": "path" },
+    { "moduleId": "backend", "nameFi": "Backend- ja alustakehittäjä", "kind": "path" },
+    { "moduleId": "data_ml", "nameFi": "Data- ja ML-kehittäjä", "kind": "path" },
+    { "moduleId": "devops", "nameFi": "DevOps- ja alustainsinööri", "kind": "path" },
+    { "moduleId": "entry", "nameFi": "Haluan alalle", "kind": "path" }
+  ],
+  "skills": [
+    { "skillId": "planning", "category": "transferable", "labelFi": "Vaatimusten pilkkominen" },
+    { "skillId": "quality_assurance", "category": "transferable", "labelFi": "Testivetoinen todentaminen" },
+    { "skillId": "context_management", "category": "occupation_specific", "labelFi": "Kontekstin hallinta" },
+    { "skillId": "ai_output_verification", "category": "occupation_specific", "labelFi": "Uskottavan näköisen mutta virheellisen tuotoksen tunnistaminen" },
+    { "skillId": "production_approval", "category": "decision_responsibility", "labelFi": "Vastuu tuotantoon menevästä koodista" }
+  ],
+  "panel": {
+    "mainPanel": [
+      "Seniori frontend- tai fullstack-kehittäjä",
+      "Seniori backend- tai alustakehittäjä",
+      "Data- tai ML-seniori",
+      "DevOps- tai SRE-seniori",
+      "Engineering manager tai rekrytoiva esihenkilö"
+    ],
+    "supplementaryPanel": [
+      "AI-työkaluja päivittäin käyttävä juniori, 0–2 vuotta kokemusta",
+      "Tech lead konsultti- tai tuotetalosta, eri organisaatiotyyppi kuin pääpaneelissa",
+      "Ohjelmistoalan kouluttaja tai bootcamp-ohjaaja",
+      "Valinnainen tietoturva-asiantuntija"
+    ],
+    "criteria": [
+      { "id": "frequency", "nameFi": "Yleisyys", "guidanceFi": "Kuinka usein tehtävää tehdään tässä ammatissa? 1 = harvemmin kuin kuukausittain, 5 = päivittäin." },
+      { "id": "importance", "nameFi": "Tärkeys", "guidanceFi": "Kuinka vakavia seurauksia tehtävän huonosta suorituksesta on? 1 = vähäisiä, 5 = kriittisiä." },
+      { "id": "juniorShare", "nameFi": "Junioriosuus", "guidanceFi": "Kuinka suuri osa tehtävästä sopii juniorille itsenäisesti? 1 = ei sovi, 5 = tyypillistä junioriurakkaa." },
+      { "id": "aiAssistance", "nameFi": "AI-avustettavuus", "guidanceFi": "Kuinka paljon nykyiset AI-työkalut nopeuttavat tehtävää käytännössä? 1 = ei lainkaan, 5 = moninkertaistaa vauhdin." }
+    ],
+    "disagreementRuleFi": "Jos hajonta kriteerissä on vähintään kaksi pistettä, tehtävä keskustellaan auki ja pisteytetään uudelleen kevyellä Delphi-kierroksella.",
+    "aiReviewIntervalMonths": 12
+  },
+  "critiqueLog": [
+    {
+      "round": 1,
+      "outcome": "REVIEWED",
+      "findingFi": "Evidenssiportti hylkäsi: O*NET-koodihistoria oli virheellinen, väitettynä edeltäjänä 15-1032.00.",
+      "resolutionFi": "Ohjattu korjauskierrokselle. Toinen huomio hakupäivän mahdottomuudesta todettiin vääräksi hälytykseksi."
+    },
+    {
+      "round": 2,
+      "outcome": "PASS_WITH_NOTES",
+      "findingFi": "ESCO-lähde on vain etusivutasolla ilman ammattikohtaista URI:a. Moduulien D ja E tehtävämäärä on kolme, kun A–C:ssä on neljä, ilman erillistä perustelua.",
+      "resolutionFi": "O*NET-lähdemerkintä korjattu koodiin 15-1252.00. Kumpikaan viimeistelylöydös ei estänyt toimitusta; ESCO-lähteen tarkkuus on kirjattu kentässä precision."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://esco.ec.europa.eu",
+      "label": "ESCO, eurooppalainen ammatti- ja osaamistaksonomia",
+      "precision": "site",
+      "retrievedAt": "2026-08-30"
+    }
+  ],
+  "researchOnlyRefs": [
+    {
+      "url": "https://www.onetonline.org/link/summary/15-1252.00",
+      "label": "O*NET 15-1252.00 Software Developers, yhdysvaltalainen luokitus, vain taustatutkimukseksi",
+      "precision": "occupation_uri",
+      "retrievedAt": "2026-08-30"
+    },
+    {
+      "url": "https://www.onetcenter.org/taxonomy/2019/soc.html",
+      "label": "O*NET-SOC 2019 -taksonomia, vain taustatutkimukseksi",
+      "precision": "document",
+      "retrievedAt": "2026-08-30"
+    }
+  ],
+  "tasks": [
+    {
+      "taskId": "Y1",
+      "moduleId": "core",
+      "titleFi": "Tehtävän spesifiointi AI:lle",
+      "descriptionFi": "Muotoilee vaatimuksen täsmälliseksi speksiksi tai promptiksi hyväksymiskriteereineen.",
+      "aiAssistance": { "value": 3, "why": "AI auttaa jäsentämään, mutta tavoitteen määrittely on ihmisen syöte.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 5, "why": "Väärä speksi monistuu kaikkeen generoituun koodiin; vastuu rajauksista on ihmisellä.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "Y2",
+      "moduleId": "core",
+      "titleFi": "AI-generoidun koodin katselmointi",
+      "descriptionFi": "Lukee, arvioi ja hyväksyy tai hylkää AI:n tuottaman muutoksen.",
+      "aiAssistance": { "value": 3, "why": "AI voi esiselittää diffin ja nostaa riskikohdat, mutta ei hyväksyä itseään.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 5, "why": "Hyväksyntäpäätös ja vastuu tuotantokoodista on nimenomaan ihmisen.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "Y3",
+      "moduleId": "core",
+      "titleFi": "Agenttityönkulun orkestrointi",
+      "descriptionFi": "Pilkkoo työn agenteille, hallitsee kontekstia ja iteroi välitulosten pohjalta.",
+      "aiAssistance": { "value": 4, "why": "Agentit tekevät suorituksen ja ihminen ohjaa, joten työ nopeutuu selvästi.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 4, "why": "Ohjausvirheet kertautuvat; vaatii jatkuvaa harkintaa siitä, mitä delegoidaan.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "Y4",
+      "moduleId": "core",
+      "titleFi": "Testaus ja laadunvarmistus",
+      "descriptionFi": "Määrittelee ja generoi testit sekä tulkitsee tulokset ennen hyväksyntää.",
+      "aiAssistance": { "value": 5, "why": "Testien generointi ja ajo on AI:n vahvinta aluetta.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 4, "why": "Testikattavuuden riittävyys ja päätös siitä, mitä pitää testata, ovat ihmisen.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "Y5",
+      "moduleId": "core",
+      "titleFi": "Muutosten integrointi ja versionhallinta",
+      "descriptionFi": "Hoitaa vetopyynnöt, commit-hygienian ja muutoshistorian ymmärrettävyyden.",
+      "aiAssistance": { "value": 4, "why": "AI kirjoittaa kuvaukset ja ratkoo rutiinikonfliktit.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 3, "why": "Mekaanista, mutta yhdistämispäätökset yhteiseen päähaaraan vaativat harkintaa.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "Y6",
+      "moduleId": "core",
+      "titleFi": "Turva- ja lisenssitarkastus AI-koodille",
+      "descriptionFi": "Tarkistaa generoidusta koodista haavoittuvuudet, salaisuudet ja lisenssiriskit.",
+      "aiAssistance": { "value": 3, "why": "Skannerit ja AI löytävät tunnettuja kuvioita, mutta eivät kaikkea kontekstisidonnaista.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 5, "why": "Tietoturva- ja tietosuojavastuu ei ole delegoitavissa koneelle.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "A1",
+      "moduleId": "frontend",
+      "titleFi": "UI-komponenttien generointi design-speksistä",
+      "descriptionFi": "Tuottaa ja muokkaa käyttöliittymäkomponentteja mallin tai kuvauksen pohjalta.",
+      "aiAssistance": { "value": 5, "why": "Erittäin hyvin AI-avustettava, ja tulokset ovat heti nähtävissä.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 2, "why": "Virheet näkyvät ja korjautuvat nopeasti, joten riski on matala.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "A2",
+      "moduleId": "frontend",
+      "titleFi": "Saavutettavuuden ja käytettävyyden varmistus",
+      "descriptionFi": "Todentaa, että toteutus toimii eri käyttäjille ja laitteille, muun muassa WCAG-vaatimusten osalta.",
+      "aiAssistance": { "value": 3, "why": "AI löytää teknisiä puutteita, mutta ei koe käyttöä.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 4, "why": "Todellisen käyttökokemuksen arviointi vaatii ihmistä.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "A3",
+      "moduleId": "frontend",
+      "titleFi": "Tilanhallinnan ja rajapintakutsujen suunnittelu",
+      "descriptionFi": "Suunnittelee sovelluksen tietovirrat ja frontendin rajapintaintegraatiot.",
+      "aiAssistance": { "value": 4, "why": "Vakiintuneet mallit generoituvat hyvin.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 3, "why": "Arkkitehtuurivalinta sitoo jatkokehitystä, mutta on korjattavissa.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "A4",
+      "moduleId": "frontend",
+      "titleFi": "Iterointi käyttäjäpalautteen pohjalta",
+      "descriptionFi": "Priorisoi muutokset analytiikan ja sidosryhmäkeskustelujen perusteella.",
+      "aiAssistance": { "value": 2, "why": "Data-analyysissä AI auttaa, mutta neuvottelu ja priorisointi eivät automatisoidu.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 5, "why": "Tuotepäätökset ja sidosryhmäluottamus ovat ytimeltään inhimillisiä.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "B1",
+      "moduleId": "backend",
+      "titleFi": "Rajapintasopimusten suunnittelu",
+      "descriptionFi": "Määrittelee rajapinnat, versioinnin ja taaksepäin yhteensopivuuden.",
+      "aiAssistance": { "value": 3, "why": "AI luonnostelee skeemat, mutta sopimus sitoo muita tiimejä.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 5, "why": "Rikkoutuva rajapinta kaataa muiden työn ja vaatii neuvottelua.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "B2",
+      "moduleId": "backend",
+      "titleFi": "Tietomallin ja migraatioiden suunnittelu",
+      "descriptionFi": "Suunnittelee tietokantarakenteet ja turvalliset skeemamuutokset.",
+      "aiAssistance": { "value": 3, "why": "Generointi onnistuu, mutta tuotantodatan migraatio on riskialtista.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 5, "why": "Peruuttamaton datan menetys on mahdollinen, joten ihmisen hyväksyntä on pakollinen.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "B3",
+      "moduleId": "backend",
+      "titleFi": "Suorituskyvyn profilointi ja optimointi",
+      "descriptionFi": "Tunnistaa ja korjaa pullonkaulat mittausten perusteella.",
+      "aiAssistance": { "value": 4, "why": "AI tulkitsee profiilit ja ehdottaa korjaukset tehokkaasti.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 3, "why": "Mittaus todentaa tuloksen, joten harkinnan tarve on rajatumpi.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "B4",
+      "moduleId": "backend",
+      "titleFi": "Legacy-koodin haltuunotto ja refaktorointi",
+      "descriptionFi": "Selvittää vanhan koodin toiminnan ja modernisoi sen hallitusti.",
+      "aiAssistance": { "value": 4, "why": "AI:n koodinluku nopeuttaa ymmärtämistä merkittävästi.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 4, "why": "Dokumentoimattoman liiketoimintalogiikan rikkomisriski vaatii varovaisuutta.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "C1",
+      "moduleId": "data_ml",
+      "titleFi": "Dataputkien rakentaminen ja datan validointi",
+      "descriptionFi": "Rakentaa putket ja tarkistaa datan laadun ja käyttöoikeudet.",
+      "aiAssistance": { "value": 4, "why": "Putkikoodi generoituu hyvin vakiotyökaluilla.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 4, "why": "Henkilötietojen ja datan käyttöehtojen arviointi on ihmisen vastuulla.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "C2",
+      "moduleId": "data_ml",
+      "titleFi": "Mallin ja promptin evaluointi",
+      "descriptionFi": "Määrittelee mittarit ja arvioi mallin tai kielimalliratkaisun laadun ja harhat.",
+      "aiAssistance": { "value": 3, "why": "AI auttaa evaluointiajoissa, mutta riittävän hyvän raja on ihmisen kriteeri.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 5, "why": "Harha- ja virhearvio vaikuttaa suoraan käyttäjiin, ja sääntelyvastuu kasvaa.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "C3",
+      "moduleId": "data_ml",
+      "titleFi": "Kielimalli- ja hakuintegraation toteutus sovellukseen",
+      "descriptionFi": "Kytkee kielimallin, haun ja datalähteet toimivaksi ominaisuudeksi.",
+      "aiAssistance": { "value": 4, "why": "Vakiintuneet integraatiomallit generoituvat nopeasti.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 3, "why": "Tekninen toteutus on todennettavissa testein.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "C4",
+      "moduleId": "data_ml",
+      "titleFi": "Tulosten tulkinta ja viestintä liiketoiminnalle",
+      "descriptionFi": "Kääntää analyysin päätöskelpoiseksi suositukseksi epävarmuuksineen.",
+      "aiAssistance": { "value": 3, "why": "AI luonnostelee raportit, mutta johtopäätösvastuu ei siirry.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 5, "why": "Väärä tulkinta johtaa vääriin liiketoimintapäätöksiin, ja luottamus on henkilökohtaista.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "D1",
+      "moduleId": "devops",
+      "titleFi": "Julkaisuputkien rakentaminen ja ylläpito",
+      "descriptionFi": "Automatisoi käännökset, testit ja julkaisut.",
+      "aiAssistance": { "value": 4, "why": "Konfiguraatiot ovat kaavamaisia ja hyvin generoituvia.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 3, "why": "Rikkinäinen putki hidastaa kaikkia, mutta on palautettavissa.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "D2",
+      "moduleId": "devops",
+      "titleFi": "Infrastruktuuri koodina",
+      "descriptionFi": "Määrittelee ympäristöt, oikeudet ja verkot koodina.",
+      "aiAssistance": { "value": 4, "why": "AI tuottaa infrastruktuuripohjat nopeasti.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 4, "why": "Oikeus- ja verkkovirheet ovat tietoturvariskejä, joten muutokset on katselmoitava.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "D3",
+      "moduleId": "devops",
+      "titleFi": "Tuotantohäiriön selvitys ja juurisyyanalyysi",
+      "descriptionFi": "Diagnosoi häiriön, palauttaa palvelun ja dokumentoi juurisyyn.",
+      "aiAssistance": { "value": 3, "why": "AI nopeuttaa lokianalyysiä, mutta tilannekuva on usein epätäydellinen.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 5, "why": "Paineen alla tehtävät palautuspäätökset ja viestintä vaativat ihmisen.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "E1",
+      "moduleId": "entry",
+      "titleFi": "Portfolioprojektin rakentaminen AI-parina",
+      "descriptionFi": "Toteuttaa oman projektin alusta loppuun AI-avusteisesti.",
+      "aiAssistance": { "value": 5, "why": "Juuri tässä AI madaltaa kynnystä eniten.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 2, "why": "Harjoitusympäristö, jossa virheiden seuraukset ovat pieniä.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "E2",
+      "moduleId": "entry",
+      "titleFi": "Perusteiden opiskelu AI-tutorin kanssa",
+      "descriptionFi": "Opettelee ohjelmoinnin perusteet niin, että ymmärtää mitä hyväksyy.",
+      "aiAssistance": { "value": 5, "why": "AI-tutorointi on tehokas ja henkilökohtainen oppimistapa.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 3, "why": "Oppijan on itse varmistettava, ettei ulkoista ymmärrystä koneelle.", "reviewedAt": "2026-08-30" }
+    },
+    {
+      "taskId": "E3",
+      "moduleId": "entry",
+      "titleFi": "Oman työtavan osoittaminen rekrytoinnissa",
+      "descriptionFi": "Näyttää haastattelussa, miten käyttää tekoälyä ja missä vetää vastuurajan.",
+      "aiAssistance": { "value": 2, "why": "Näyttö ja vuorovaikutus tapahtuvat livenä ilman apuria.", "reviewedAt": "2026-08-30" },
+      "humanCriticality": { "value": 5, "why": "Luottamuksen rakentaminen työnantajaan on täysin inhimillinen suoritus.", "reviewedAt": "2026-08-30" }
+    }
+  ]
+}

@@ -4,9 +4,11 @@ import { useLocale, useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { AnalysisResults } from "@/components/AnalysisResults";
 import { CompareAction } from "@/components/CompareAction";
+import { CuratedPath } from "@/components/CuratedPath";
 import { RegionalOutlook } from "@/components/RegionalOutlook";
+import { curatedProfilesForOccupation } from "@/lib/curated-view";
 import { buildOccupationAnalysis } from "@/lib/analysis/build";
-import type { Occupation } from "@/lib/schemas";
+import type { CuratedProfile, Occupation } from "@/lib/schemas";
 import { exampleOccupations } from "@/lib/occupation-view";
 import { useVisualizerStore } from "@/lib/store";
 import { occupationName } from "@/lib/utils";
@@ -14,9 +16,11 @@ import { occupationName } from "@/lib/utils";
 export function DetailPanel({
   occupation,
   catalog,
+  curatedProfiles = [],
 }: {
   occupation: Occupation | null;
   catalog: Occupation[];
+  curatedProfiles?: CuratedProfile[];
 }) {
   const t = useTranslations();
   const locale = useLocale();
@@ -82,6 +86,9 @@ export function DetailPanel({
 
       <AnalysisResults occupation={occupation} catalog={catalog} analysis={analysis} />
       <RegionalOutlook occupation={occupation} />
+      {curatedProfilesForOccupation(curatedProfiles, occupation.occupationCode).map((profile) => (
+        <CuratedPath key={profile.profileId} profile={profile} />
+      ))}
     </aside>
   );
 }

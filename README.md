@@ -49,6 +49,7 @@ Copy `.env.example` to `.env.local` only if you want to run the offline LLM scor
 | `scripts/04_score_occupations.ts` | SQLite cache `data/scores.db`, resumable, idempotent |
 | `scripts/05_merge.ts` | Writes `data/occupations.json` |
 | `scripts/06_validate.ts` | Unique codes, ranges, coverage |
+| `scripts/07_validate_curated.ts` | Curated profile integrity and per-profile completeness |
 
 `data/raw/` is gitignored. `data/fixtures/scores.json` is a small committed example set (`scoringModel`: `fixture/2026-08-29`). If the barometer API is down, use `data/fixtures/outlook_adapter.example.json` as a schema template — do not invent official values.
 
@@ -65,6 +66,12 @@ Script `03` also fetches `GET /api/Paikka/regions` so the 19 regional kohtaanto 
 - `/api/occupations` filters `occupations.json` only — no LLM
 - Methodology: `/fi/methodology` — calibration bands, labelled fixtures, provenance, live coverage (fully translated in fi/sv/en)
 - Detail panel: grouped task observations led by **what remains human**, plus labelled links to the verified official sources
+
+## Curated golden sets
+
+`data/curated/` holds hand-written task sets for a way of working, spanning several AML codes rather than being one occupation. This is a **third data class** next to official statistics and AI estimates, and it is labelled as such everywhere it appears. Each card carries two independent 1–5 axes — AI assistance and human criticality — each with its own written reasoning, and the AI axis carries its own review date because tool capability ages fastest.
+
+Nothing is validated yet: every card renders as *Kuratoitu luonnos, ei validoitu* until a panel reviews it. `npm run pipeline:07` gates the content. See [`docs/CURATED_GOLDEN_SETS.md`](docs/CURATED_GOLDEN_SETS.md).
 
 ## Reading the market composition honestly
 

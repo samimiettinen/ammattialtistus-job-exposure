@@ -9,3 +9,4 @@ export * from "./skills";
 export * from "./coverage";
 export * from "./situation";
 export * from "./composition";
+export * from "./curated";
